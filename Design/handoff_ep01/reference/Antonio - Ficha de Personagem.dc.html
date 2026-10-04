@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+</style>
+</helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 32px 120px;display:flex;flex-direction:column;gap:64px">
+
+<header style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--color-text);padding-top:16px">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+    <span>Recreio Espacial · Ficha de personagem 01</span>
+    <span style="color:var(--color-accent-700)">Protagonista / Main character</span>
+  </div>
+  <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(72px,14vw,184px);line-height:.85;letter-spacing:-.04em">Antônio</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:18px;font-weight:600">
+    <span>8 anos / 8 years old</span><span>3º ano / 3rd grade</span><span>PC + mobile</span>
+  </div>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+    <image-slot id="antonio-hero" src="assets/antonio-hero.png" shape="rect" fit="contain" placeholder="Arte principal · corpo inteiro, segurando o braço mecânico"></image-slot>
+  </div>
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Quem é / Who he is</div>
+      <p style="margin:0;font-size:20px;line-height:1.45;text-wrap:pretty">Antônio é um menino curioso e inventor, que fala pouco e observa muito. Na hora da educação física, enquanto os colegas correm, ele prefere mexer no braço mecânico de brinquedo que trouxe de casa. Foi exatamente o que estava fazendo quando a luz desceu do céu.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Antônio is a curious little inventor who says little and notices a lot. During PE, while the other kids run around, he'd rather play with the toy grabber arm he brought from home. That's exactly what he was doing when the light came down from the sky.</p></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Idade / Age</span><span>8 anos</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Altura / Height</span><span>Média para a idade, cerca de 1,28 m</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Cabelo / Hair</span><span>Liso, castanho</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Roupa / Outfit</span><span>Uniforme da escola: camiseta, bermuda e tênis</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Item marca / Signature item</span><span>Braço mecânico de brinquedo</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Personalidade</h2><span style="font-size:14px;color:var(--color-neutral-700)">Personality</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">01</span>
+      <h3 style="margin:0;font-size:24px">Curioso <span style="font-weight:400;color:var(--color-neutral-700)">/ Curious</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Quer saber como tudo funciona. No jogo, é ele quem aponta e comenta os objetos do cenário.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Wants to know how everything works. In game, he points at and comments on objects in each scene.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">02</span>
+      <h3 style="margin:0;font-size:24px">Inventor <span style="font-weight:400;color:var(--color-neutral-700)">/ Tinkerer</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Combina objetos para criar soluções. É a base dos puzzles de combinar itens do inventário.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Combines objects into new solutions. The core of the item-combination puzzles.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">03</span>
+      <h3 style="margin:0;font-size:24px">Tímido <span style="font-weight:400;color:var(--color-neutral-700)">/ Shy</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Fala pouco, em frases curtas. Diante de estranhos se esconde atrás do braço mecânico ou do capuz imaginário da gola.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Speaks little, in short sentences. Around strangers he hides behind the grabber arm or tugs his collar up.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">04</span>
+      <h3 style="margin:0;font-size:24px">Engraçado <span style="font-weight:400;color:var(--color-neutral-700)">/ Funny</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">O humor vem das reações e das respostas secas, não de piadas. Quebra a tensão nas cenas com o alien.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">His humor comes from reactions and deadpan replies, not jokes. Breaks tension in scenes with the alien.</p></sc-if>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Descrição de arte</h2><span style="font-size:14px;color:var(--color-neutral-700)">Art description</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Estilo geral</span><span style="line-height:1.55">Ilustração 2D feita à mão, com aparência de livro infantil. Contorno marrom-escuro fino e irregular, nunca preto puro. Preenchimento com textura leve de lápis de cor ou aquarela. Sombras simples em uma única camada.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Proporção</span><span style="line-height:1.55">3,5 cabeças de altura. Cabeça grande e arredondada, tronco curto, braços e pernas finos. Mãos simplificadas com 4 dedos.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Cabelo</span><span style="line-height:1.55">Liso e castanho, franja reta caindo até as sobrancelhas, cobrindo parte da testa. Mechas soltas nas laterais que balançam quando ele anda. A franja ajuda a expressar a timidez: ele olha por baixo dela.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Rosto</span><span style="line-height:1.55">Olhos redondos, grandes e bem separados, com um ponto de brilho. Sobrancelhas grossas e expressivas (fazem a maior parte da atuação). Nariz pequeno em forma de gota. Boca pequena, que fica grande só quando ele se surpreende.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Camiseta</span><span style="line-height:1.55">Uniforme da escola, branca e um pouco larga, com gola e punhos azuis e o brasão da escola no peito. Um lado sempre meio para fora da bermuda.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Bermuda</span><span style="line-height:1.55">Azul-marinho, até acima do joelho, com uma faixa branca na lateral. Joelhos à mostra, um deles com arranhão.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Tênis</span><span style="line-height:1.55">Vermelhos, grandes em relação às pernas, sola branca grossa. Meias brancas curtas. Os pés grandes dão peso e graça ao andar.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Silhueta</span><span style="line-height:1.55">Deve ser reconhecível só pela sombra: cabeça redonda com franja, pés grandes e o braço mecânico comprido saindo de uma das mãos.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Paleta do personagem</h2><span style="font-size:14px;color:var(--color-neutral-700)">Character palette</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#f6f3ea"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Camiseta</span><span style="font-size:12px;color:var(--color-neutral-700)">#F6F3EA</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#4a78c2"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Gola e punhos</span><span style="font-size:12px;color:var(--color-neutral-700)">#4A78C2</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#23315a"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Bermuda</span><span style="font-size:12px;color:var(--color-neutral-700)">#23315A</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#d8432c"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Tênis</span><span style="font-size:12px;color:var(--color-neutral-700)">#D8432C</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#6e4528"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Cabelo</span><span style="font-size:12px;color:var(--color-neutral-700)">#6E4528</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#e9b98f"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Pele (a definir)</span><span style="font-size:12px;color:var(--color-neutral-700)">#E9B98F</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#f3b72e"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Braço mecânico</span><span style="font-size:12px;color:var(--color-neutral-700)">#F3B72E</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#3b2618"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Contorno</span><span style="font-size:12px;color:var(--color-neutral-700)">#3B2618</span></div></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Tons quentes para o Antônio se destacar nos cenários frios da nave (azuis, verdes-água, violetas). O amarelo do braço mecânico é a cor mais forte do personagem e marca onde o jogador pode interagir.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">O braço mecânico</h2><span style="font-size:14px;color:var(--color-neutral-700)">The grabber arm</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:16px">
+      <p style="margin:0;font-size:18px;line-height:1.5;text-wrap:pretty">Brinquedo de plástico amarelo com cabo, gatilho e uma garra de três dedos na ponta. Aperta o gatilho, a mão abre e fecha. Tem um adesivo de foguete meio descascado e um remendo de fita crepe feito pelo próprio Antônio.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:14px;line-height:1.5;color:var(--color-neutral-700)">Yellow plastic toy with a handle, trigger and three-finger claw. Squeeze the trigger and the hand opens and closes. It has a half-peeled rocket sticker and a masking-tape patch Antônio added himself.</p></sc-if>
+      <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Na história:</strong> é por causa dele que o Antônio é abduzido. O alien, colecionador de objetos da Terra, tenta levar o brinquedo e leva o menino junto.</div>
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>No jogo:</strong> alcança objetos distantes, aperta botões fora de alcance, puxa alavancas e pega itens atrás de grades.</div>
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Evolução:</strong> ao longo dos episódios ele recebe melhorias inventadas com peças da nave (extensão, ímã, lanterna).</div>
+      </div>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:420px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="antonio-garra" src="assets/antonio-garra.png" shape="rect" fit="contain" placeholder="Arte do braço mecânico · aberto e fechado"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Inventário inicial</h2><span style="font-size:14px;color:var(--color-neutral-700)">Starting inventory</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-accent);color:#fff;padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Braço mecânico</h3><span style="font-size:15px;line-height:1.5">Pegar, puxar, apertar à distância.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Corda de pular</h3><span style="font-size:15px;line-height:1.5">Descer, amarrar, balançar, prender portas.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Apito</h3><span style="font-size:15px;line-height:1.5">Distrair os ajudantes do alien, ativar sensores sonoros.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Frisbee</h3><span style="font-size:15px;line-height:1.5">Atingir alvos longe, servir de bandeja ou escudo.</span></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Todos vêm do saco de brinquedos da aula de educação física, que caiu com ele na nave. Combinações possíveis: braço mecânico + corda = gancho de escalada.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Turnaround</h2><span style="font-size:14px;color:var(--color-neutral-700)">Frente, 3/4, perfil, costas</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:2/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-front" src="assets/antonio-front.png" shape="rect" fit="contain" placeholder="frente"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Frente / Front</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:2/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-34" src="assets/antonio-34.png" shape="rect" fit="contain" placeholder="3/4"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">3/4</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:2/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-side" src="assets/antonio-side.png" shape="rect" fit="contain" placeholder="perfil"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Perfil / Side</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:2/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-back" src="assets/antonio-back.png" shape="rect" fit="contain" placeholder="costas"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Costas / Back</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Expressões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Expressions</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-curioso" src="assets/antonio-ex-curioso.png" shape="rect" placeholder="curioso"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Curioso</span><span style="font-size:13px;color:var(--color-neutral-700)">Examinando algo</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-timido" src="assets/antonio-ex-timido.png" shape="rect" placeholder="tímido"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Tímido</span><span style="font-size:13px;color:var(--color-neutral-700)">Olhando por baixo da franja</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-ideia" src="assets/antonio-ex-ideia.png" shape="rect" placeholder="tive uma ideia"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Tive uma ideia</span><span style="font-size:13px;color:var(--color-neutral-700)">Puzzle resolvido</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-susto" src="assets/antonio-ex-susto.png" shape="rect" placeholder="susto"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Susto</span><span style="font-size:13px;color:var(--color-neutral-700)">Acordando na sala fechada</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-seco" src="assets/antonio-ex-seco.png" shape="rect" placeholder="cara de nada"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Cara de nada</span><span style="font-size:13px;color:var(--color-neutral-700)">Resposta seca, humor</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-saudade" src="assets/antonio-ex-saudade.png" shape="rect" placeholder="saudade"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Saudade</span><span style="font-size:13px;color:var(--color-neutral-700)">Olhando a Terra pela janela</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-feliz" src="assets/antonio-ex-feliz.png" shape="rect" placeholder="feliz"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Feliz</span><span style="font-size:13px;color:var(--color-neutral-700)">Sorriso contido</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="antonio-ex-cansado" src="assets/antonio-ex-cansado.png" shape="rect" placeholder="desanimado"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Desanimado</span><span style="font-size:13px;color:var(--color-neutral-700)">Puzzle travado</span></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Voz nos balões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Speech bubbles</span>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Frases curtas, de no máximo uma linha. Muitas reticências quando está sem graça. Nunca explica o puzzle: comenta o que vê.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Examinando</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Isso tem parafuso. Parafuso eu sei tirar."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"That has screws. I know how to do screws."</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Item errado</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Hm... não."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Hm... no."</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Diante do alien</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Oi... eu só vim buscar o meu brinquedo."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Hi... I just came to get my toy."</span></sc-if></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Animações necessárias</h2><span style="font-size:14px;color:var(--color-neutral-700)">Animation list</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;background:var(--color-bg);border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Parado</strong> · respira, mexe na garra</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Idle longo</strong> · abre e fecha a garra olhando para ela</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Andar</strong> · passos curtos, pés pesados</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Correr</strong> · braço mecânico balançando</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Pegar com a garra</strong> · estica e recolhe</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Usar item</strong> · genérico por item</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>"Não dá"</strong> · balança a cabeça, franja mexe</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Esconder</strong> · encolhe atrás de objetos</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Comemorar</strong> · pulinho tímido</div>
+  </div>
+</section>
+
+<sc-if value="{{ showBrief }}" hint-placeholder-val="{{ true }}">
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefing para ilustração</h2><span style="font-size:14px;color:var(--color-neutral-700)">Illustration brief · para ilustrador ou ferramenta de imagem</span>
+  </div>
+  <div style="background:var(--color-text);color:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:16px">
+    <p style="margin:0;font-size:16px;line-height:1.7;font-family:ui-monospace,Menlo,monospace">Character sheet of Antônio, an 8-year-old shy, curious boy for a hand-drawn 2D point-and-click adventure game. Storybook illustration style, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, simple single-layer shading. Big round head, 3.5 heads tall, thin arms and legs, big red sneakers with thick white soles. Straight brown hair with a straight fringe down to his eyebrows. Big round eyes, thick expressive eyebrows, small nose. School PE uniform: loose white t-shirt with blue collar and cuffs and a school crest, navy shorts with a white side stripe, short white socks, one shirt side untucked, scraped knee. Holding a yellow plastic toy grabber arm with a three-finger claw, peeling rocket sticker and masking-tape patch. Warm colors, plain paper background. Views: front, three-quarter, side, back.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 02 · Expressões / Expressions</div>
+      <p style="margin:0;font-size:14px;line-height:1.5">Anexe a folha de personagem atual como referência, para manter o mesmo rosto e traço.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Expression sheet of Antônio, the same 8-year-old boy from the reference image, same hand-drawn storybook style, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, warm colors, plain cream paper background. Head and shoulders only, same size and framing in every panel, 3 columns by 2 rows, white PE t-shirt with blue collar visible. Straight brown hair with straight fringe to the eyebrows, big round eyes, thick expressive eyebrows, small nose, rosy cheeks. Six expressions: 1. curious, leaning in, one eyebrow raised, eyes wide examining something; 2. shy, head tilted down, looking up from under his fringe, small closed smile, shoulders raised; 3. "I have an idea", eyes bright, eyebrows up, open grin, one finger up; 4. startled, eyes huge, tiny pupils, mouth open in an O, hair slightly lifted; 5. deadpan, half-closed eyes, flat straight mouth, unimpressed; 6. homesick, soft sad eyes looking upward, slight frown, eyebrows tilted up in the middle. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 03 · Braço mecânico / Grabber arm</div>
+      <p style="margin:0;font-size:14px;line-height:1.5">Anexe a folha de personagem atual como referência para a cor e o formato da garra.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Prop sheet of a yellow plastic toy grabber arm for a hand-drawn 2D point-and-click adventure game, same storybook style as the reference, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, plain cream paper background. Long straight yellow plastic shaft, pistol-style handle with a trigger at one end, three-finger claw at the other end. A half-peeled rocket sticker on the shaft and a strip of beige masking tape wrapped near the handle as a homemade repair. Show: 1. full side view with claw open; 2. full side view with claw closed; 3. close-up of the claw from the front; 4. close-up of the handle and trigger; 5. a child's hand squeezing the trigger. Later upgrades as small extra drawings: extension piece taped to the shaft, magnet stuck to the claw, small flashlight taped on top. No text, no labels.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEN&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Idioma&quot;},&quot;showBrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showEN: this.props.showEN ?? true, showBrief: this.props.showBrief ?? true };
+  }
+}
+</script>
+</body>
+</html>

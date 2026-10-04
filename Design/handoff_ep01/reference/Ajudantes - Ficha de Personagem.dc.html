@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+</style>
+</helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 32px 120px;display:flex;flex-direction:column;gap:64px">
+
+<header style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--color-text);padding-top:16px">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+    <span>Recreio Espacial · Ficha de personagem 03</span>
+    <span style="color:var(--color-accent-700)">Ajudantes do Amber / Henchmen</span>
+  </div>
+  <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(56px,10vw,136px);line-height:.88;letter-spacing:-.04em">Olhão, Parafuso e Carreto</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:18px;font-weight:600">
+    <span>3 ajudantes</span><span>Metade da altura do Antônio</span><span>Meio robô, meio criatura</span>
+  </div>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:440px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+    <image-slot id="ajud-hero" src="assets/ajud-hero.png" shape="rect" fit="contain" placeholder="Arte principal · os três juntos"></image-slot>
+  </div>
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Quem são / Who they are</div>
+      <p style="margin:0;font-size:20px;line-height:1.45;text-wrap:pretty">Três criaturinhas roxas do planeta do Amber, cada uma montada dentro de um corpo de robô que ele mesmo construiu. Vigiam, consertam e carregam tudo na nave, e atrapalham o chefe sem querer o tempo todo. Cada um só sabe dizer uma palavra.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Three little purple creatures from Amber's planet, each fitted inside a robot body he built himself. They guard, fix and carry everything on the ship, and keep getting in their boss's way by accident. Each one can only say one word.</p></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Altura / Height</span><span>Cerca de 64 cm, metade do Antônio</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Corpo / Body</span><span>Criatura roxa e macia + peças de robô</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Cor / Color</span><span>Roxo</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Fala / Speech</span><span>Uma palavra só, cada um a sua</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Medo / Fear</span><span>Som de apito</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Disfarce / Disguise</span><span>Cachorros, no ato 2</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Os três</h2><span style="font-size:14px;color:var(--color-neutral-700)">The three henchmen</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-olhao" src="assets/ajud-olhao.png" shape="rect" fit="contain" placeholder="Olhão · corpo inteiro"></image-slot></div>
+      <div style="padding:24px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3 style="margin:0;font-size:32px">Olhão</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Vigia</span></div>
+        <div style="font-size:26px;font-weight:800">"Alerta!"</div>
+        <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5">
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Criatura:</strong> uma bolha roxa com um único olho enorme, amarelo, que ocupa quase o corpo todo.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Robô:</strong> pescoço de periscópio que estica e encolhe, apoiado numa roda só. Lanterna presa em cima do olho.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Personalidade:</strong> nervoso e exagerado. Dá alerta para tudo, inclusive para a própria sombra.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>No jogo:</strong> patrulha os corredores. O jogador precisa passar fora do cone de luz da lanterna.</div>
+          <div style="padding:10px 0"><strong>Com o apito:</strong> o pescoço encolhe de uma vez e ele fica escondido dentro da roda.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-parafuso" src="assets/ajud-parafuso.png" shape="rect" fit="contain" placeholder="Parafuso · corpo inteiro"></image-slot></div>
+      <div style="padding:24px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3 style="margin:0;font-size:32px">Parafuso</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:var(--color-accent);color:#fff">Vira amigo</span></div>
+        <div style="font-size:26px;font-weight:800">"Pronto!"</div>
+        <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5">
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Criatura:</strong> pequena e redonda, com quatro tentáculos curtos e dois olhinhos curiosos.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Robô:</strong> capacete de lata com antena torta e um braço mecânico de ferramentas nas costas, parecido com o braço do Antônio.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Personalidade:</strong> curioso e inventor, como o Antônio. Diz "Pronto!" mesmo quando o conserto deu errado.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>No jogo:</strong> conserta painéis e portas da nave. Fica fascinado pelo braço mecânico do Antônio.</div>
+          <div style="padding:10px 0"><strong>Com o apito:</strong> os tentáculos se enrolam e ele rola para longe.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-carreto" src="assets/ajud-carreto.png" shape="rect" fit="contain" placeholder="Carreto · corpo inteiro"></image-slot></div>
+      <div style="padding:24px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><h3 style="margin:0;font-size:32px">Carreto</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Carregador</span></div>
+        <div style="font-size:26px;font-weight:800">"Opa!"</div>
+        <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5">
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Criatura:</strong> larga e achatada, bochechuda, com olhos pequenos e sonolentos.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Robô:</strong> base de esteira como a de um tanque, plataforma de carga nas costas e dois braços de empilhadeira.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>Personalidade:</strong> calmo, forte e desastrado. Empilha coisas alto demais e derruba tudo.</div>
+          <div style="padding:10px 0;border-bottom:2px solid var(--color-divider)"><strong>No jogo:</strong> leva caixas pela nave. O Antônio pode se esconder numa caixa e ser carregado.</div>
+          <div style="padding:10px 0"><strong>Com o apito:</strong> trava no lugar e solta o que estiver carregando.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Descrição de arte</h2><span style="font-size:14px;color:var(--color-neutral-700)">Art description</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Estilo geral</span><span style="line-height:1.55">O mesmo do Antônio e do Amber: ilustração 2D feita à mão, contorno marrom-escuro irregular, textura de lápis de cor e aquarela.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Criatura</span><span style="line-height:1.55">Macia e gelatinosa, roxa, com brilho leve. Deve parecer fofa e um pouco estranha ao mesmo tempo.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Robô</span><span style="line-height:1.55">Feito pelo Amber com o mesmo metal cinza e botões rosa das ferramentas dele. Aparência caseira: parafusos aparentes, remendos, peças que não combinam.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Silhuetas</span><span style="line-height:1.55">Cada um com uma forma básica diferente para serem reconhecidos de longe: Olhão é vertical e fino, Parafuso é redondo e pequeno, Carreto é largo e baixo.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Olhos</span><span style="line-height:1.55">Amarelos, como os do Amber, para mostrar que são do mesmo planeta.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Paleta</h2><span style="font-size:14px;color:var(--color-neutral-700)">Palette</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#9b6fd6"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Criatura</span><span style="font-size:12px;color:var(--color-neutral-700)">#9B6FD6</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#6a45a3"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Sombra</span><span style="font-size:12px;color:var(--color-neutral-700)">#6A45A3</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#f4e27a"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Olhos</span><span style="font-size:12px;color:var(--color-neutral-700)">#F4E27A</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#b9c2c4"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Metal</span><span style="font-size:12px;color:var(--color-neutral-700)">#B9C2C4</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#e05aa8"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Luzes</span><span style="font-size:12px;color:var(--color-neutral-700)">#E05AA8</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#3b2618"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Contorno</span><span style="font-size:12px;color:var(--color-neutral-700)">#3B2618</span></div></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">O roxo das criaturas repete o tom do macacão do Amber, mais claro e saturado. Metal e luzes rosa são os mesmos das ferramentas dele: tudo o que é tecnologia do Amber tem essa combinação.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">O arco do Parafuso</h2><span style="font-size:14px;color:var(--color-neutral-700)">Parafuso's story arc</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">01 · Nave</span><span style="font-size:15px;line-height:1.5">Parafuso tenta desmontar o braço mecânico do Antônio a mando do Amber, mas fica encantado com ele.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">02 · Nave</span><span style="font-size:15px;line-height:1.5">O braço de ferramentas do Parafuso quebra. O Antônio conserta com a fita crepe do próprio brinquedo.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">03 · Terra</span><span style="font-size:15px;line-height:1.5">Disfarçado de cachorro, Parafuso começa a ajudar o Antônio escondido dos outros dois.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-accent);background:var(--color-accent);color:#fff;padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600">04 · Final</span><span style="font-size:15px;line-height:1.5">Parafuso aprende uma segunda palavra: "Amigo!"</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Disfarce de cachorro</h2><span style="font-size:14px;color:var(--color-neutral-700)">Dog disguises · ato 2</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5">Fantasias malfeitas copiadas de comerciais de ração: orelhas de pano, nariz de borracha e rabo de mola. Os adultos acreditam; só o Antônio percebe.</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Olhão:</strong> um "cachorro" muito alto e fino, com uma coleira no pescoço de periscópio e um tapa-olho falso.</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Parafuso:</strong> um filhote redondo, com orelhas grandes demais. A antena aparece por um furo no gorro.</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Carreto:</strong> um cachorro largo que anda sobre esteiras, com um tapete de pelúcia jogado nas costas.</div>
+      <div style="padding:20px 24px;line-height:1.5"><strong>A palavra continua:</strong> mesmo disfarçados, só conseguem dizer "Alerta!", "Pronto!" e "Opa!", nunca "au au".</div>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:420px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="ajud-disfarce" src="assets/ajud-disfarce.png" shape="rect" fit="contain" placeholder="Os três disfarçados de cachorro"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Escala</h2><span style="font-size:14px;color:var(--color-neutral-700)">Com o Antônio e o Amber</span>
+  </div>
+  <div style="border:2px solid var(--color-text);display:flex;flex-direction:column">
+    <div style="position:relative;aspect-ratio:16/7;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-escala" src="assets/ajud-escala.png" shape="rect" fit="contain" placeholder="Antônio, Amber e os três ajudantes lado a lado"></image-slot></div>
+    <span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Ajudantes com metade da altura do Antônio; Amber com o dobro</span>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Expressões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Três por personagem</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-olhao-1" src="assets/ajud-ex-olhao-1.png" shape="rect" fit="contain" placeholder="Olhão · alerta"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Olhão · Alerta</span><span style="font-size:13px;color:var(--color-neutral-700)">Pescoço esticado, olho arregalado</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-parafuso-1" src="assets/ajud-ex-parafuso-1.png" shape="rect" fit="contain" placeholder="Parafuso · orgulhoso"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Parafuso · Orgulhoso</span><span style="font-size:13px;color:var(--color-neutral-700)">"Pronto!" com o conserto soltando fumaça</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-carreto-1" src="assets/ajud-ex-carreto-1.png" shape="rect" fit="contain" placeholder="Carreto · sonolento"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Carreto · Sonolento</span><span style="font-size:13px;color:var(--color-neutral-700)">Olhos meio fechados, carga torta</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-olhao-2" src="assets/ajud-ex-olhao-2.png" shape="rect" fit="contain" placeholder="Olhão · desconfiado"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Olhão · Desconfiado</span><span style="font-size:13px;color:var(--color-neutral-700)">Olho semicerrado, lanterna apontada</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-parafuso-2" src="assets/ajud-ex-parafuso-2.png" shape="rect" fit="contain" placeholder="Parafuso · encantado"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Parafuso · Encantado</span><span style="font-size:13px;color:var(--color-neutral-700)">Olhando o braço mecânico</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-carreto-2" src="assets/ajud-ex-carreto-2.png" shape="rect" fit="contain" placeholder="Carreto · opa"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Carreto · Opa!</span><span style="font-size:13px;color:var(--color-neutral-700)">A pilha caindo</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-olhao-3" src="assets/ajud-ex-olhao-3.png" shape="rect" fit="contain" placeholder="Olhão · apito"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Olhão · Apito</span><span style="font-size:13px;color:var(--color-neutral-700)">Escondido dentro da roda</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-parafuso-3" src="assets/ajud-ex-parafuso-3.png" shape="rect" fit="contain" placeholder="Parafuso · apito"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Parafuso · Apito</span><span style="font-size:13px;color:var(--color-neutral-700)">Enrolado, rolando para longe</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ajud-ex-carreto-3" src="assets/ajud-ex-carreto-3.png" shape="rect" fit="contain" placeholder="Carreto · apito"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Carreto · Apito</span><span style="font-size:13px;color:var(--color-neutral-700)">Travado, soltando a carga</span></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Voz nos balões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Speech bubbles</span>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Uma palavra só, e o sentido muda com a pontuação e o tamanho da letra no balão.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Olhão</span><span style="font-size:22px;font-weight:800;line-height:1.3">"Alerta!" · "Alerta?" · "ALERTAAA!" · "alerta..."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Alert!" · "Alert?" · "ALERRRT!" · "alert..."</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Parafuso</span><span style="font-size:22px;font-weight:800;line-height:1.3">"Pronto!" · "Pronto?" · "pronto..." · e no final, "Amigo!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Done!" · "Done?" · "done..." · and at the end, "Friend!"</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Carreto</span><span style="font-size:22px;font-weight:800;line-height:1.3">"Opa!" · "Opa?" · "Opaaa..." · "OPA!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Oops!" · "Oops?" · "Ooooops..." · "OOPS!"</span></sc-if></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Animações necessárias</h2><span style="font-size:14px;color:var(--color-neutral-700)">Animation list</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Olhão · patrulha</strong> · roda indo e voltando, lanterna varrendo</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Olhão · periscópio</strong> · pescoço estica para olhar por cima</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Olhão · susto</strong> · encolhe dentro da roda</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Parafuso · consertar</strong> · braço de ferramentas girando</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Parafuso · andar</strong> · tentáculos em passinhos rápidos</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Parafuso · rolar</strong> · enrolado como bola</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Carreto · carregar</strong> · pilha balançando na plataforma</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Carreto · derrubar</strong> · pilha caindo em cascata</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Carreto · travar</strong> · esteiras param, braços abrem</div>
+  </div>
+</section>
+
+<sc-if value="{{ showBrief }}" hint-placeholder-val="{{ true }}">
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefing para ilustração</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe as folhas do Antônio e do Amber como referência de estilo</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 01 · Os três</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet of three small alien henchmen for a hand-drawn 2D point-and-click adventure game, same storybook style as the reference images, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, plain cream paper background. Each is a soft, jelly-like purple creature with yellow eyes, fitted inside a homemade robot body of silver-grey metal with visible screws, patches and pink glowing buttons. 1. Olhão, the guard: a purple blob with one huge yellow eye, on a telescopic periscope neck over a single wheel, a flashlight on top of the eye, tall and thin silhouette. 2. Parafuso, the fixer: small and round with four short tentacles and two curious little eyes, a tin-can helmet with a bent antenna, a mechanical tool arm on his back, round silhouette. 3. Carreto, the carrier: wide, flat and chubby with small sleepy eyes, on tank treads, a cargo platform on his back and two forklift arms, wide and low silhouette. Each shown front and side, all the same height scale. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 02 · Expressões</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Expression sheet of the three purple robot-creature henchmen from the reference, same storybook style, plain cream paper background, 3 columns by 3 rows, one column per character, same framing in every panel. Column 1, Olhão: alarmed with neck stretched and eye wide; suspicious with eye half-closed and flashlight pointed; hiding scared inside his wheel. Column 2, Parafuso: proud next to a smoking failed repair; enchanted, staring at something with sparkling eyes; curled into a ball rolling away. Column 3, Carreto: sleepy with a crooked stack of boxes; surprised as the stack falls; frozen stiff with arms open, dropping his cargo. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 03 · Disfarce de cachorro</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">The three purple robot-creature henchmen from the reference in bad homemade dog disguises, same storybook style, plain cream paper background. Cloth ears, rubber noses and springy tails. Olhão as a very tall thin dog with a collar on his periscope neck and a fake eyepatch. Parafuso as a round puppy with oversized ears, his antenna poking through a hole in the hat. Carreto as a wide dog on tank treads with a plush rug thrown over his back. Funny and obviously fake. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 04 · Escala</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Height comparison lineup, same storybook style as the references, plain cream paper background with faint horizontal guide lines. From left to right: Antônio, the 8-year-old boy with the yellow toy grabber arm; the three purple henchmen Olhão, Parafuso and Carreto, each about half the boy's height; Amber, the tall thin green six-armed floating alien, twice the boy's height. Full bodies, side by side, no text, no labels.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEN&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Idioma&quot;},&quot;showBrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showEN: this.props.showEN ?? true, showBrief: this.props.showBrief ?? true };
+  }
+}
+</script>
+</body>
+</html>

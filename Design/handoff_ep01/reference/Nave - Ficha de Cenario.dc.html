@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+</style>
+</helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 32px 120px;display:flex;flex-direction:column;gap:64px">
+
+<header style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--color-text);padding-top:16px">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+    <span>Recreio Espacial · Ficha 04</span>
+    <span style="color:var(--color-accent-700)">Cenário principal do ato 1 / Main setting</span>
+  </div>
+  <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(72px,14vw,184px);line-height:.85;letter-spacing:-.04em">A nave</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:18px;font-weight:600">
+    <span>Disco voador remendado</span><span>8 salas + corredores</span><span>Limpa por dentro</span>
+  </div>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:440px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+    <image-slot id="nave-hero" src="assets/nave-hero.png" shape="rect" fit="contain" placeholder="Arte principal · a nave no espaço"></image-slot>
+  </div>
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">O que é / What it is</div>
+      <p style="margin:0;font-size:20px;line-height:1.45;text-wrap:pretty">A nave de inspeção do Amber, um disco voador clássico. Por fora está cheia de remendos de anos de viagem, feitos às pressas pelo Parafuso. Por dentro é o oposto: limpa, branca e organizada, do jeito metódico do Amber.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Amber's inspection ship, a classic flying saucer. Outside it is covered in patches from years of travel, hastily made by Parafuso. Inside it is the opposite: clean, white and tidy, in Amber's methodical way.</p></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Formato / Shape</span><span>Disco com cúpula de vidro</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Tamanho / Size</span><span>Cerca de 30 m de diâmetro, 3 níveis</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Por fora / Outside</span><span>Prateada, remendada, antena de TV velha</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Por dentro / Inside</span><span>Limpa e tecnológica</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Ato 2</span><span>Pousa na quadra da escola no final</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Por fora</h2><span style="font-size:14px;color:var(--color-neutral-700)">Exterior</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Estilo geral</span><span style="line-height:1.55">O mesmo dos personagens: ilustração 2D feita à mão, contorno marrom-escuro irregular, textura de lápis de cor e aquarela.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Forma</span><span style="line-height:1.55">Disco largo e achatado, com uma cúpula de vidro esverdeado no topo (a ponte de comando) e uma barriga arredondada embaixo (casa de máquinas e hangar). Três pernas de pouso dobráveis.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Remendos</span><span style="line-height:1.55">Placas de metal de cores diferentes presas com parafusos grandes, rebites tortos, uma janela redonda tapada com tampa de panela e um amassado enorme na borda. Tudo com cara de conserto do Parafuso.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Antena de TV</span><span style="line-height:1.55">Uma antena de TV antiga, tipo "orelha de coelho", soldada ao lado da cúpula. É por ela que o Amber capta os canais da Terra.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Luzes</span><span style="line-height:1.55">Um anel de luzes rosa na borda do disco, algumas queimadas. Embaixo, o raio puxador: um círculo de luz rosa que desce até o chão.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Silhueta</span><span style="line-height:1.55">O formato clássico de disco, fácil de reconhecer, quebrado pela antena torta de um lado e pelo amassado do outro.</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-ext-frente" src="assets/nave-ext-frente.png" shape="rect" fit="contain" placeholder="vista de frente"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Frente / Front</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-ext-cima" src="assets/nave-ext-cima.png" shape="rect" fit="contain" placeholder="vista de cima"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Cima / Top</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-ext-baixo" src="assets/nave-ext-baixo.png" shape="rect" fit="contain" placeholder="vista de baixo com o raio"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Baixo, com o raio / Bottom</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Mapa em corte</h2><span style="font-size:14px;color:var(--color-neutral-700)">Cutaway · 3 níveis</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:110px minmax(0,1fr);border-bottom:2px solid var(--color-text)">
+        <div style="padding:16px;border-right:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Nível 1</span><span style="font-weight:800">Cúpula</span></div>
+        <div style="padding:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Ponte de comando</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px minmax(0,1fr);border-bottom:2px solid var(--color-text)">
+        <div style="padding:16px;border-right:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Nível 2</span><span style="font-weight:800">Anel</span></div>
+        <div style="padding:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="padding:6px 10px;background:var(--color-accent);color:#fff;font-weight:600;font-size:14px">Sala fechada</span><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Corredores</span><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Oficina do Parafuso</span><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Sala da TV</span><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Laboratório do Amber</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px minmax(0,1fr)">
+        <div style="padding:16px;border-right:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Nível 3</span><span style="font-weight:800">Barriga</span></div>
+        <div style="padding:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Casa de máquinas</span><span style="padding:6px 10px;border:2px solid var(--color-text);font-weight:600;font-size:14px">Hangar da cápsula</span></div>
+      </div>
+      <p style="margin:0;padding:16px;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5">Os corredores formam um anel em volta do nível 2 e ligam todas as salas. Um elevador tubular no centro sobe para a ponte e desce para a barriga da nave.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:380px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="nave-corte" src="assets/nave-corte.png" shape="rect" fit="contain" placeholder="Desenho em corte da nave mostrando as salas"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Ambientes</h2><span style="font-size:14px;color:var(--color-neutral-700)">Rooms · na ordem em que o jogador visita</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-sala-fechada" src="assets/nave-sala-fechada.png" shape="rect" placeholder="Sala fechada"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">01 · Nível 2</span><span>EP 02</span></div>
+        <h3 style="margin:0;font-size:24px">Sala fechada</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Cela de observação branca e redonda, sem porta visível. Uma cama flutuante, uma janela pequena para o espaço e uma câmera com um olho que segue o Antônio.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> descobrir a porta escondida e abri-la com os brinquedos.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-corredores" shape="rect" placeholder="Corredores"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">02 · Nível 2</span><span>EP 03</span></div>
+        <h3 style="margin:0;font-size:24px">Corredores</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Anel curvo e brilhante, com portas redondas e faixas de luz rosa no chão. A curva esconde o que vem pela frente.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> passar pelo Olhão sem entrar no cone da lanterna.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-oficina" src="assets/nave-oficina.png" shape="rect" placeholder="Oficina do Parafuso"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">03 · Nível 2</span><span>EP 03</span></div>
+        <h3 style="margin:0;font-size:24px">Oficina do Parafuso</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">O único canto bagunçado da nave por dentro: bancada baixa, ferramentas penduradas, peças em potes, um robô pela metade.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> consertar o braço do Parafuso com fita crepe. Começa a amizade.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-sala-tv" src="assets/nave-sala-tv.png" shape="rect" placeholder="Sala da TV"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">04 · Nível 2</span><span>EP 03</span></div>
+        <h3 style="margin:0;font-size:24px">Sala da TV</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Parede inteira de telas mostrando canais da Terra: novela, jornal, desenho, propaganda. Uma poltrona de seis braços no centro.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> trocar de canal para descobrir pistas; aqui o jogador entende por que o Amber fala daquele jeito.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-laboratorio" src="assets/nave-laboratorio.png" shape="rect" placeholder="Laboratório do Amber"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">05 · Nível 2</span><span>EP 03</span></div>
+        <h3 style="margin:0;font-size:24px">Laboratório do Amber</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Branco e impecável. Vitrines com objetos da Terra etiquetados como "perigosos": um ioiô, uma meia, um guarda-chuva. Mesa de exame com scanner gigante.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> pegar a peça de navegação de dentro de uma vitrine com o braço mecânico.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-ponte" src="assets/nave-ponte.png" shape="rect" placeholder="Ponte de comando"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">06 · Nível 1</span><span>EP 04</span></div>
+        <h3 style="margin:0;font-size:24px">Ponte de comando</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Dentro da cúpula de vidro, com o espaço em volta. Painel em anel com seis manches, um para cada braço do Amber, e um mapa de galáxias flutuando.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> encontrar a Terra no mapa e gravar as coordenadas.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-maquinas" src="assets/nave-maquinas.png" shape="rect" placeholder="Casa de máquinas"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">07 · Nível 3</span><span>EP 04</span></div>
+        <h3 style="margin:0;font-size:24px">Casa de máquinas</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Um motor redondo girando no centro, tubos transparentes com energia rosa e alavancas enormes. O Carreto passa por aqui carregando caixas de combustível.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> desviar a energia para o hangar sem disparar o alarme.</p>
+      </div>
+    </div>
+
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="nave-hangar" src="assets/nave-hangar.png" shape="rect" placeholder="Hangar da cápsula"></image-slot></div>
+      <div style="padding:20px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase"><span style="color:var(--color-accent-700)">08 · Nível 3</span><span>EP 04</span></div>
+        <h3 style="margin:0;font-size:24px">Hangar da cápsula</h3>
+        <p style="margin:0;font-size:14px;line-height:1.5">Sala baixa com uma escotilha redonda no chão. A cápsula de fuga fica pendurada por garras, coberta por uma lona.</p>
+        <p style="margin:0;font-size:14px;line-height:1.5"><strong>Puzzle:</strong> ligar a cápsula, inserir as coordenadas e abrir a escotilha.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">A cápsula de fuga</h2><span style="font-size:14px;color:var(--color-neutral-700)">Escape pod</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:16px">
+      <p style="margin:0;font-size:18px;line-height:1.5;text-wrap:pretty">Uma cápsula triangular de um lugar só, com uma janela redonda na frente e três pequenos propulsores atrás. Nunca foi usada e está velha: remendada com placas tortas, um parafuso faltando e uma das pontas amassada.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:14px;line-height:1.5;color:var(--color-neutral-700)">A one-seat triangular pod with a round front window and three small thrusters at the back. Never used and old: patched with crooked plates, a missing screw and one dented corner.</p></sc-if>
+      <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Remendos do Antônio:</strong> antes de partir, ele reforça a cápsula com a fita crepe e a corda de pular. Os remendos dele ficam visíveis até o fim do jogo.</div>
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Por dentro:</strong> um banco pequeno demais para o Amber e perfeito para uma criança, e um painel com três botões grandes.</div>
+        <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Chegada:</strong> cai no quintal de casa de madrugada, encerrando o ato 1.</div>
+      </div>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:420px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="nave-capsula" src="assets/nave-capsula.png" shape="rect" fit="contain" placeholder="Cápsula triangular remendada"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Paleta</h2><span style="font-size:14px;color:var(--color-neutral-700)">Exterior e interior</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#b9c2c4"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Casco</span><span style="font-size:12px;color:var(--color-neutral-700)">#B9C2C4</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#b9814f"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Remendos</span><span style="font-size:12px;color:var(--color-neutral-700)">#B9814F</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#9fd1c3"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Cúpula</span><span style="font-size:12px;color:var(--color-neutral-700)">#9FD1C3</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#e05aa8"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Luzes e raio</span><span style="font-size:12px;color:var(--color-neutral-700)">#E05AA8</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#eef3f4"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Paredes internas</span><span style="font-size:12px;color:var(--color-neutral-700)">#EEF3F4</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#8fa6b8"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Sombras internas</span><span style="font-size:12px;color:var(--color-neutral-700)">#8FA6B8</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#7fb33f"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Detalhes do Amber</span><span style="font-size:12px;color:var(--color-neutral-700)">#7FB33F</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#2a2d4a"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Espaço</span><span style="font-size:12px;color:var(--color-neutral-700)">#2A2D4A</span></div></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Por dentro, brancos frios e azuis acinzentados: o Antônio, com o uniforme e os tênis vermelhos, é a única coisa quente na cena. O verde do Amber aparece em detalhes como puxadores e etiquetas. O rosa marca tudo o que é interativo ou perigoso.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Pouso na escola</h2><span style="font-size:14px;color:var(--color-neutral-700)">Ato 2 · final</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:16px">
+      <p style="margin:0;font-size:18px;line-height:1.5;text-wrap:pretty">No último episódio, a mesma nave pousa na quadra da escola, no lugar exato onde o Antônio foi abduzido. As três pernas afundam no piso da quadra e o raio rosa ilumina as traves e os cestos de basquete.</p>
+      <p style="margin:0;font-size:15px;line-height:1.55">O cenário fecha o ciclo com o episódio 1. É aqui que a escola inteira faz barulho para expulsar o Amber, e a nave decola de volta com os remendos novos que o Antônio deixou.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:380px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="nave-pouso-escola" src="assets/nave-pouso-escola.png" shape="rect" fit="contain" placeholder="A nave pousada na quadra da escola"></image-slot>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ showBrief }}" hint-placeholder-val="{{ true }}">
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefing para ilustração</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe as folhas dos personagens como referência de estilo</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 01 · Exterior</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Vehicle sheet of a classic flying saucer for a hand-drawn 2D point-and-click adventure game, same storybook style as the reference images, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, plain cream paper background. Wide flat silver-grey disc with a pale green glass dome on top and a rounded belly underneath, three folding landing legs. Covered in patches: mismatched metal plates with big screws, crooked rivets, a round window covered with a pot lid, a big dent on the rim. An old rabbit-ear TV antenna welded next to the dome. A ring of pink lights around the rim, some burnt out. Views: front, top, and bottom with a pink tractor beam shining down. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 02 · Corte</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Cutaway cross-section of the same patched flying saucer, same storybook style, cream paper background. Three levels. Top level inside the glass dome: command bridge. Middle level ring: a white round observation cell, curved corridors, a messy small workshop, a TV room with a wall of screens, a clean white laboratory with display cases. Bottom level in the belly: engine room with a round spinning engine and pink energy tubes, and a low hangar holding a small triangular escape pod. A tube elevator in the center connecting all levels. Clean, white, high-tech interior contrasting with the patched exterior. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 03 · Salas (uma por vez)</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Background art for a hand-drawn 2D point-and-click adventure game, 16:9, side view of one room inside a clean, white, high-tech alien flying saucer, same storybook style as the reference images, soft colored-pencil and watercolor texture, cool whites and grey-blues, pink glowing lights on interactive objects, small green details. Empty of characters. Room: [cole aqui a descrição de uma sala da seção Ambientes, em inglês]. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 04 · Cápsula</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Prop sheet of a small one-seat triangular escape pod, same storybook style as the reference images, cream paper background. Silver-grey metal, a round front window, three small thrusters at the back, old and patched: crooked plates, a missing screw, one dented corner. Also shown after a child's repairs: strips of beige masking tape and a jump rope tied around it. Views: front, side, and open with a tiny seat and three big buttons inside. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 05 · Pouso na escola</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Background art, 16:9, same storybook style as the references. The patched flying saucer landed in the middle of a Brazilian school's covered sports court, its three legs on the painted court floor, pink tractor beam glowing down, basketball hoops and goalposts on each side, school building in the background, late afternoon light. No characters, no text, no labels.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEN&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Idioma&quot;},&quot;showBrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showEN: this.props.showEN ?? true, showBrief: this.props.showBrief ?? true };
+  }
+}
+</script>
+</body>
+</html>

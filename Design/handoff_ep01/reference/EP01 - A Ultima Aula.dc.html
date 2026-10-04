@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+</style>
+</helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 32px 120px;display:flex;flex-direction:column;gap:64px">
+
+<header style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--color-text);padding-top:16px">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+    <span>Recreio Espacial · Documento de episódio</span>
+    <span style="color:var(--color-accent-700)">Versão 0.1 · para validação</span>
+  </div>
+  <div style="font-size:24px;font-weight:800;color:var(--color-accent-700)">EP 01</div>
+  <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(64px,12vw,160px);line-height:.85;letter-spacing:-.04em">A última aula</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:18px;font-weight:600">
+    <span>10–15 min</span><span>3 cenas</span><span>Tutorial do jogo</span><span>Termina na abdução</span>
+  </div>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:32px;display:flex;flex-direction:column;gap:12px">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Resumo / Summary</div>
+    <p style="margin:0;font-size:20px;line-height:1.45;text-wrap:pretty">Antônio precisa terminar três contas de multiplicação no caderno para ser liberado para a educação física. No caminho até a quadra, resgata o frisbee dos colegas preso no portão. Na quadra, fica encarregado de guardar o material da aula. Quando todos saem para beber água, uma luz rosa desce do céu e leva o Antônio junto com o saco de brinquedos.</p>
+    <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Antônio has to finish three multiplication problems in his notebook before he's allowed out to PE. On the way to the court he rescues his classmates' frisbee from the school gate. At the court he's put in charge of the PE equipment. When everyone leaves for a water break, a pink light comes down from the sky and takes Antônio along with the bag of toys.</p></sc-if>
+  </div>
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:32px;display:flex;flex-direction:column;border-top:0">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);padding-bottom:12px">Objetivos do episódio</div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+      <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Ensinar os controles</strong> sem tela de instruções: cada mecânica aparece numa situação simples.</div>
+      <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Apresentar o Antônio:</strong> tímido, curioso, sempre com o braço mecânico.</div>
+      <div style="padding:12px 0;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Montar o inventário</strong> com os 4 itens que ele leva para a nave.</div>
+      <div style="padding:12px 0;line-height:1.5"><strong>Plantar o mistério:</strong> o jogador só vê a luz, nunca o Amber.</div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Fluxo</h2><span style="font-size:14px;color:var(--color-neutral-700)">Flow · tempo estimado</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 1 · 5 min</span><span style="font-size:22px;font-weight:800">Sala de aula</span><span style="font-size:14px;line-height:1.45">Terminar as 3 contas</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 2 · 3 min</span><span style="font-size:22px;font-weight:800">Portão da escola</span><span style="font-size:14px;line-height:1.45">Resgatar o frisbee</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 3 · 5 min</span><span style="font-size:22px;font-weight:800">Quadra</span><span style="font-size:14px;line-height:1.45">Guardar o material</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px;background:var(--color-accent);color:#fff"><span style="font-size:13px;font-weight:600">Final · 1 min</span><span style="font-size:22px;font-weight:800">A luz</span><span style="font-size:14px;line-height:1.45">Abdução, sem controle do jogador</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Personagens do episódio</h2><span style="font-size:14px;color:var(--color-neutral-700)">Novos · precisam de ficha</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Caio</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Melhor amigo</span><p style="margin:0;font-size:15px;line-height:1.5">Senta ao lado do Antônio. Falante e agitado, o oposto dele. Bom em esportes e ruim em matemática. Defende o Antônio quando os outros zoam. No ato 2 é o primeiro a acreditar na história.</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Professor Beto</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Educação física</span><p style="margin:0;font-size:15px;line-height:1.5">Grande, de boné e agasalho, sempre com o apito na boca. Fala alto e apita para tudo. Gosta do Antônio e dá a ele a tarefa de "assistente oficial do material".</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Professora Lúcia</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Matemática · sugestão</span><p style="margin:0;font-size:15px;line-height:1.5">Não estava na lista, mas a cena da sala precisa de alguém para liberar a turma. Pequena, de óculos, calma. Só confere o caderno e libera o aluno.</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><h3 style="margin:0;font-size:24px">Colegas de turma</h3><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Figurantes</span><p style="margin:0;font-size:15px;line-height:1.5">4 a 6 crianças com o mesmo uniforme, silhuetas variadas. Uma delas, a Bia, é dona do frisbee e só fala na cena do portão.</p></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Cena 1 · Sala de aula</h2><span style="font-size:14px;color:var(--color-neutral-700)">Ensina: tocar, conversar, pegar item, pedir dica</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-sala" src="assets/ep01-sala.png" shape="rect" placeholder="Cenário · sala de aula"></image-slot></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cenário</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Sala de aula vista de lado, fim de manhã. Lousa com a tarefa do dia, carteiras em fileiras, janela com vista para a quadra, relógio de parede marcando 9h55. Os colegas já guardaram o material e esperam na porta. Só o Antônio ainda está com o caderno aberto.</p>
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);padding-top:8px">Objetos tocáveis</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Caderno · lápis · mochila · janela · lousa · estojo do Caio · relógio · porta</p>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">1</span><span style="line-height:1.55"><strong>Abertura.</strong> O sinal toca. A professora Lúcia avisa que só sai quem mostrar as 3 contas prontas. Os colegas mostram e saem correndo. O Caio fica esperando na porta. A câmera mostra o Antônio sozinho na carteira. Primeiro balão de tutorial: uma mãozinha piscando em cima do caderno.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">2</span><span style="line-height:1.55"><strong>O lápis quebrado.</strong> Tocar no caderno abre a página com as 3 contas. Ao tentar escrever, a ponta do lápis quebra. Ensina que nem tudo se resolve de primeira.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">3</span><span style="line-height:1.55"><strong>Conversar com o Caio.</strong> O Caio tem um apontador no estojo, mas fica do outro lado da sala. Tocar nele abre um balão de conversa (ensina diálogo). Ele joga o apontador, que cai embaixo de uma carteira, fora do alcance.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">4</span><span style="line-height:1.55"><strong>O braço mecânico.</strong> Tocar na mochila: o Antônio tira o braço mecânico, que entra no inventário (ensina pegar item). Arrastar o braço até o apontador: ele pega (ensina usar item no cenário). Apontar o lápis.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">5</span><span style="line-height:1.55"><strong>As 3 contas.</strong> Cada conta tem a resposta escondida na própria sala, para quem não souber de cabeça. O jogador escolhe o resultado tocando nos números. Errar não pune: o Antônio apaga e tenta de novo.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">6</span><span style="line-height:1.55"><strong>Liberado.</strong> A professora confere, carimba uma estrelinha no caderno e libera. O Antônio sai com o Caio, levando o braço mecânico escondido na camiseta.</span></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Conta 1</span><span style="font-size:48px;font-weight:800;line-height:1">2 × 3 = 6</span><span style="font-size:14px;line-height:1.5"><strong>Pista:</strong> a janela tem 2 fileiras de 3 vidros.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Conta 2</span><span style="font-size:48px;font-weight:800;line-height:1">4 × 2 = 8</span><span style="font-size:14px;line-height:1.5"><strong>Pista:</strong> os desenhos perto da lousa: 4 bichinhos, 2 orelhas cada.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Conta 3</span><span style="font-size:48px;font-weight:800;line-height:1">3 × 5 = 15</span><span style="font-size:14px;line-height:1.5"><strong>Pista:</strong> o estojo do Caio tem 3 compartimentos com 5 lápis de cor cada.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Cena 2 · Portão da escola</h2><span style="font-size:14px;color:var(--color-neutral-700)">Reforça: usar item no cenário</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-portao" src="assets/ep01-portao.png" shape="rect" placeholder="Cenário · portão da escola"></image-slot></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cenário</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Pátio de entrada da escola, com o portão de grade alto e o nome da escola em letras de metal no topo. Uma árvore grande, um banco e o caminho que leva até a quadra coberta, ao fundo.</p>
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);padding-top:8px">Objetos tocáveis</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Portão · frisbee preso · árvore · banco · Bia · Caio · caminho da quadra</p>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">1</span><span style="line-height:1.55"><strong>O problema.</strong> No caminho, a Bia está quase chorando: o frisbee dela ficou preso no topo do portão. Os colegas pulam e não alcançam. O Caio tenta escalar e é chamado de volta pelo zelador (só voz).</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">2</span><span style="line-height:1.55"><strong>Tentativa errada.</strong> Usar o braço mecânico direto no portão: não alcança. O Antônio faz a animação de "não dá". Ensina que o cenário também faz parte da solução.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">3</span><span style="line-height:1.55"><strong>A solução.</strong> Conversar com o Caio: ele oferece as costas. Do ombro do Caio, o braço mecânico alcança o frisbee. (O banco do cenário não se move; ficou mais simples de animar e reforça a amizade dos dois.)</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">4</span><span style="line-height:1.55"><strong>Recompensa.</strong> A Bia agradece e diz que ele pode ficar com o frisbee durante a aula. O frisbee entra no inventário. Todos seguem para a quadra.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Cena 3 · Quadra</h2><span style="font-size:14px;color:var(--color-neutral-700)">Junta tudo · sem tutorial</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;aspect-ratio:16/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-quadra" src="assets/ep01-quadra.png" shape="rect" placeholder="Cenário · quadra coberta"></image-slot></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cenário</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Quadra poliesportiva com cobertura de telhas e laterais abertas para o céu. Traves de futebol, tabelas de basquete, arquibancada pequena de cimento, bebedouro no canto. É o mesmo cenário do episódio final, quando a nave pousa.</p>
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);padding-top:8px">Objetos tocáveis</div>
+      <p style="margin:0;font-size:15px;line-height:1.55">Saco de rede · corda enroscada na tabela · apito · Professor Beto · Caio · arquibancada · bebedouro · céu</p>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">1</span><span style="line-height:1.55"><strong>Os times.</strong> O Professor Beto apita e os capitães escolhem os times. O Caio é escolhido logo; o Antônio sobra. O professor nomeia ele "assistente oficial do material" e entrega o saco de rede.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">2</span><span style="line-height:1.55"><strong>A tarefa.</strong> Recolher o material espalhado. Dois itens dão trabalho: a corda de pular, enroscada no aro da tabela de basquete, e o apito, que o professor esqueceu no alto da arquibancada.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">3</span><span style="line-height:1.55"><strong>A corda.</strong> Jogar o frisbee no aro: a corda se solta e cai. Primeira vez que o jogador resolve algo sem ajuda.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">4</span><span style="line-height:1.55"><strong>O apito.</strong> Subir na arquibancada e pegar o apito com o braço mecânico por entre a grade. O Antônio apita uma vez, de leve, e se assusta com o próprio barulho. Pista para o resto do jogo.</span></div>
+    <div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:16px 0"><span style="font-size:20px;font-weight:800;color:var(--color-accent-700)">5</span><span style="line-height:1.55"><strong>Pausa para a água.</strong> O professor chama todos para o bebedouro, do outro lado da escola. O Antônio fica sozinho na quadra, guardando tudo no saco de rede.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Final · A luz</h2><span style="font-size:14px;color:var(--color-neutral-700)">Cutscene · sem controle do jogador</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-final-1" src="assets/ep01-final-1.png" shape="rect" fit="contain" placeholder="quadro 1"></image-slot></div><p style="margin:0;padding:16px;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5"><strong>1.</strong> O céu escurece de repente. As folhas param de cair no ar. Silêncio total.</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-final-2" src="assets/ep01-final-2.png" shape="rect" fit="contain" placeholder="quadro 2"></image-slot></div><p style="margin:0;padding:16px;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5"><strong>2.</strong> Um círculo de luz rosa desce pela lateral aberta da quadra e para em cima do Antônio.</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-final-3" src="assets/ep01-final-3.png" shape="rect" fit="contain" placeholder="quadro 3"></image-slot></div><p style="margin:0;padding:16px;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5"><strong>3.</strong> O braço mecânico começa a flutuar primeiro. O Antônio segura firme e sobe junto, agarrado ao saco de rede.</p></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:4/9;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="ep01-final-4" src="assets/ep01-final-4.png" shape="rect" fit="contain" placeholder="quadro 4"></image-slot></div><p style="margin:0;padding:16px;border-top:2px solid var(--color-text);font-size:14px;line-height:1.5"><strong>4.</strong> A luz some. A turma volta e encontra a quadra vazia. Só fica um tênis vermelho no chão. Tela preta: "Continua…"</p></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">O braço mecânico subir primeiro é a pista visual de que a luz veio atrás dele, e não do menino. O tênis que fica para trás pode virar prova no ato 2, quando ninguém acredita no Antônio.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Inventário</h2><span style="font-size:14px;color:var(--color-neutral-700)">Onde cada item é conseguido</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 1 · mochila</span><span style="font-size:22px;font-weight:800">Braço mecânico</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 2 · portão</span><span style="font-size:22px;font-weight:800">Frisbee</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 3 · tabela</span><span style="font-size:22px;font-weight:800">Corda de pular</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Cena 3 · arquibancada</span><span style="font-size:22px;font-weight:800">Apito</span></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Apontador e lápis são itens temporários: aparecem no inventário só durante a cena 1.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Falas nos balões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Dialogue</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Prof. Lúcia</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Só sai quem me mostrar as três contas."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Only those who show me all three problems can go."</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Caio</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Anda, Antônio! O professor Beto já tá apitando!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Come on, Antônio! Coach Beto's already blowing the whistle!"</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Antônio</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Quebrou... claro."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"It broke... of course."</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Caio</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Pega aí!" (o apontador rola para baixo da carteira) "...Ops."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Catch!" (the sharpener rolls under a desk) "...Oops."</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Bia</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Meu frisbee novo! Ninguém alcança!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"My new frisbee! Nobody can reach it!"</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Antônio</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Hm... falta um pouco."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Hm... not quite."</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Prof. Beto</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">"Antônio! Você é o assistente oficial do material. Missão importante!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Antônio! You're the official equipment assistant. Important mission!"</span></sc-if></span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:24px;padding:14px 0"><span style="font-weight:800">Antônio</span><span style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">(sozinho, olhando para cima) "...Ué."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">(alone, looking up) "...Huh."</span></sc-if></span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Sistema de dicas</h2><span style="font-size:14px;color:var(--color-neutral-700)">Hints</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Nível 1</span><span style="font-size:15px;line-height:1.5">O Antônio olha para o objeto certo e faz um "hm?".</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Nível 2</span><span style="font-size:15px;line-height:1.5">Um balão com o desenho do item e do objeto juntos.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">Nível 3</span><span style="font-size:15px;line-height:1.5">Uma mãozinha mostra o gesto de arrastar, passo a passo.</span></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Botão de dica com uma lâmpada no canto da tela. Cada toque mostra o próximo nível. No EP01, o nível 1 aparece sozinho depois de 30 segundos sem progresso.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Lista de artes</h2><span style="font-size:14px;color:var(--color-neutral-700)">O que precisa ser produzido</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cenários · 3</span><span style="font-size:15px;line-height:1.6">Sala de aula<br>Portão da escola<br>Quadra coberta</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Personagens · 4 fichas</span><span style="font-size:15px;line-height:1.6">Caio<br>Professor Beto<br>Professora Lúcia<br>Colegas (Bia + figurantes)</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Objetos · 8</span><span style="font-size:15px;line-height:1.6">Caderno aberto com as contas, lápis, apontador, mochila, frisbee, corda, apito, saco de rede</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cutscene · 4 quadros</span><span style="font-size:15px;line-height:1.6">Céu escurecendo, luz descendo, Antônio flutuando, quadra vazia com o tênis</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Interface</span><span style="font-size:15px;line-height:1.6">Barra de inventário, balão de fala, botão de dica, mãozinha de tutorial</span></div>
+  </div>
+</section>
+
+<sc-if value="{{ showBrief }}" hint-placeholder-val="{{ true }}">
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefing dos cenários</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe a folha do Antônio como referência de estilo</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Sala de aula</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Background art for a hand-drawn 2D point-and-click adventure game, 16:9, side view, same storybook style as the reference image, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, warm late-morning light. A Brazilian primary school classroom: green chalkboard with three multiplication problems, rows of small wooden desks, one window with 2 rows of 3 glass panes showing a covered sports court outside, a wall clock at 9:55, children's drawings on the walls, a backpack hanging on a chair. Empty of characters. No readable text except the numbers on the board.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Portão da escola</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Background art, 16:9, side view, same storybook style as the reference. The entrance courtyard of a Brazilian primary school: a tall painted iron bar gate with metal letters on top, a red frisbee stuck at the very top of the gate, a big leafy tree, a wooden bench that can be pushed, a path leading to a covered sports court in the background. Sunny morning. Empty of characters. No text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Quadra coberta</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Background art, 16:9, side view, same storybook style as the reference. A Brazilian school's covered multi-sport court: tiled roof on metal beams with open sides showing the sky, painted court lines, a small futsal goal, a basketball hoop with a jump rope tangled on the rim, a small concrete bleacher with a railing and a whistle left on the top step, a water fountain in the corner, a mesh bag of balls on the floor. Sunny late morning. Empty of characters. No text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Cutscene · a luz</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Four 16:9 story frames, same storybook style as the references, same covered school sports court. 1. the sky suddenly darkening, leaves frozen in mid-air. 2. a soft pink circle of light coming down through the open side of the court onto Antônio, the boy from the reference. 3. his yellow toy grabber arm floating up first, the boy holding on and rising with a mesh bag of balls. 4. the empty court in normal daylight with a single red sneaker left on the floor. No spaceship visible, no text.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<section id="pendentes" style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Artes pendentes</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe a folha do Antônio como referência de estilo em todos</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">01–04 aprovados</span><span style="line-height:1.55">Caio, Bia, Lúcia e Beto já estão no protótipo. O Beto usa a pose 3/4, a única em que ele aparece sem apito, porque o apito é um item da quadra.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">05 refazer</span><span style="line-height:1.55">Veio outro portão, com pilares de tijolo e placa, em dois painéis verticais. Precisa ser a imagem atual (ep01-portao.png) editada.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">06 refazer</span><span style="line-height:1.55">A quadra foi redesenhada com portão e banco, e a corda e o apito continuam no lugar. Precisa ser a imagem atual (ep01-quadra.png) só sem os dois objetos.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">07 refazer</span><span style="line-height:1.55">Vieram 7 quadros, sendo que o primeiro e o último estão de frente. Fundo bege, mangas compridas azuis e alturas diferentes. Precisa de 8 quadros de perfil, com o mesmo tamanho e fundo transparente.</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">01 · Caio</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/game/caio.png, fundo transparente, corpo inteiro, de frente.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet, same hand-drawn storybook style as the attached sheet of Antônio: thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, 3.5 heads tall, 4-finger hands. Caio, an 8-year-old Brazilian boy, Antônio's restless best friend, slightly taller than him. Short curly black hair, warm brown skin, big grin with a missing front tooth, energetic leaning-forward posture. Same school PE uniform: white t-shirt with blue collar and cuffs and the school crest, navy shorts with a white side stripe, white socks, worn green sneakers with one lace untied. Full body, front view, plus 3/4 view and two expressions (laughing, "oops" embarrassed). Plain transparent background, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">02 · Bia</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/game/bia.png, fundo transparente, corpo inteiro, de frente.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet, same hand-drawn storybook style as the attached sheet of Antônio, same proportions. Bia, an 8-year-old Brazilian girl, Antônio's classmate. Light brown skin, freckles, dark wavy hair in two high puffs tied with red hair bands, determined eyebrows. Same school PE uniform: white t-shirt with blue collar and cuffs and the school crest, navy shorts with a white side stripe, white socks, purple sneakers with velcro straps. Full body, front view, plus 3/4 view and two expressions (pointing up worried, jumping happy). Plain transparent background, no text, no frisbee in her hands.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">03 · Professora Lúcia</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/game/lucia.png, fundo transparente, corpo inteiro, de frente.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet, same hand-drawn storybook style as the attached sheet of Antônio. Professora Lúcia, a Brazilian primary school math teacher in her 50s, adult proportions but still cartoonish, about twice Antônio's height. Gray hair in a neat bun held by a pencil, round reading glasses on a beaded chain, kind but strict face, one eyebrow often raised. Mustard cardigan over a white blouse, long brown skirt, comfortable flat shoes, a piece of chalk in one hand and a notebook in the other. Full body, front view, plus 3/4 view and two expressions (stern "show me", proud smile). Plain transparent background, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">04 · Professor Beto</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/game/beto.png, fundo transparente, corpo inteiro, de frente.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet, same hand-drawn storybook style as the attached sheet of Antônio. Professor Beto, a Brazilian PE teacher in his 30s, adult proportions but cartoonish, about twice Antônio's height, broad shoulders and skinny legs. Dark skin, shaved head, thick friendly mustache, big enthusiastic smile. Blue tracksuit jacket open over a white t-shirt with the school crest, navy track pants with white side stripes, white sneakers, a clipboard under one arm and an empty whistle lanyard around his neck (no whistle). Full body, front view, plus 3/4 view and two expressions (cheering, pointing with a "mission" face). Plain transparent background, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">05 · Portão sem frisbee</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/ep01-portao-vazio.png. Anexe ep01-portao.png.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Edit the attached school gate image. Keep everything exactly the same: style, colors, lighting, camera angle, framing, gate, tree, bench and path. Change only one thing: remove the red frisbee stuck at the top of the gate and paint the gate bars and sky behind it as if it had never been there. Same resolution, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">06 · Quadra sem corda e sem apito</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/ep01-quadra-vazia.png. Anexe ep01-quadra.png.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Edit the attached covered sports court image. Keep everything exactly the same: style, colors, lighting, camera angle, framing, roof, court lines, goal, bleacher, fountain and mesh bag of balls. Change only two things: 1. remove the jump rope tangled on the basketball hoop, leaving a clean rim and net; 2. remove the whistle from the top step of the bleacher, leaving the plain concrete step. Same resolution, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">07 · Antônio andando</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivo:</strong> assets/game/antonio-walk.png, uma tira com 8 quadros do mesmo tamanho. Anexe antonio-side.png.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Sprite sheet of a walk cycle for the boy in the attached image, Antônio, side view facing right, exactly the same design, colors, outline and size. 8 frames in one horizontal row, evenly spaced, each frame the same width and height, feet on the same baseline, no camera movement. Classic cartoon walk: contact, down, passing, up, for each leg. Big red sneakers lift and land with weight, loose side strands of hair and the untucked t-shirt bounce slightly, arms swing, he holds the yellow toy grabber arm in his back hand. Transparent background, no shadow, no text.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">08 · Final corrigido</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>Arquivos:</strong> ep01-final-2.png e ep01-final-3.png. Use o prompt da Correção 02, logo abaixo.</p>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefings de correção</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe a imagem atual + a folha do Antônio em cada pedido</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Correção 01 · Sala de aula</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>O que muda:</strong> lousa com as contas sem resposta e com os números certos; nave removida da janela.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Edit the attached classroom image. Keep everything else exactly the same: style, colors, camera angle, desks, backpack, drawings, clock and window frame. Change only two things. 1. The chalkboard must show three unsolved multiplication problems written in white chalk, with no answers: "2 × 3 =", "4 × 2 =", "3 × 5 =". 2. Remove the flying saucer and the pink light from the window view completely; through the window show only the covered school sports court with its basketball hoop and goal, a clear blue sky and trees. No spaceship, no alien, no pink light anywhere.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Correção 02 · Final, quadros 2 e 3</div>
+      <p style="margin:0;font-size:14px;line-height:1.5"><strong>O que muda:</strong> o Antônio com o uniforme da escola e o braço mecânico dele subindo primeiro, sem garra vinda do céu.</p>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Edit the attached four-panel strip. Keep panels 1 and 4 exactly as they are. In panels 2 and 3, redraw the boy to match the attached character sheet of Antônio: straight brown hair with a straight fringe, white PE t-shirt with blue collar and cuffs and a school crest, navy shorts with a white side stripe, short white socks, red sneakers. Panel 2: he stands inside the pink cone of light holding the mesh bag of balls in one hand and his yellow plastic toy grabber arm in the other, looking up surprised. Panel 3: his yellow toy grabber arm floats up first, pulling his raised hand; he rises off the ground holding on to it with one hand and to the mesh bag of balls with the other. Remove the yellow claw hanging from the sky. Nothing comes down from above, only the pink light. Same style, same colors, same panel layout, no text.</p>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Para validar</h2><span style="font-size:14px;color:var(--color-neutral-700)">Perguntas para o teste do protótipo</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="padding:14px 0;border-bottom:2px solid var(--color-divider);line-height:1.5">O jogador entende sozinho que precisa tocar no caderno?</div>
+    <div style="padding:14px 0;border-bottom:2px solid var(--color-divider);line-height:1.5">As pistas das contas são percebidas por quem não sabe a tabuada?</div>
+    <div style="padding:14px 0;border-bottom:2px solid var(--color-divider);line-height:1.5">A ideia de empurrar o banco aparece sem precisar de dica?</div>
+    <div style="padding:14px 0;border-bottom:2px solid var(--color-divider);line-height:1.5">O episódio fica entre 10 e 15 minutos para uma criança de 8 anos?</div>
+    <div style="padding:14px 0;line-height:1.5">O final deixa vontade de jogar o EP02?</div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEN&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Idioma&quot;},&quot;showBrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showEN: this.props.showEN ?? true, showBrief: this.props.showBrief ?? true };
+  }
+}
+</script>
+</body>
+</html>

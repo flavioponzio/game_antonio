@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#201e1d;font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow:hidden;user-select:none;-webkit-user-select:none}
+a{color:var(--color-accent)}a:hover{color:var(--color-accent-400)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(236,48,19,.7)}50%{box-shadow:0 0 0 1.2cqw rgba(236,48,19,0)}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -1.2%}}
+@keyframes breathe{0%,100%{scale:1 1}50%{scale:1.008 1.016}}
+@keyframes talk{0%,100%{translate:0 0;scale:1 1}30%{translate:0 -1.8%;scale:.985 1.03}60%{translate:0 0;scale:1.025 .975}}
+@keyframes npcwalk{0%,100%{translate:0 0;scale:1.02 .98}50%{translate:0 -2.6%;scale:.99 1.02}}
+@keyframes pop{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
+</style>
+</helmet>
+<div style="width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#201e1d">
+<div ref="{{ stageRef }}" onClick="{{ onStageClick }}" style="position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;overflow:hidden;container-type:inline-size;background:var(--color-text);cursor:pointer">
+
+  <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background-image:url({{ sceneBg }});background-size:cover;background-position:center;pointer-events:none"></div>
+    <sc-for list="{{ patches }}" as="p" hint-placeholder-count="0">
+      <div style="position:absolute;left:{{ p.left }}%;top:{{ p.top }}%;width:{{ p.w }}%;height:{{ p.h }}%;background-image:url({{ p.src }});background-size:100% 100%;pointer-events:none"></div>
+    </sc-for>
+    <sc-for list="{{ hotspots }}" as="h" hint-placeholder-count="0">
+      <button onClick="{{ h.onClick }}" onMouseEnter="{{ h.onEnter }}" onMouseLeave="{{ h.onLeave }}" title="{{ h.label }}" style="position:absolute;left:{{ h.left }}%;top:{{ h.top }}%;width:{{ h.w }}%;height:{{ h.h }}%;z-index:{{ h.z }};transition:{{ h.trans }};padding:0;margin:0;border:{{ h.border }};background:{{ h.bg }};cursor:pointer;display:flex;align-items:flex-end;justify-content:flex-start;animation:{{ h.anim }};font-family:var(--font-body)">
+        <sc-if value="{{ h.hasSprite }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;inset:0;background-image:url({{ h.sprite }});background-size:auto 100%;background-repeat:no-repeat;background-position:center bottom;transform-origin:center bottom;transform:skewX({{ h.lean }}deg) scaleX({{ h.flip }});transition:transform .5s ease;animation:{{ h.sAnim }};filter:drop-shadow(0 .4cqw 0 rgba(32,30,29,.18));pointer-events:none"></span>
+        </sc-if>
+        <sc-if value="{{ h.isPlaceholder }}" hint-placeholder-val="{{ false }}">
+          <span style="display:flex;flex-direction:column;align-items:flex-start;gap:.2cqw;padding:.5cqw;text-align:left"><span style="font-size:1.25cqw;font-weight:800;color:var(--color-text)">{{ h.label }}</span><span style="font-size:.85cqw;font-weight:600;color:var(--color-neutral-700)">arte pendente</span></span>
+        </sc-if>
+      </button>
+    </sc-for>
+    {{ antEl }}
+
+    <sc-if value="{{ hasBubble }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ skipBubble }}" style="position:absolute;left:{{ bubble.x }}%;bottom:{{ bubble.b }}%;z-index:250;transform:translateX(-50%);max-width:34cqw;min-width:10cqw;background:#fff;border:.2cqw solid var(--color-text);padding:.9cqw 1.2cqw;display:flex;flex-direction:column;gap:.3cqw;animation:pop .15s ease-out;z-index:5">
+        <span style="font-size:1cqw;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">{{ bubble.name }}</span>
+        <span style="font-size:1.7cqw;font-weight:700;line-height:1.25;color:var(--color-text);text-wrap:pretty">{{ bubble.text }}</span>
+      </div>
+    </sc-if>
+
+    <div style="position:absolute;top:1.2cqw;left:1.2cqw;right:1.2cqw;display:flex;justify-content:space-between;align-items:flex-start;gap:1cqw;pointer-events:none;z-index:260">
+      <span style="background:var(--color-text);color:var(--color-bg);padding:.5cqw .9cqw;font-size:1.1cqw;font-weight:700;letter-spacing:.06em;text-transform:uppercase">{{ sceneTitle }}</span>
+      <sc-if value="{{ hasBanner }}" hint-placeholder-val="{{ false }}">
+        <span style="background:var(--color-bg);color:var(--color-text);border:.2cqw solid var(--color-text);padding:.6cqw 1cqw;font-size:1.35cqw;font-weight:700;max-width:46cqw;text-align:left;animation:pop .2s ease-out">{{ banner }}</span>
+      </sc-if>
+      <button onClick="{{ onHint }}" style="pointer-events:auto;display:flex;align-items:center;gap:.6cqw;background:var(--color-bg);border:.2cqw solid var(--color-text);padding:.5cqw .9cqw;font-family:var(--font-body);font-size:1.2cqw;font-weight:800;color:var(--color-text);cursor:pointer" style-hover="background:var(--color-accent-100)">
+        <svg viewBox="0 0 24 24" style="width:1.6cqw;height:1.6cqw" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+        <span>Dica {{ hintLabel }}</span>
+      </button>
+    </div>
+
+    <sc-if value="{{ hasHover }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:5cqw;left:50%;z-index:260;transform:translateX(-50%);background:var(--color-text);color:var(--color-bg);padding:.4cqw .8cqw;font-size:1.2cqw;font-weight:700;pointer-events:none;z-index:6">{{ hoverLabel }}</div>
+    </sc-if>
+
+    <div onClick="{{ stop }}" style="position:absolute;left:1.2cqw;bottom:1.2cqw;display:flex;gap:.8cqw;z-index:260">
+      <sc-for list="{{ inv }}" as="it" hint-placeholder-count="0">
+        <button onClick="{{ it.onClick }}" style="width:8.5cqw;height:8.5cqw;padding:.5cqw;display:flex;flex-direction:column;align-items:stretch;gap:.3cqw;background:{{ it.bg }};border:.25cqw solid {{ it.borderColor }};cursor:pointer;font-family:var(--font-body);animation:{{ it.anim }}">
+          <span style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden"><span style="width:100%;height:100%;background-image:url({{ it.src }});background-size:contain;background-repeat:no-repeat;background-position:center;pointer-events:none"></span></span>
+          <span style="font-size:.95cqw;font-weight:700;color:var(--color-text);text-align:left;white-space:nowrap;overflow:hidden">{{ it.label }}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ cadOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ stop }}" style="position:absolute;inset:0;background:rgba(32,30,29,.55);display:flex;align-items:center;justify-content:center;z-index:280;cursor:default">
+        <div style="width:52cqw;background:#fbfaf6;border:.25cqw solid var(--color-text);padding:2.4cqw;display:flex;flex-direction:column;gap:1.4cqw;background-image:repeating-linear-gradient(0deg,transparent 0 3.1cqw,#c9d6e6 3.1cqw 3.25cqw);animation:pop .2s ease-out">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:1cqw">
+            <span style="font-size:2.4cqw;font-weight:800;color:var(--color-text)">Tarefa de matemática</span>
+            <span style="font-size:1.1cqw;font-weight:600;color:var(--color-neutral-700)">Antônio · 3º ano</span>
+          </div>
+          <sc-for list="{{ cadRows }}" as="r" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:14cqw 7cqw minmax(0,1fr);align-items:center;gap:1cqw;border-top:.2cqw solid var(--color-text);padding-top:1cqw">
+              <span style="font-size:3.2cqw;font-weight:800;color:var(--color-text)">{{ r.q }} =</span>
+              <span style="font-size:3.2cqw;font-weight:800;color:var(--color-accent-700)">{{ r.ans }}</span>
+              <span style="display:flex;gap:.8cqw;justify-content:flex-start">
+                <sc-for list="{{ r.opts }}" as="o" hint-placeholder-count="3">
+                  <button onClick="{{ o.onClick }}" style="min-width:5cqw;height:4.4cqw;padding:0 1cqw;font-family:var(--font-body);font-size:2cqw;font-weight:800;text-align:left;background:{{ o.bg }};color:{{ o.color }};border:.2cqw solid var(--color-text);cursor:pointer" style-hover="background:var(--color-accent-100)">{{ o.v }}</button>
+                </sc-for>
+              </span>
+            </div>
+          </sc-for>
+          <div style="min-height:2.4cqw;font-size:1.6cqw;font-weight:700;color:var(--color-text)">{{ cadMsg }}</div>
+          <div style="display:flex;gap:1cqw;justify-content:flex-start;border-top:.2cqw solid var(--color-text);padding-top:1.2cqw">
+            <sc-if value="{{ cadAllDone }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ cadShow }}" style="padding:1cqw 1.6cqw;font-family:var(--font-body);font-size:1.5cqw;font-weight:800;background:var(--color-accent);color:#fff;border:.2cqw solid var(--color-accent);cursor:pointer;text-align:left" style-hover="background:var(--color-accent-600)">Mostrar para a professora</button>
+            </sc-if>
+            <button onClick="{{ cadHint }}" style="padding:1cqw 1.6cqw;font-family:var(--font-body);font-size:1.5cqw;font-weight:700;background:transparent;color:var(--color-text);border:.2cqw solid var(--color-text);cursor:pointer;text-align:left" style-hover="background:var(--color-accent-100)">Pedir dica</button>
+            <button onClick="{{ cadClose }}" style="padding:1cqw 1.6cqw;font-family:var(--font-body);font-size:1.5cqw;font-weight:700;background:transparent;color:var(--color-text);border:.2cqw solid var(--color-text);cursor:pointer;text-align:left" style-hover="background:var(--color-accent-100)">Fechar caderno</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ isFinal }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#000">
+      <sc-for list="{{ finalPanels }}" as="fp" hint-placeholder-count="4">
+        <div style="width:100%;height:100%;background-image:url({{ fp.src }});background-size:cover;background-position:center;opacity:{{ fp.opacity }};transition:opacity 1.2s ease"></div>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:1.6cqw 2cqw;background:rgba(32,30,29,.85);color:var(--color-bg);font-size:2cqw;font-weight:700">{{ finalCaption }}</div>
+  </sc-if>
+
+  <sc-if value="{{ isTitle }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0;background:var(--color-bg);display:flex;flex-direction:column;justify-content:space-between;padding:4cqw;cursor:default">
+      <div style="display:flex;justify-content:space-between;border-top:.25cqw solid var(--color-text);padding-top:1cqw;font-size:1.2cqw;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text)"><span>Protótipo jogável · v0.1</span><span style="color:var(--color-accent-700)">PC + mobile</span></div>
+      <div style="display:flex;flex-direction:column;gap:1.4cqw">
+        <span style="font-size:2.4cqw;font-weight:800;color:var(--color-accent-700)">Recreio Espacial · EP 01</span>
+        <span style="font-size:11cqw;font-weight:800;line-height:.85;letter-spacing:-.04em;color:var(--color-text)">A última aula</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:2cqw">
+        <span style="max-width:46cqw;font-size:1.5cqw;line-height:1.45;color:var(--color-text)">Toque no cenário para andar e interagir. Toque num item do inventário e depois onde quer usar. Toque no balão para pular a fala.</span>
+        <button onClick="{{ onStart }}" style="padding:1.4cqw 5cqw 1.4cqw 2cqw;font-family:var(--font-body);font-size:2.4cqw;font-weight:800;background:var(--color-accent);color:#fff;border:0;cursor:pointer;text-align:left" style-hover="background:var(--color-accent-600)">Jogar</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isEnd }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:3cqw;padding:6cqw;cursor:default">
+      <span style="font-size:8cqw;font-weight:800;letter-spacing:-.03em;color:var(--color-bg)">Continua…</span>
+      <span style="font-size:1.6cqw;color:var(--color-neutral-400)">Fim do episódio 01 · tempo de jogo: {{ playTime }}</span>
+      <button onClick="{{ onReplay }}" style="padding:1.2cqw 4cqw 1.2cqw 1.6cqw;font-family:var(--font-body);font-size:1.8cqw;font-weight:800;background:var(--color-accent);color:#fff;border:0;cursor:pointer;text-align:left" style-hover="background:var(--color-accent-600)">Jogar de novo</button>
+    </div>
+  </sc-if>
+
+  <div style="position:absolute;inset:0;background:#000;opacity:{{ fade }};transition:opacity .5s ease;pointer-events:none;z-index:300"></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScene&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;title&quot;,&quot;sala&quot;,&quot;portao&quot;,&quot;quadra&quot;,&quot;final&quot;],&quot;default&quot;:&quot;title&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Teste&quot;},&quot;showHotspots&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Teste&quot;},&quot;autoHint&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:0,&quot;max&quot;:120,&quot;step&quot;:5,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Dicas&quot;}}">
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const ITEMS = {
+  braco: { label: 'Braço mecânico', src: 'assets/game/item-braco.png' },
+  frisbee: { label: 'Frisbee', src: 'assets/game/item-frisbee.png' },
+  corda: { label: 'Corda', src: 'assets/game/item-corda.png' },
+  apito: { label: 'Apito', src: 'assets/game/item-apito.png' },
+};
+const NPC_SPRITES = { caio: 'assets/game/npc-caio.png', bia: 'assets/game/npc-bia.png', lucia: 'assets/game/npc-lucia.png', beto: 'assets/game/npc-beto.png' };
+const NAMES = { antonio: 'Antônio', caio: 'Caio', lucia: 'Prof. Lúcia', bia: 'Bia', beto: 'Prof. Beto', zelador: 'Zelador (voz)' };
+const SCENE_META = {
+  sala: { bg: 'assets/ep01-sala.png', title: 'Cena 1 · Sala de aula', antH: 52, start: 35, floor: { near: 2, far: 10, fs: .86, nx: [6, 94], fx: [8, 92] } },
+  portao: { bg: 'assets/ep01-portao.png', title: 'Cena 2 · Portão da escola', antH: 44, start: 60, floor: { near: 2, far: 16, fs: .78, nx: [6, 94], fx: [46, 92] } },
+  quadra: { bg: 'assets/ep01-quadra.png', title: 'Cena 3 · Quadra', antH: 46, start: 40, floor: { near: 2, far: 20, fs: .74, nx: [6, 94], fx: [10, 74] } },
+};
+const PROBLEMS = [
+  { q: '2 × 3', a: 6, opts: [5, 6, 9], hint: 'Olhe a janela: 2 fileiras com 3 vidros.' },
+  { q: '4 × 2', a: 8, opts: [6, 8, 10], hint: 'Os desenhos perto da lousa: 4 bichinhos, 2 orelhas cada.' },
+  { q: '3 × 5', a: 15, opts: [12, 15, 18], hint: 'O estojo do Caio: 3 divisões, 5 lápis em cada.' },
+];
+const ANT_SPR = { side: { src: 'assets/game/antonio-side.png', ar: '205 / 513' }, front: { src: 'assets/game/antonio-front.png', ar: '275 / 516' } };
+const lerp = (a, b, t) => a + (b - a) * t;
+const NOPE = ['Hm... não.', 'Acho que não funciona.', 'Não é bem isso.'];
+
+class Component extends DCLogic {
+  state = { scene: 'title', flags: {}, inv: [], sel: null, bubble: null, antX: 47, antY: 2, lift: 0, npcMove: {},
+    busy: false, fade: 0, hint: 0, banner: null, hover: null, cad: null, finalStep: 0, startedAt: 0, endedAt: 0 };
+  stageRef = React.createRef();
+  antWrap = React.createRef(); antSpr = React.createRef(); antShadow = React.createRef();
+  idle = 0;
+  pos = { x: 47, y: 2 }; mv = null;
+  cur = { v: 0, phase: 0, lean: 0, dir: 1, lift: 0, t: 0, spr: '', side: false };
+
+  componentDidMount() {
+    const s = this.props.startScene ?? 'title';
+    if (s !== 'title') this.startAt(s);
+    this.timer = setInterval(() => this.onTick(), 1000);
+    let last = performance.now();
+    const loop = now => { const dt = Math.min(0.05, (now - last) / 1000); last = now; this.frame(dt); this.raf = requestAnimationFrame(loop); };
+    this.raf = requestAnimationFrame(loop);
+  }
+  componentWillUnmount() { clearInterval(this.timer); cancelAnimationFrame(this.raf); }
+
+  floor() { const m = SCENE_META[this.state.scene]; return m ? m.floor : { near: 2, far: 2, fs: 1, nx: [6, 94], fx: [6, 94] }; }
+  depthT(y) { const fl = this.floor(); return fl.far > fl.near ? Math.max(0, Math.min(1, (y - fl.near) / (fl.far - fl.near))) : 0; }
+  scaleAt(y) { return lerp(1, this.floor().fs, this.depthT(y)); }
+  clampPt(x, y) {
+    const fl = this.floor();
+    y = Math.max(fl.near, Math.min(fl.far, y));
+    const t = this.depthT(y);
+    return { x: Math.max(lerp(fl.nx[0], fl.fx[0], t), Math.min(lerp(fl.nx[1], fl.fx[1], t), x)), y };
+  }
+  frame(dt) {
+    const c = this.cur, p = this.pos, A = 140;
+    c.t += dt;
+    let sideways = c.side;
+    if (this.mv) {
+      const dx = this.mv.tx - p.x, dy = (this.mv.ty - p.y) * 0.5625, D = Math.hypot(dx, dy);
+      const vmax = 30 * this.scaleAt(p.y);
+      if (D <= (c.v * c.v) / (2 * A) + 0.05) c.v = Math.max(6, c.v - A * dt); else c.v = Math.min(vmax, c.v + A * dt);
+      const step = Math.min(D, c.v * dt);
+      if (D > 0.001) { p.x += (dx / D) * step; p.y += (dy / D) * step / 0.5625; }
+      c.phase += step / (4.2 * this.scaleAt(p.y)) * Math.PI;
+      if (Math.abs(dx) > 0.2) c.dir = Math.sign(dx);
+      sideways = Math.abs(dx) > Math.abs(dy) * 0.6;
+      if (D - step < 0.05) {
+        p.x = this.mv.tx; p.y = this.mv.ty; c.v = 0;
+        const res = this.mv.res; this.mv = null;
+        this.setState({ antX: p.x, antY: p.y }, res);
+      }
+    } else {
+      c.v = Math.max(0, c.v - A * dt);
+      const target = Math.round(c.phase / Math.PI) * Math.PI;
+      c.phase += (target - c.phase) * Math.min(1, dt * 12);
+    }
+    c.side = sideways;
+    c.lift += ((this.state.lift || 0) - c.lift) * Math.min(1, dt * 7);
+    const w = this.antWrap.current, sp = this.antSpr.current, sh = this.antShadow.current;
+    if (!w || !sp) return;
+    const m = SCENE_META[this.state.scene]; if (!m) return;
+    const s = this.scaleAt(p.y), walkAmt = Math.min(1, c.v / 14), sn = Math.abs(Math.sin(c.phase));
+    const moving = !!this.mv || walkAmt > 0.05;
+    const key = moving && c.side ? 'side' : 'front';
+    if (c.spr !== key) { c.spr = key; sp.style.backgroundImage = 'url(' + ANT_SPR[key].src + ')'; w.style.aspectRatio = ANT_SPR[key].ar; }
+    const bob = sn * 2.4 * walkAmt;
+    const contact = (1 - sn) * walkAmt;
+    const breathe = (1 - walkAmt) * 0.011 * Math.sin(c.t * 2.3);
+    const sy = 1 - 0.05 * contact + breathe, sx = 1 + 0.035 * contact - breathe * 0.4;
+    c.lean += ((key === 'side' ? c.dir * 5 * walkAmt : 0) - c.lean) * Math.min(1, dt * 10);
+    const fx = key === 'side' ? c.dir : 1;
+    w.style.left = p.x + '%';
+    w.style.bottom = (p.y + c.lift) + '%';
+    w.style.height = (m.antH * s) + '%';
+    w.style.zIndex = String(Math.round(2 * (100 - p.y)) + 1);
+    sp.style.transform = 'translateY(' + (-bob) + '%) rotate(' + c.lean + 'deg) scale(' + (sx * fx) + ',' + sy + ')';
+    if (sh) { sh.style.opacity = String(c.lift > 3 ? 0 : 1 - bob * 0.12); sh.style.transform = 'translateX(-50%) scale(' + (1 - bob * 0.06) + ')'; }
+  }
+
+  onTick() {
+    const st = this.state;
+    if (!SCENE_META[st.scene] || st.busy || st.cad) return;
+    this.idle++;
+    const lim = this.props.autoHint ?? 30;
+    if (lim > 0 && this.idle >= lim && st.hint === 0) this.setState({ hint: 1 });
+  }
+  f(k) { return this.state.flags[k]; }
+  set(k, v = true) { return new Promise(r => this.setState(s => ({ flags: { ...s.flags, [k]: v } }), r)); }
+  has(i) { return this.state.inv.includes(i); }
+  give(i) { if (!this.has(i)) this.setState(s => ({ inv: [...s.inv, i] })); }
+
+  say(who, text) {
+    return new Promise(res => {
+      const ms = Math.max(1600, text.length * 60);
+      let done = false;
+      const fin = () => { if (done) return; done = true; clearTimeout(t); this._skip = null; this.setState({ bubble: null }); setTimeout(res, 150); };
+      const t = setTimeout(fin, ms);
+      this._skip = fin;
+      this.setState({ bubble: { who, text } });
+    });
+  }
+  walkTo(x, y) {
+    const t = this.clampPt(x, y == null ? this.pos.y : y);
+    if (Math.hypot(t.x - this.pos.x, (t.y - this.pos.y) * 0.5625) < 0.6) return Promise.resolve();
+    if (this.mv) this.mv.res();
+    return new Promise(res => { this.mv = { tx: t.x, ty: t.y, res }; });
+  }
+  npcGo(id, ms = 1000) {
+    this.setState(s => ({ npcMove: { ...s.npcMove, [id]: true } }));
+    setTimeout(() => this.setState(s => ({ npcMove: { ...s.npcMove, [id]: false } })), ms);
+  }
+  async seq(fn) {
+    if (this.state.busy) return;
+    this.setState({ busy: true });
+    try { await fn(); } finally { this.setState({ busy: false }); }
+  }
+  banner(text) { this.setState({ banner: text }); }
+
+  async goScene(s) {
+    this.setState({ fade: 1 });
+    await wait(550);
+    const m = SCENE_META[s];
+    const fl0 = m ? m.floor : null;
+    this.mv = null; this.pos = { x: m ? m.start : 47, y: fl0 ? fl0.near : 2 }; this.cur.lift = 0; this.cur.v = 0; this.cur.dir = 1; this.cur.spr = '';
+    this.setState({ scene: s, antX: this.pos.x, antY: this.pos.y, lift: 0, hint: 0, sel: null, hover: null, banner: null, finalStep: 0, npcMove: {} });
+    await wait(150);
+    this.setState({ fade: 0 });
+    await wait(450);
+    this.idle = 0;
+    if (s === 'sala') await this.introSala();
+    if (s === 'portao') await this.introPortao();
+    if (s === 'quadra') await this.introQuadra();
+    if (s === 'final') await this.runFinal();
+  }
+  startAt(s) {
+    const flags = {}, inv = [];
+    if (s === 'portao' || s === 'quadra' || s === 'final') { Object.assign(flags, { broken: 1, thrown: 1, sharp: 1, mathDone: 1 }); inv.push('braco'); }
+    if (s === 'quadra' || s === 'final') { Object.assign(flags, { tried: 1, hasFrisbee: 1 }); inv.push('frisbee'); }
+    this.setState({ flags, inv, startedAt: Date.now() }, () => this.seq(() => this.goScene(s)));
+  }
+
+  async introSala() {
+    await this.say('lucia', 'Só sai quem me mostrar as três contas.');
+    await this.say('caio', 'Anda, Antônio! O professor Beto já tá apitando!');
+    this.banner('Toque nas coisas para interagir. Toque no chão para andar.');
+    await this.set('pulse', 'caderno');
+  }
+  async introPortao() {
+    await this.say('bia', 'Meu frisbee novo! Ninguém alcança!');
+    await this.say('caio', 'Deixa comigo, eu escalo!');
+    await this.say('zelador', 'Ei! Desce desse portão, menino!');
+    await this.say('caio', '...Melhor não.');
+  }
+  async introQuadra() {
+    await this.say('beto', 'Times escolhidos! E você, Antônio...');
+    await this.say('beto', 'Você é o assistente oficial do material. Missão importante!');
+    await this.say('antonio', '...Tá bom.');
+    await this.say('beto', 'Guarde a corda e o apito no saco de rede.');
+  }
+  async runFinal() {
+    const caps = ['O céu escurece de repente.', 'Uma luz rosa desce sobre o Antônio.', 'O braço mecânico sobe primeiro. O Antônio vai junto.', 'A turma volta. A quadra está vazia. Só ficou um tênis.'];
+    for (let i = 1; i <= 4; i++) { this.setState({ finalStep: i, finalCaption: caps[i - 1] }); await wait(3200); }
+    await wait(800);
+    this.setState({ fade: 1 }); await wait(600);
+    this.setState({ scene: 'end', endedAt: Date.now(), fade: 0 });
+  }
+
+  objective() {
+    const s = this.state.scene, f = k => this.f(k), h = i => this.has(i);
+    if (s === 'sala') {
+      if (!f('broken')) return { t: 'caderno', text: 'Toque no caderno, em cima da carteira.' };
+      if (!f('thrown')) return { t: 'caio', text: 'Converse com o Caio. Ele tem apontador.' };
+      if (!h('braco')) return { t: 'mochila', text: 'Veja o que tem na mochila.' };
+      if (!f('sharp')) return { t: 'apontador', item: 'braco', text: 'Toque no braço mecânico e depois no apontador.' };
+      if (!f('mathDone')) return { t: 'caderno', text: 'Resolva as contas. As pistas estão na sala: janela, desenhos e estojo.' };
+      return { t: 'porta', text: 'Saia pela porta.' };
+    }
+    if (s === 'portao') {
+      if (!f('hasFrisbee')) {
+        if (!f('tried')) return { t: 'frisbee', item: 'braco', text: 'Tente pegar o frisbee com o braço mecânico.' };
+        if (!f('shoulders')) return { t: 'caio', text: 'Sozinho não alcança. Peça ajuda ao Caio.' };
+        return { t: 'frisbee', item: 'braco', text: 'Agora use o braço mecânico no frisbee.' };
+      }
+      return { t: 'caminho', text: 'Siga o caminho até a quadra.' };
+    }
+    if (s === 'quadra') {
+      if (!f('corda')) return { t: 'corda', item: 'frisbee', text: 'O braço não alcança. Jogue o frisbee na corda.' };
+      if (!f('apito')) return { t: 'apito', item: 'braco', text: 'Pegue o apito pela grade com o braço mecânico.' };
+      return { t: 'saco', text: 'Guarde tudo no saco de rede.' };
+    }
+    return null;
+  }
+
+  hotspots() {
+    const s = this.state.scene, f = k => this.f(k);
+    const H = (o) => o;
+    if (s === 'sala') return [
+      H({ id: 'lousa', label: 'Lousa', x: 12, y: 21, w: 31, h: 37, walk: 32, tap: () => this.say('antonio', 'As contas da tarefa. Preciso fazer no caderno.') }),
+      H({ id: 'janela', label: 'Janela', x: 58.4, y: 5, w: 36, h: 53, walk: 76, tap: () => this.say('antonio', 'A quadra... A janela tem 2 fileiras com 3 vidros.') }),
+      H({ id: 'desenhos', label: 'Desenhos', x: 44.5, y: 29, w: 12.4, h: 23, walk: 48, tap: () => this.say('antonio', 'Quatro bichinhos. Cada um com 2 orelhas.') }),
+      H({ id: 'relogio', label: 'Relógio', x: 25.8, y: 10.3, w: 5.3, h: 10.3, walk: 30, tap: () => this.say('antonio', 'Quase dez horas.') }),
+      H({ id: 'porta', label: 'Porta', x: 0, y: 21, w: 7.1, h: 53, walk: 9, tap: async () => {
+        if (!f('mathDone')) return this.say('antonio', 'Ainda não posso sair.');
+        await this.goScene('portao');
+      } }),
+      H({ id: 'mochila', label: 'Mochila', x: 23.2, y: 63, w: 6.4, h: 18.7, walk: 31, tap: async () => {
+        if (this.has('braco')) return this.say('antonio', 'Só sobrou o lanche.');
+        this.give('braco');
+        await this.say('antonio', 'Meu braço mecânico!');
+        this.banner('Toque num item do inventário e depois onde quer usar.');
+      } }),
+      H({ id: 'caderno', label: 'Caderno', x: 44.5, y: 74.2, w: 16, h: 11, walk: 47, tap: async () => {
+        if (f('pulse') === 'caderno') await this.set('pulse', null);
+        if (!f('broken')) { await this.say('antonio', 'Vamos lá...'); await this.set('broken'); return this.say('antonio', 'Quebrou a ponta... claro.'); }
+        if (!f('sharp')) return this.say('antonio', 'Sem ponta não dá pra escrever.');
+        if (f('mathDone')) return this.say('antonio', 'Ganhei uma estrelinha.');
+        this.setState({ cad: { ans: this.state.cad ? this.state.cad.ans : [null, null, null], msg: '' } });
+      } }),
+      H({ id: 'estojo', label: 'Estojo do Caio', kind: 'prop', x: 71, y: 62, w: 7, h: 8, walk: 72, tap: () => this.say('antonio', 'O estojo do Caio: 3 divisões, 5 lápis de cor em cada.') }),
+      H({ id: 'apontador', label: 'Apontador', kind: 'prop', show: f('thrown') && !f('sharp'), x: 61, y: 88, w: 6.5, h: 8, walk: 58, tap: () => this.say('antonio', 'Rolou lá pra baixo. Minha mão não passa.'),
+        use: { braco: async () => { await this.say('antonio', 'Peguei!'); await this.set('sharp'); await this.say('antonio', 'Pronto. Ponta nova.'); } } }),
+      H({ id: 'lucia', label: 'Prof. Lúcia', kind: 'npc', x: 58, y: 20, w: 9, h: 44, walk: 55, tap: () => this.say('lucia', f('mathDone') ? 'Bom recreio, Antônio.' : 'Termine as três contas, Antônio.') }),
+      H({ id: 'caio', label: 'Caio', kind: 'npc', x: 85, y: 40, w: 9, h: 56, walk: 79, tap: async () => {
+        if (f('broken') && !f('thrown')) {
+          await this.say('caio', 'Quebrou? Pega aí!');
+          await this.set('thrown');
+          await this.say('caio', '...Ops.');
+          return this.say('antonio', 'Rolou pra baixo da carteira.');
+        }
+        if (!f('broken')) return this.say('caio', 'Faz logo! Eu já terminei.');
+        return this.say('caio', 'Matemática é o pior.');
+      } }),
+    ];
+    if (s === 'portao') {
+      const caioX = f('shoulders') ? 27 : 52;
+      return [
+        H({ id: 'portao', label: 'Portão', x: 0.4, y: 26, w: 43, h: 73, walk: 30, tap: () => this.say('antonio', 'O portão da escola. Alto demais pra subir.') }),
+        H({ id: 'arvore', label: 'Árvore', x: 70, y: 18, w: 18, h: 42, walk: 80, tap: () => this.say('antonio', 'Uma árvore enorme. Os galhos nem chegam perto do portão.') }),
+        H({ id: 'banco', label: 'Banco', x: 57, y: 62, w: 22, h: 27.6, walk: 66, tap: () => this.say('antonio', 'Um banco. Tá preso no chão.') }),
+        H({ id: 'caminho', label: 'Caminho da quadra', x: 88, y: 31.6, w: 11, h: 29, walk: 92, tap: async () => {
+          if (!f('hasFrisbee')) return this.say('antonio', 'Não vou deixar a Bia assim.');
+          await this.goScene('quadra');
+        } }),
+        H({ id: 'frisbee', label: 'Frisbee', show: !f('hasFrisbee'), x: 27.3, y: 6.6, w: 7.3, h: 17, walk: f('shoulders') ? null : 31, tap: () => this.say('antonio', 'Lá no alto do portão.'),
+          use: { braco: async () => {
+            if (!f('shoulders')) { await this.set('tried'); return this.say('antonio', 'Hm... falta um pouco.'); }
+            await this.say('antonio', 'Quase... peguei!');
+            this.give('frisbee'); this.npcGo('caio', 1100); await this.set('hasFrisbee'); await this.set('shoulders', false);
+            this.setState({ lift: 0 });
+            await this.say('bia', 'Você salvou meu frisbee! Pode ficar com ele na aula.');
+            await this.say('antonio', 'Valeu.');
+          } } }),
+        H({ id: 'bia', label: 'Bia', kind: 'npc', x: 37, y: 51, w: 8, h: 44, walk: 46, tap: () => this.say('bia', f('hasFrisbee') ? 'Obrigada, Antônio!' : 'Era novinho...') }),
+        H({ id: 'caio', label: 'Caio', kind: 'npc', x: caioX, y: 48, w: 9, h: 48, walk: f('shoulders') ? null : caioX + 10, tap: async () => {
+          if (f('hasFrisbee')) return this.say('caio', 'Bora pra quadra!');
+          if (!f('tried')) return this.say('caio', 'Esse portão é alto demais.');
+          if (f('shoulders')) return this.say('caio', 'Rápido, você é pesado!');
+          await this.say('caio', 'Sobe nas minhas costas!');
+          this.npcGo('caio', 1100);
+          await this.set('shoulders');
+          await Promise.all([this.walkTo(31, 2), wait(1100)]);
+          this.cur.dir = 1;
+          this.setState({ lift: 22 });
+          await wait(450);
+          await this.say('antonio', 'Daqui dá pra alcançar.');
+        } }),
+      ];
+    }
+    if (s === 'quadra') {
+      const agua = f('agua');
+      return [
+        H({ id: 'ceu', label: 'Céu', x: 0, y: 16, w: 56, h: 37, walk: null, tap: () => this.say('antonio', 'Céu limpinho hoje.') }),
+        H({ id: 'trave', label: 'Trave', x: 63, y: 43, w: 15, h: 27, walk: 68, tap: () => this.say('antonio', 'A trave do futsal.') }),
+        H({ id: 'bebedouro', label: 'Bebedouro', x: 93, y: 51, w: 7, h: 19, walk: 90, tap: () => this.say('antonio', 'Tô com sede também.') }),
+        H({ id: 'saco', label: 'Saco de rede', x: 43.4, y: 75.5, w: 22.8, h: 18, walk: 54, tap: async () => {
+          if (!(f('corda') && f('apito'))) {
+            const falta = [!f('corda') && 'a corda', !f('apito') && 'o apito'].filter(Boolean).join(' e ');
+            return this.say('antonio', 'Ainda falta ' + falta + '.');
+          }
+          await this.say('antonio', 'Tudo guardado.');
+          await this.say('beto', 'Água, pessoal! Todo mundo pro bebedouro do pátio!');
+          await this.set('agua');
+          await wait(600);
+          await this.say('antonio', 'Eu fico aqui guardando.');
+          await wait(900);
+          await this.goScene('final');
+        } }),
+        H({ id: 'corda', label: 'Corda de pular', show: !f('corda'), x: 61.8, y: 29.4, w: 4.6, h: 14.6, walk: 62, tap: () => this.say('antonio', 'A corda enroscou no aro.'),
+          use: { braco: () => this.say('antonio', 'Não alcanço. É muito alto.'),
+            frisbee: async () => { await this.say('antonio', 'Vou tentar...'); await this.set('corda'); this.give('corda'); await this.say('antonio', 'Caiu! Acertei.'); } } }),
+        H({ id: 'apito', label: 'Apito', show: !f('apito'), x: 85.7, y: 73.5, w: 6, h: 6, walk: 80, tap: () => this.say('antonio', 'O apito do professor, atrás da grade.'),
+          use: { braco: async () => { await this.set('apito'); this.give('apito'); await this.say('antonio', 'Piii.'); await this.say('antonio', '...Que susto.'); } } }),
+        H({ id: 'beto', label: 'Prof. Beto', kind: 'npc', show: !agua, x: 11, y: 22, w: 12, h: 72, walk: 26, tap: () => this.say('beto', 'Corda e apito, assistente!') }),
+        H({ id: 'caio', label: 'Caio', kind: 'npc', show: !agua, x: 27, y: 46, w: 9, h: 50, walk: 38, tap: () => this.say('caio', 'Depois eu te passo a bola, prometo!') }),
+      ];
+    }
+    return [];
+  }
+  patches() {
+    const s = this.state.scene, f = k => this.f(k), out = [];
+    if (s === 'portao' && f('hasFrisbee')) out.push({ src: 'assets/game/patch-frisbee.png', left: 27.32, top: 6.59, w: 7.56, h: 17.58 });
+    if (s === 'quadra' && f('corda')) out.push({ src: 'assets/game/patch-corda.png', left: 61.38, top: 28.85, w: 5.24, h: 15.8 });
+    if (s === 'quadra' && f('apito')) out.push({ src: 'assets/game/patch-apito.png', left: 85.33, top: 72.8, w: 6.74, h: 7.28 });
+    return out;
+  }
+
+  onHotspot(h, e) {
+    e.stopPropagation();
+    this.idle = 0;
+    if (this.state.busy) { if (this._skip) this._skip(); return; }
+    const item = this.state.sel;
+    this.seq(async () => {
+      if (this.f('shoulders') && h.id !== 'frisbee' && h.id !== 'caio') { this.setState({ sel: null }); return this.say('antonio', 'Daqui de cima só alcanço o frisbee.'); }
+      this.setState({ banner: null });
+      if (h.walk != null) await this.walkTo(h.walk);
+      const cx = h.x + h.w / 2;
+      if (Math.abs(cx - this.pos.x) > 2) this.cur.dir = cx < this.pos.x ? -1 : 1;
+      if (item) {
+        this.setState({ sel: null });
+        if (h.use && h.use[item]) await h.use[item]();
+        else await this.say('antonio', NOPE[Math.floor(Math.random() * NOPE.length)]);
+      } else await h.tap();
+      this.setState({ hint: 0 });
+    });
+  }
+  onStageClick(e) {
+    this.idle = 0;
+    if (this._skip) { this._skip(); return; }
+    if (!SCENE_META[this.state.scene] || this.state.busy || this.state.cad || this.f('shoulders')) return;
+    const r = this.stageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = 100 - ((e.clientY - r.top) / r.height) * 100;
+    this.setState({ sel: null });
+    this.seq(() => this.walkTo(x, y));
+  }
+  onHint(e) {
+    e.stopPropagation();
+    this.idle = 0;
+    const o = this.objective(); if (!o) return;
+    const lvl = Math.min(3, this.state.hint + 1);
+    this.setState({ hint: lvl });
+    if (lvl === 1 && !this.state.busy) this.seq(() => this.say('antonio', 'Hm?'));
+    if (lvl === 2) this.banner(o.text.split('.')[0] + '.');
+    if (lvl === 3) this.banner(o.text);
+  }
+
+  cadChoose(i, v) {
+    const p = PROBLEMS[i];
+    const ans = this.state.cad.ans.slice();
+    if (v === p.a) { ans[i] = v; this.setState({ cad: { ans, msg: ans.every(a => a != null) ? 'Pronto! Agora é só mostrar.' : 'Isso!' } }); }
+    else this.setState({ cad: { ans, msg: 'Hm... não. Apaga e tenta de novo.' } });
+  }
+  cadHint() {
+    const i = this.state.cad.ans.findIndex(a => a == null);
+    if (i < 0) return;
+    this.setState({ cad: { ...this.state.cad, msg: PROBLEMS[i].hint } });
+  }
+
+  renderVals() {
+    const st = this.state, m = SCENE_META[st.scene];
+    const showHs = this.props.showHotspots ?? false;
+    const obj = this.objective();
+    const pulseId = st.hint >= 1 && obj ? obj.t : this.f('pulse');
+    const list = this.hotspots().filter(h => !('show' in h) || !!h.show);
+    const hotspots = list.map(h => {
+      const sprite = h.kind === 'npc' && NPC_SPRITES[h.id];
+      const ph = !sprite && (h.kind === 'npc' || h.kind === 'prop');
+      const pulse = pulseId === h.id;
+      const fb = 100 - (h.y + h.h), d = st.antX - (h.x + h.w / 2), sg = Math.sign(d) || 1;
+      const talking = !!st.bubble && st.bubble.who === h.id, moving = !!st.npcMove[h.id];
+      const lean = sprite ? (talking ? -sg * 3 : Math.abs(d) < 28 ? -sg * 1.5 : 0) : 0;
+      const delay = (-(h.id.charCodeAt(0) % 7) * 0.45).toFixed(2) + 's';
+      return {
+        z: sprite ? Math.round(2 * (100 - fb)) : 1,
+        trans: moving ? 'left 1.1s ease-in-out, top 1.1s ease-in-out' : 'none',
+        lean, sAnim: moving ? 'npcwalk .32s ease-in-out infinite' : talking ? 'talk .5s ease-in-out infinite' : 'breathe 3.4s ease-in-out ' + delay + ' infinite',
+        key: h.id, label: h.label, left: h.x, top: h.y, w: h.w, h: h.h, isPlaceholder: ph, hasSprite: !!sprite, sprite: sprite || '', flip: h.id === 'beto' && d > 0 ? -1 : 1,
+        border: ph ? '0.2cqw dashed var(--color-text)' : (pulse ? '0.25cqw solid var(--color-accent)' : (showHs ? '0.15cqw dashed var(--color-accent)' : '0 none transparent')),
+        bg: ph ? 'rgba(243,242,242,.82)' : 'transparent',
+        anim: pulse ? 'pulse 1.2s ease-in-out infinite' : 'none',
+        onClick: e => this.onHotspot(h, e),
+        onEnter: () => this.setState({ hover: h.label }),
+        onLeave: () => this.setState({ hover: null }),
+      };
+    });
+    let bubble = null;
+    if (st.bubble && m) {
+      const w = st.bubble.who;
+      let x = 50, b = 80;
+      if (w === 'antonio') { x = this.pos.x; b = this.pos.y + m.antH * this.scaleAt(this.pos.y) + st.lift + 1; }
+      else { const n = list.find(h => h.id === w); if (n) { x = n.x + n.w / 2; b = 100 - n.y + 1; } }
+      bubble = { x: Math.max(17, Math.min(83, x)), b: Math.min(76, b), name: NAMES[w] || w, text: st.bubble.text };
+    }
+    const itemHint = st.hint >= 3 && obj && obj.item;
+    const inv = st.inv.map(k => ({
+      key: k, label: ITEMS[k].label, src: ITEMS[k].src,
+      bg: st.sel === k ? 'var(--color-accent-100)' : 'var(--color-bg)',
+      borderColor: st.sel === k ? 'var(--color-accent)' : 'var(--color-text)',
+      anim: itemHint === k ? 'pulse 1.2s ease-in-out infinite' : 'none',
+      onClick: e => { e.stopPropagation(); this.idle = 0; if (this.state.busy) return; this.setState({ sel: this.state.sel === k ? null : k, banner: null }); },
+    }));
+    const cad = st.cad;
+    const cadRows = PROBLEMS.map((p, i) => ({
+      q: p.q, ans: cad && cad.ans[i] != null ? String(cad.ans[i]) : '',
+      opts: p.opts.map(v => {
+        const ok = cad && cad.ans[i] === v;
+        return { v, bg: ok ? 'var(--color-text)' : 'var(--color-bg)', color: ok ? 'var(--color-bg)' : 'var(--color-text)', onClick: () => this.cadChoose(i, v) };
+      }),
+    }));
+    const secs = st.endedAt && st.startedAt ? Math.round((st.endedAt - st.startedAt) / 1000) : 0;
+    return {
+      stageRef: this.stageRef,
+      isTitle: st.scene === 'title', isPlay: !!m, isFinal: st.scene === 'final', isEnd: st.scene === 'end',
+      sceneBg: m ? m.bg : '', sceneTitle: m ? m.title : '',
+      hotspots, patches: this.patches(),
+      antEl: React.createElement('div', { ref: this.antWrap, 'aria-label': 'Antônio', style: { position: 'absolute', transform: 'translateX(-50%)', pointerEvents: 'none', aspectRatio: ANT_SPR.front.ar } },
+        React.createElement('div', { ref: this.antShadow, style: { position: 'absolute', left: '50%', bottom: '-1.2%', width: '78%', height: '5%', borderRadius: '50%', background: 'radial-gradient(closest-side, rgba(32,30,29,.32), rgba(32,30,29,0))', transform: 'translateX(-50%)' } }),
+        React.createElement('div', { ref: this.antSpr, style: { position: 'absolute', inset: 0, backgroundImage: 'url(' + ANT_SPR.front.src + ')', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center bottom', transformOrigin: 'center bottom' } })),
+      hasBubble: !!bubble, bubble: bubble || { x: 50, b: 50, name: '', text: '' },
+      skipBubble: e => { e.stopPropagation(); if (this._skip) this._skip(); },
+      hasBanner: !!st.banner, banner: st.banner || '',
+      hasHover: !!st.hover && !st.bubble, hoverLabel: st.hover || '',
+      hintLabel: st.hint ? '(' + st.hint + '/3)' : '',
+      onHint: e => this.onHint(e),
+      inv, stop: e => e.stopPropagation(),
+      cadOpen: !!cad, cadRows, cadMsg: cad ? cad.msg : '',
+      cadAllDone: !!cad && cad.ans.every(a => a != null),
+      cadClose: () => this.setState({ cad: null }),
+      cadHint: () => this.cadHint(),
+      cadShow: () => {
+        this.setState({ cad: null });
+        this.seq(async () => {
+          await this.walkTo(55);
+          await this.say('lucia', 'Muito bem, Antônio! Pode ir.');
+          await this.set('mathDone');
+          await this.say('caio', 'Finalmente! Bora!');
+          await this.goScene('portao');
+        });
+      },
+      finalPanels: [1, 2, 3, 4].map(i => ({ src: 'assets/ep01-final-' + i + '.png', opacity: st.finalStep >= i ? 1 : 0 })),
+      finalCaption: st.finalCaption || '',
+      fade: st.fade,
+      onStageClick: e => this.onStageClick(e),
+      onStart: e => { e.stopPropagation(); this.setState({ flags: {}, inv: [], startedAt: Date.now() }); this.seq(() => this.goScene('sala')); },
+      onReplay: e => { e.stopPropagation(); this.setState({ scene: 'title', flags: {}, inv: [] }); },
+      playTime: Math.floor(secs / 60) + ' min ' + (secs % 60) + ' s',
+    };
+  }
+}
+</script>
+</body>
+</html>

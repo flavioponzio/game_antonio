@@ -1,0 +1,203 @@
+{
+  "episode": "EP01",
+  "title": "A Última Aula",
+  "coordinates": "Todas as posições em % de um palco 16:9 (referência 1920x1080). Hotspots: x,y = canto superior esquerdo medido do topo; w,h = largura/altura. Chão e personagens: x = centro horizontal, y = distância da base do palco (bottom %).",
+  "characters": {
+    "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front.png", "side": "assets/characters/antonio-side.png" } },
+    "caio": { "name": "Caio", "sprite": "assets/characters/npc-caio.png" },
+    "bia": { "name": "Bia", "sprite": "assets/characters/npc-bia.png" },
+    "lucia": { "name": "Prof. Lúcia", "sprite": "assets/characters/npc-lucia.png" },
+    "beto": { "name": "Prof. Beto", "sprite": "assets/characters/npc-beto.png", "faceTowardAntonio": true },
+    "zelador": { "name": "Zelador (voz)", "sprite": null, "voiceOnly": true }
+  },
+  "items": {
+    "braco": { "label": "Braço mecânico", "article": "o", "icon": "assets/items/item-braco.png" },
+    "frisbee": { "label": "Frisbee", "article": "o", "icon": "assets/items/item-frisbee.png" },
+    "corda": { "label": "Corda", "article": "a", "icon": "assets/items/item-corda.png" },
+    "apito": { "label": "Apito", "article": "o", "icon": "assets/items/item-apito.png" }
+  },
+  "failLines": ["Hm... não.", "Acho que não funciona.", "Não é bem isso."],
+  "actionsDoc": {
+    "say": "[who, text] balão de fala; duração = max(1.6s, 60ms por caractere); clique pula",
+    "set": "liga flag (ou {flag: valor})",
+    "unset": "desliga flag",
+    "give": "adiciona item ao inventário",
+    "walkTo": "[x, y] Antônio anda até o ponto (y opcional = mantém)",
+    "goScene": "fade 0.55s, troca de cena, fade de volta",
+    "banner": "faixa de tutorial no topo até a próxima ação",
+    "wait": "ms",
+    "npcMove": "[id, ms] NPC anda até a posição nova calculada pelas flags",
+    "lift": "altura extra do Antônio em % (22 = nas costas do Caio)",
+    "openPuzzle": "abre o puzzle de multiplicação",
+    "sayMissing": "fala 'Ainda falta X e Y.' com os itens que faltam (item falta se não há flag nem item com esse id; usa o 'article' do item)",
+    "face": "1 = olha para a direita, -1 = esquerda"
+  },
+  "rulesDoc": "Cada 'tap' ou 'use.<item>' é uma lista de regras; executa a primeira cujo 'if' é verdadeiro. if: { flags: [...], notFlags: [...], has: [...], notHas: [...] }.",
+  "scenes": {
+    "sala": {
+      "title": "Cena 1 · Sala de aula",
+      "background": "assets/scenes/ep01-sala.png",
+      "antonioHeight": 52,
+      "start": { "x": 35 },
+      "floor": { "nearY": 2, "farY": 10, "farScale": 0.86, "nearX": [6, 94], "farX": [8, 92] },
+      "intro": [
+        { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
+        { "say": ["caio", "Anda, Antônio! O professor Beto já tá apitando!"] },
+        { "banner": "Toque nas coisas para interagir. Toque no chão para andar." },
+        { "set": { "pulse": "caderno" } }
+      ],
+      "hotspots": [
+        { "id": "lousa", "label": "Lousa", "rect": [12, 21, 31, 37], "walk": 32, "tap": [{ "do": [{ "say": ["antonio", "As contas da tarefa. Preciso fazer no caderno."] }] }] },
+        { "id": "janela", "label": "Janela", "rect": [58.4, 5, 36, 53], "walk": 76, "tap": [{ "do": [{ "say": ["antonio", "A quadra... A janela tem 2 fileiras com 3 vidros."] }] }] },
+        { "id": "desenhos", "label": "Desenhos", "rect": [44.5, 29, 12.4, 23], "walk": 48, "tap": [{ "do": [{ "say": ["antonio", "Quatro bichinhos. Cada um com 2 orelhas."] }] }] },
+        { "id": "relogio", "label": "Relógio", "rect": [25.8, 10.3, 5.3, 10.3], "walk": 30, "tap": [{ "do": [{ "say": ["antonio", "Quase dez horas."] }] }] },
+        { "id": "porta", "label": "Porta", "rect": [0, 21, 7.1, 53], "walk": 9, "tap": [
+          { "if": { "notFlags": ["mathDone"] }, "do": [{ "say": ["antonio", "Ainda não posso sair."] }] },
+          { "do": [{ "goScene": "portao" }] } ] },
+        { "id": "mochila", "label": "Mochila", "rect": [23.2, 63, 6.4, 18.7], "walk": 31, "tap": [
+          { "if": { "has": ["braco"] }, "do": [{ "say": ["antonio", "Só sobrou o lanche."] }] },
+          { "do": [{ "give": "braco" }, { "say": ["antonio", "Meu braço mecânico!"] }, { "banner": "Toque num item do inventário e depois onde quer usar." }] } ] },
+        { "id": "caderno", "label": "Caderno", "rect": [44.5, 74.2, 16, 11], "walk": 47, "tap": [
+          { "if": { "notFlags": ["broken"] }, "do": [{ "unset": "pulse" }, { "say": ["antonio", "Vamos lá..."] }, { "set": "broken" }, { "say": ["antonio", "Quebrou a ponta... claro."] }] },
+          { "if": { "notFlags": ["sharp"] }, "do": [{ "say": ["antonio", "Sem ponta não dá pra escrever."] }] },
+          { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["antonio", "Ganhei uma estrelinha."] }] },
+          { "do": [{ "openPuzzle": "multiplicacao" }] } ] },
+        { "id": "estojo", "label": "Estojo do Caio", "kind": "prop", "rect": [71, 62, 7, 8], "walk": 72, "tap": [{ "do": [{ "say": ["antonio", "O estojo do Caio: 3 divisões, 5 lápis de cor em cada."] }] }] },
+        { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [61, 88, 6.5, 8], "walk": 58,
+          "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
+          "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
+        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [58, 20, 9, 44], "walk": 55, "tap": [
+          { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["lucia", "Bom recreio, Antônio."] }] },
+          { "do": [{ "say": ["lucia", "Termine as três contas, Antônio."] }] } ] },
+        { "id": "caio", "label": "Caio", "kind": "npc", "rect": [85, 40, 9, 56], "walk": 79, "tap": [
+          { "if": { "flags": ["broken"], "notFlags": ["thrown"] }, "do": [{ "say": ["caio", "Quebrou? Pega aí!"] }, { "set": "thrown" }, { "say": ["caio", "...Ops."] }, { "say": ["antonio", "Rolou pra baixo da carteira."] }] },
+          { "if": { "notFlags": ["broken"] }, "do": [{ "say": ["caio", "Faz logo! Eu já terminei."] }] },
+          { "do": [{ "say": ["caio", "Matemática é o pior."] }] } ] }
+      ],
+      "puzzles": {
+        "multiplicacao": {
+          "problems": [
+            { "q": "2 × 3", "a": 6, "options": [5, 6, 9], "hint": "Olhe a janela: 2 fileiras com 3 vidros." },
+            { "q": "4 × 2", "a": 8, "options": [6, 8, 10], "hint": "Os desenhos perto da lousa: 4 bichinhos, 2 orelhas cada." },
+            { "q": "3 × 5", "a": 15, "options": [12, 15, 18], "hint": "O estojo do Caio: 3 divisões, 5 lápis em cada." }
+          ],
+          "messages": { "correct": "Isso!", "allCorrect": "Pronto! Agora é só mostrar.", "wrong": "Hm... não. Apaga e tenta de novo." },
+          "keepsAnswersWhenClosed": true,
+          "onShow": [
+            { "walkTo": [55] },
+            { "say": ["lucia", "Muito bem, Antônio! Pode ir."] },
+            { "set": "mathDone" },
+            { "say": ["caio", "Finalmente! Bora!"] },
+            { "goScene": "portao" }
+          ]
+        }
+      },
+      "objectives": [
+        { "if": { "notFlags": ["broken"] }, "target": "caderno", "text": "Toque no caderno, em cima da carteira." },
+        { "if": { "notFlags": ["thrown"] }, "target": "caio", "text": "Converse com o Caio. Ele tem apontador." },
+        { "if": { "notHas": ["braco"] }, "target": "mochila", "text": "Veja o que tem na mochila." },
+        { "if": { "notFlags": ["sharp"] }, "target": "apontador", "item": "braco", "text": "Toque no braço mecânico e depois no apontador." },
+        { "if": { "notFlags": ["mathDone"] }, "target": "caderno", "text": "Resolva as contas. As pistas estão na sala: janela, desenhos e estojo." },
+        { "target": "porta", "text": "Saia pela porta." }
+      ]
+    },
+    "portao": {
+      "title": "Cena 2 · Portão da escola",
+      "background": "assets/scenes/ep01-portao.png",
+      "antonioHeight": 44,
+      "start": { "x": 60 },
+      "floor": { "nearY": 2, "farY": 16, "farScale": 0.78, "nearX": [6, 94], "farX": [46, 92] },
+      "intro": [
+        { "say": ["bia", "Meu frisbee novo! Ninguém alcança!"] },
+        { "say": ["caio", "Deixa comigo, eu escalo!"] },
+        { "say": ["zelador", "Ei! Desce desse portão, menino!"] },
+        { "say": ["caio", "...Melhor não."] }
+      ],
+      "shouldersRule": "Com a flag 'shoulders' o Antônio está nas costas do Caio: não anda; tocar em qualquer coisa que não seja frisbee ou caio responde 'Daqui de cima só alcanço o frisbee.'",
+      "restrictWhenFlag": { "flag": "shoulders", "allow": ["frisbee", "caio"], "noWalk": true, "say": "Daqui de cima só alcanço o frisbee." },
+      "hotspots": [
+        { "id": "portao", "label": "Portão", "rect": [0.4, 26, 43, 73], "walk": 30, "tap": [{ "do": [{ "say": ["antonio", "O portão da escola. Alto demais pra subir."] }] }] },
+        { "id": "arvore", "label": "Árvore", "rect": [70, 18, 18, 42], "walk": 80, "tap": [{ "do": [{ "say": ["antonio", "Uma árvore enorme. Os galhos nem chegam perto do portão."] }] }] },
+        { "id": "banco", "label": "Banco", "rect": [57, 62, 22, 27.6], "walk": 66, "tap": [{ "do": [{ "say": ["antonio", "Um banco. Tá preso no chão."] }] }] },
+        { "id": "caminho", "label": "Caminho da quadra", "rect": [88, 31.6, 11, 29], "walk": 92, "tap": [
+          { "if": { "notFlags": ["hasFrisbee"] }, "do": [{ "say": ["antonio", "Não vou deixar a Bia assim."] }] },
+          { "do": [{ "goScene": "quadra" }] } ] },
+        { "id": "frisbee", "label": "Frisbee", "show": { "notFlags": ["hasFrisbee"] }, "rect": [27.3, 6.6, 7.3, 17], "walk": 31, "walkWhenFlag": { "shoulders": null },
+          "tap": [{ "do": [{ "say": ["antonio", "Lá no alto do portão."] }] }],
+          "use": { "braco": [
+            { "if": { "notFlags": ["shoulders"] }, "do": [{ "set": "tried" }, { "say": ["antonio", "Hm... falta um pouco."] }] },
+            { "do": [{ "say": ["antonio", "Quase... peguei!"] }, { "give": "frisbee" }, { "npcMove": ["caio", 1100] }, { "set": "hasFrisbee" }, { "unset": "shoulders" }, { "lift": 0 }, { "say": ["bia", "Você salvou meu frisbee! Pode ficar com ele na aula."] }, { "say": ["antonio", "Valeu."] }] } ] },
+          "patchWhenTaken": { "flag": "hasFrisbee", "image": "assets/patches/patch-frisbee.png", "rect": [27.32, 6.59, 7.56, 17.58] } },
+        { "id": "bia", "label": "Bia", "kind": "npc", "rect": [37, 51, 8, 44], "walk": 46, "tap": [
+          { "if": { "flags": ["hasFrisbee"] }, "do": [{ "say": ["bia", "Obrigada, Antônio!"] }] },
+          { "do": [{ "say": ["bia", "Era novinho..."] }] } ] },
+        { "id": "caio", "label": "Caio", "kind": "npc", "rect": [52, 48, 9, 48], "rectWhenFlag": { "shoulders": [27, 48, 9, 48] }, "walk": 62, "walkWhenFlag": { "shoulders": null }, "tap": [
+          { "if": { "flags": ["hasFrisbee"] }, "do": [{ "say": ["caio", "Bora pra quadra!"] }] },
+          { "if": { "notFlags": ["tried"] }, "do": [{ "say": ["caio", "Esse portão é alto demais."] }] },
+          { "if": { "flags": ["shoulders"] }, "do": [{ "say": ["caio", "Rápido, você é pesado!"] }] },
+          { "do": [{ "say": ["caio", "Sobe nas minhas costas!"] }, { "npcMove": ["caio", 1100] }, { "set": "shoulders" }, { "walkTo": [31, 2], "parallelWait": 1100 }, { "face": 1 }, { "lift": 22 }, { "wait": 450 }, { "say": ["antonio", "Daqui dá pra alcançar."] }] } ] }
+      ],
+      "objectives": [
+        { "if": { "notFlags": ["hasFrisbee", "tried"] }, "target": "frisbee", "item": "braco", "text": "Tente pegar o frisbee com o braço mecânico." },
+        { "if": { "notFlags": ["hasFrisbee", "shoulders"] }, "target": "caio", "text": "Sozinho não alcança. Peça ajuda ao Caio." },
+        { "if": { "notFlags": ["hasFrisbee"] }, "target": "frisbee", "item": "braco", "text": "Agora use o braço mecânico no frisbee." },
+        { "target": "caminho", "text": "Siga o caminho até a quadra." }
+      ]
+    },
+    "quadra": {
+      "title": "Cena 3 · Quadra",
+      "background": "assets/scenes/ep01-quadra.png",
+      "antonioHeight": 46,
+      "start": { "x": 40 },
+      "floor": { "nearY": 2, "farY": 20, "farScale": 0.74, "nearX": [6, 94], "farX": [10, 74] },
+      "intro": [
+        { "say": ["beto", "Times escolhidos! E você, Antônio..."] },
+        { "say": ["beto", "Você é o assistente oficial do material. Missão importante!"] },
+        { "say": ["antonio", "...Tá bom."] },
+        { "say": ["beto", "Guarde a corda e o apito no saco de rede."] }
+      ],
+      "hotspots": [
+        { "id": "ceu", "label": "Céu", "rect": [0, 16, 56, 37], "walk": null, "tap": [{ "do": [{ "say": ["antonio", "Céu limpinho hoje."] }] }] },
+        { "id": "trave", "label": "Trave", "rect": [63, 43, 15, 27], "walk": 68, "tap": [{ "do": [{ "say": ["antonio", "A trave do futsal."] }] }] },
+        { "id": "bebedouro", "label": "Bebedouro", "rect": [93, 51, 7, 19], "walk": 90, "tap": [{ "do": [{ "say": ["antonio", "Tô com sede também."] }] }] },
+        { "id": "saco", "label": "Saco de rede", "rect": [43.4, 75.5, 22.8, 18], "walk": 54, "tap": [
+          { "if": { "notFlags": ["corda"] }, "do": [{ "sayMissing": ["corda", "apito"] }] },
+          { "if": { "notFlags": ["apito"] }, "do": [{ "sayMissing": ["corda", "apito"] }] },
+          { "do": [{ "say": ["antonio", "Tudo guardado."] }, { "say": ["beto", "Água, pessoal! Todo mundo pro bebedouro do pátio!"] }, { "set": "agua" }, { "wait": 600 }, { "say": ["antonio", "Eu fico aqui guardando."] }, { "wait": 900 }, { "goScene": "final" }] } ] },
+        { "id": "corda", "label": "Corda de pular", "show": { "notFlags": ["corda"] }, "rect": [61.8, 29.4, 4.6, 14.6], "walk": 62,
+          "tap": [{ "do": [{ "say": ["antonio", "A corda enroscou no aro."] }] }],
+          "use": {
+            "braco": [{ "do": [{ "say": ["antonio", "Não alcanço. É muito alto."] }] }],
+            "frisbee": [{ "do": [{ "say": ["antonio", "Vou tentar..."] }, { "set": "corda" }, { "give": "corda" }, { "say": ["antonio", "Caiu! Acertei."] }] }] },
+          "patchWhenTaken": { "flag": "corda", "image": "assets/patches/patch-corda.png", "rect": [61.38, 28.85, 5.24, 15.8] } },
+        { "id": "apito", "label": "Apito", "show": { "notFlags": ["apito"] }, "rect": [85.7, 73.5, 6, 6], "walk": 80,
+          "tap": [{ "do": [{ "say": ["antonio", "O apito do professor, atrás da grade."] }] }],
+          "use": { "braco": [{ "do": [{ "set": "apito" }, { "give": "apito" }, { "say": ["antonio", "Piii."] }, { "say": ["antonio", "...Que susto."] }] }] },
+          "patchWhenTaken": { "flag": "apito", "image": "assets/patches/patch-apito.png", "rect": [85.33, 72.8, 6.74, 7.28] } },
+        { "id": "beto", "label": "Prof. Beto", "kind": "npc", "show": { "notFlags": ["agua"] }, "rect": [11, 22, 12, 72], "walk": 26, "tap": [{ "do": [{ "say": ["beto", "Corda e apito, assistente!"] }] }] },
+        { "id": "caio", "label": "Caio", "kind": "npc", "show": { "notFlags": ["agua"] }, "rect": [27, 46, 9, 50], "walk": 38, "tap": [{ "do": [{ "say": ["caio", "Depois eu te passo a bola, prometo!"] }] }] }
+      ],
+      "objectives": [
+        { "if": { "notFlags": ["corda"] }, "target": "corda", "item": "frisbee", "text": "O braço não alcança. Jogue o frisbee na corda." },
+        { "if": { "notFlags": ["apito"] }, "target": "apito", "item": "braco", "text": "Pegue o apito pela grade com o braço mecânico." },
+        { "target": "saco", "text": "Guarde tudo no saco de rede." }
+      ]
+    },
+    "final": {
+      "type": "cutscene",
+      "panels": [
+        { "image": "assets/scenes/ep01-final-1.png", "caption": "O céu escurece de repente." },
+        { "image": "assets/scenes/ep01-final-2.png", "caption": "Uma luz rosa desce sobre o Antônio." },
+        { "image": "assets/scenes/ep01-final-3.png", "caption": "O braço mecânico sobe primeiro. O Antônio vai junto." },
+        { "image": "assets/scenes/ep01-final-4.png", "caption": "A turma volta. A quadra está vazia. Só ficou um tênis." }
+      ],
+      "panelSeconds": 3.2,
+      "crossfadeSeconds": 1.2,
+      "then": "end"
+    }
+  },
+  "debugStartStates": {
+    "portao": { "flags": ["broken", "thrown", "sharp", "mathDone"], "inventory": ["braco"] },
+    "quadra": { "flags": ["broken", "thrown", "sharp", "mathDone", "tried", "hasFrisbee"], "inventory": ["braco", "frisbee"] }
+  }
+}

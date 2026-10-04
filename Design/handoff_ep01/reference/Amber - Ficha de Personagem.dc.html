@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/styles.css">
+<script src="_ds/modernist-5c1ef2ae-b19b-4046-b4a1-794aacf51c5a/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+</style>
+</helmet>
+<div style="max-width:1200px;margin:0 auto;padding:48px 32px 120px;display:flex;flex-direction:column;gap:64px">
+
+<header style="display:flex;flex-direction:column;gap:20px;border-top:2px solid var(--color-text);padding-top:16px">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">
+    <span>Recreio Espacial · Ficha de personagem 02</span>
+    <span style="color:var(--color-accent-700)">Vilão / Villain</span>
+  </div>
+  <h1 style="margin:0;font-family:var(--font-heading);font-weight:800;font-size:clamp(72px,14vw,184px);line-height:.85;letter-spacing:-.04em">Amber</h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:18px;font-weight:600">
+    <span>Alien inspetor / Alien inspector</span><span>2× a altura do Antônio</span><span>Flutua / Floats</span>
+  </div>
+</header>
+
+<section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+    <image-slot id="amber-hero" src="assets/amber-hero.png" shape="rect" fit="contain" placeholder="Arte principal · Amber flutuando, braços cheios de ferramentas"></image-slot>
+  </div>
+  <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:32px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Quem é / Who he is</div>
+      <p style="margin:0;font-size:20px;line-height:1.45;text-wrap:pretty">Amber é o inspetor de tecnologia do seu planeta. Há anos ele assiste à Terra por sinais de TV e morre de medo das invenções humanas. Quando viu o Antônio com o braço mecânico, teve certeza: aquele menino é um inventor perigoso. Levou ele para descobrir o segredo da garra.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">Amber is his planet's technology inspector. He has watched Earth through TV signals for years and is terrified of human inventions. When he saw Antônio with the grabber arm he was certain: this boy is a dangerous inventor. He took him to learn the claw's secret.</p></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Altura / Height</span><span>Cerca de 2,6 m, o dobro do Antônio</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Corpo / Body</span><span>Alto e magro, 6 braços, 5 olhos, sem pernas</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Cor / Color</span><span>Verde</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Fala / Speech</span><span>Português errado, aprendido na TV</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:600">Fraqueza / Weakness</span><span>Odeia barulho alto</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Personalidade</h2><span style="font-size:14px;color:var(--color-neutral-700)">Personality · meio assustador, meio cômico</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">01</span>
+      <h3 style="margin:0;font-size:24px">Desconfiado <span style="font-weight:400;color:var(--color-neutral-700)">/ Paranoid</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Vê perigo em tudo que vem da Terra. Examina uma meia com o mesmo cuidado que uma bomba.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Sees danger in everything from Earth. Inspects a sock as carefully as a bomb.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">02</span>
+      <h3 style="margin:0;font-size:24px">Metódico <span style="font-weight:400;color:var(--color-neutral-700)">/ Methodical</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Anota, mede e cataloga. Tem uma ferramenta para cada coisa e usa várias ao mesmo tempo com os 6 braços.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Notes, measures and catalogs. Has a tool for everything and uses several at once with his 6 arms.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">03</span>
+      <h3 style="margin:0;font-size:24px">Teatral <span style="font-weight:400;color:var(--color-neutral-700)">/ Dramatic</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Aprendeu a ser vilão assistindo novela e desenho animado. Faz entradas dramáticas e pausas longas.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Learned to be a villain from soap operas and cartoons. Makes dramatic entrances and long pauses.</p></sc-if>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:13px;font-weight:600;color:var(--color-accent-700)">04</span>
+      <h3 style="margin:0;font-size:24px">Sensível <span style="font-weight:400;color:var(--color-neutral-700)">/ Sensitive</span></h3>
+      <p style="margin:0;font-size:15px;line-height:1.5">Qualquer barulho alto desmonta a pose de vilão: ele se encolhe e tapa os ouvidos com todas as mãos.</p>
+      <sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-700)">Any loud noise breaks his villain pose: he shrinks and covers his ears with every hand.</p></sc-if>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Descrição de arte</h2><span style="font-size:14px;color:var(--color-neutral-700)">Art description</span>
+  </div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-text)">
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Estilo geral</span><span style="line-height:1.55">O mesmo do Antônio: ilustração 2D feita à mão, contorno marrom-escuro irregular, textura de lápis de cor e aquarela. Formas mais pontudas e alongadas que as do menino, para contrastar com as formas redondas dele.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Proporção</span><span style="line-height:1.55">Cerca de 7 cabeças de altura, o dobro do Antônio. Cabeça pequena e oval em cima de um pescoço longo. Tronco estreito e comprido.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Olhos</span><span style="line-height:1.55">5 olhos em arco na parte de cima da cabeça: um grande no centro e dois menores de cada lado. Piscam fora de sincronia. Os olhos pequenos reagem antes do grande, o que ajuda no humor.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Ouvidos</span><span style="line-height:1.55">Duas antenas em forma de concha nas laterais da cabeça, muito sensíveis a som. Com barulho alto, elas tremem e se fecham.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Boca</span><span style="line-height:1.55">Fina e larga, sem dentes visíveis. Sorriso exagerado de apresentador de TV quando quer parecer simpático.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Braços</span><span style="line-height:1.55">6 braços finos e compridos, com cotovelos marcados e mãos de 3 dedos. Os dois de cima gesticulam; os de baixo estão sempre segurando ou mexendo em ferramentas.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Parte de baixo</span><span style="line-height:1.55">Sem pernas. O corpo afina numa cauda curta que termina num pequeno disco flutuante com brilho suave por baixo. Balança devagar para cima e para baixo.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Roupa</span><span style="line-height:1.55">Macacão de inspetor, cinza-arroxeado, com cinto largo, suspensórios e muitos bolsos. Ferramentas penduradas por toda parte: presas no cinto, nos suspensórios e nas mangas.</span></div>
+    <div style="display:grid;grid-template-columns:minmax(120px,200px) minmax(0,1fr);gap:24px;padding:16px 0;border-bottom:2px solid var(--color-divider)"><span style="font-weight:800">Silhueta</span><span style="line-height:1.55">Um traço vertical fino com uma coroa de braços no meio e a cauda flutuante embaixo. Precisa ser reconhecível de longe, na janela da nave ou atrás de uma porta.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Paleta do personagem</h2><span style="font-size:14px;color:var(--color-neutral-700)">Character palette</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#7fb33f"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Pele</span><span style="font-size:12px;color:var(--color-neutral-700)">#7FB33F</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#4f7f2a"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Sombra da pele</span><span style="font-size:12px;color:var(--color-neutral-700)">#4F7F2A</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#f4e27a"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Olhos</span><span style="font-size:12px;color:var(--color-neutral-700)">#F4E27A</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#6d6480"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Macacão</span><span style="font-size:12px;color:var(--color-neutral-700)">#6D6480</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#3d3650"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Cinto e bolsos</span><span style="font-size:12px;color:var(--color-neutral-700)">#3D3650</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#b9c2c4"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Ferramentas</span><span style="font-size:12px;color:var(--color-neutral-700)">#B9C2C4</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#e05aa8"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Luzes e botões</span><span style="font-size:12px;color:var(--color-neutral-700)">#E05AA8</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="height:96px;background:#3b2618"></div><div style="padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:14px">Contorno</span><span style="font-size:12px;color:var(--color-neutral-700)">#3B2618</span></div></div>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Verde-folha como cor principal, com o macacão em tons frios de cinza-arroxeado para ele se misturar às paredes da nave. O rosa das luzes aparece nas ferramentas ligadas e sinaliza quando ele está prestes a agir. Contorno igual ao do Antônio, para os dois parecerem do mesmo mundo.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Ferramentas no macacão</h2><span style="font-size:14px;color:var(--color-neutral-700)">Tools on his suit</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column">
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Raio puxador.</strong> Foi com ele que abduziu o Antônio. Parece uma lanterna de três bocas.</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Lupa-scanner.</strong> Lente grande que ele passa por cima de tudo que é da Terra. Apita quando "detecta perigo".</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Chave de sete pontas.</strong> Abre e fecha portas e painéis da nave. Peça importante para os puzzles.</div>
+      <div style="padding:20px 24px;border-bottom:2px solid var(--color-divider);line-height:1.5"><strong>Pinças e medidores.</strong> Pendurados no cinto, balançam quando ele se move.</div>
+      <div style="padding:20px 24px;line-height:1.5"><strong>Controle remoto de TV.</strong> Um controle velho da Terra, preso no peito como uma medalha. É com ele que "aprendeu" a língua humana.</div>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);position:relative;min-height:420px;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)">
+      <image-slot id="amber-ferramentas" src="assets/amber-ferramentas.png" shape="rect" fit="contain" placeholder="Folha de ferramentas do Amber"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Na história</h2><span style="font-size:14px;color:var(--color-neutral-700)">Story role</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Ato 1 · Na nave</span><span style="font-size:15px;line-height:1.5">Interroga o Antônio e tenta desmontar o braço mecânico. Aparece de surpresa nos corredores; o jogador precisa se esconder dele.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Ato 2 · Na Terra</span><span style="font-size:15px;line-height:1.5">Segue o Antônio até a Terra convencido de que existem outros inventores perigosos. Tenta se disfarçar com o que viu na TV.</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-accent);color:#fff;padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Final · A fraqueza</span><span style="font-size:15px;line-height:1.5">O barulho alto é a chave para expulsá-lo. O apito do Antônio é a primeira pista; no final, a escola inteira faz barulho junto.</span></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Turnaround e escala</h2><span style="font-size:14px;color:var(--color-neutral-700)">Frente, 3/4, perfil, costas, lado a lado com o Antônio</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1/2;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-front" src="assets/amber-front.png" shape="rect" fit="contain" placeholder="frente"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Frente / Front</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1/2;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-34" src="assets/amber-34.png" shape="rect" fit="contain" placeholder="3/4"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">3/4</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1/2;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-side" src="assets/amber-side.png" shape="rect" fit="contain" placeholder="perfil"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Perfil / Side</span></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1/2;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-back" src="assets/amber-back.png" shape="rect" fit="contain" placeholder="costas"></image-slot></div><span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Costas / Back</span></div>
+  </div>
+  <div style="border:2px solid var(--color-text);display:flex;flex-direction:column">
+    <div style="position:relative;aspect-ratio:16/7;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-escala" src="assets/amber-escala.png" shape="rect" fit="contain" placeholder="Amber ao lado do Antônio · comparação de altura"></image-slot></div>
+    <span style="padding:12px;font-weight:600;border-top:2px solid var(--color-text)">Escala / Scale · Amber tem o dobro da altura do Antônio</span>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Expressões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Expressions</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-desconfiado" src="assets/amber-ex-desconfiado.png" shape="rect" placeholder="desconfiado"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Desconfiado</span><span style="font-size:13px;color:var(--color-neutral-700)">Olhos semicerrados, fora de sincronia</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-ameacador" src="assets/amber-ex-ameacador.png" shape="rect" placeholder="ameaçador"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Ameaçador</span><span style="font-size:13px;color:var(--color-neutral-700)">Inclinado por cima, braços abertos</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-examinando" src="assets/amber-ex-examinando.png" shape="rect" placeholder="examinando"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Examinando</span><span style="font-size:13px;color:var(--color-neutral-700)">Olho central grande na lupa</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-apresentador" src="assets/amber-ex-apresentador.png" shape="rect" placeholder="sorriso de TV"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Sorriso de TV</span><span style="font-size:13px;color:var(--color-neutral-700)">Tentando parecer simpático</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-barulho" src="assets/amber-ex-barulho.png" shape="rect" placeholder="barulho!"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Barulho!</span><span style="font-size:13px;color:var(--color-neutral-700)">Tapando as antenas com 6 mãos</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-confuso" src="assets/amber-ex-confuso.png" shape="rect" placeholder="confuso"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Confuso</span><span style="font-size:13px;color:var(--color-neutral-700)">Cada olho olha para um lado</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-furioso" src="assets/amber-ex-furioso.png" shape="rect" placeholder="furioso"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Furioso</span><span style="font-size:13px;color:var(--color-neutral-700)">Verde mais escuro, luzes rosa acesas</span></div></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);display:flex;flex-direction:column"><div style="position:relative;aspect-ratio:1;background:repeating-linear-gradient(135deg,var(--color-neutral-200) 0 10px,var(--color-bg) 10px 20px)"><image-slot id="amber-ex-triunfante" src="assets/amber-ex-triunfante.png" shape="rect" placeholder="triunfante"></image-slot></div><div style="padding:12px;border-top:2px solid var(--color-text);display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Triunfante</span><span style="font-size:13px;color:var(--color-neutral-700)">Pose de vilão de novela</span></div></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Voz nos balões</h2><span style="font-size:14px;color:var(--color-neutral-700)">Speech bubbles</span>
+  </div>
+  <p style="margin:0;max-width:720px;font-size:15px;line-height:1.55">Fala como a TV: mistura bordão de propaganda, plantão de jornal, previsão do tempo e novela, quase sempre fora de contexto. Frases pomposas e erradas.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Primeiro encontro</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Boa noite, telespectador pequeno. Não mude de canal."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Good evening, small viewer. Don't change the channel."</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Interrogatório</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Ligue já e revele o segredo da garra! Oferta por tempo limitado!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Call now and reveal the claw's secret! Limited-time offer!"</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Antônio fugiu</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Plantão urgente! Previsão: humano fugitivo com pancadas de garra."</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Breaking news! Forecast: runaway human with scattered claw showers."</span></sc-if></div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:24px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Barulho alto</span><span style="font-size:22px;font-weight:800;line-height:1.2">"Abaixe o volume! ABAIXE O VOLUME!"</span><sc-if value="{{ showEN }}" hint-placeholder-val="{{ true }}"><span style="font-size:14px;color:var(--color-neutral-700)">"Turn down the volume! TURN DOWN THE VOLUME!"</span></sc-if></div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Animações necessárias</h2><span style="font-size:14px;color:var(--color-neutral-700)">Animation list</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Flutuar parado</strong> · sobe e desce, braços mexendo em ferramentas</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Deslizar</strong> · corpo inclinado, cauda arrastando o brilho</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Entrada dramática</strong> · desce do teto devagar</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Escanear</strong> · lupa passando, olhos seguindo</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Seis mãos ao mesmo tempo</strong> · trabalhando num painel</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Procurar</strong> · olhos girando em direções diferentes</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Raio puxador</strong> · mira e dispara</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Reação ao barulho</strong> · encolhe, tapa as antenas, cai alguns palmos</div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);background:var(--color-bg);padding:16px 20px"><strong>Discurso</strong> · braços de cima gesticulando como apresentador</div>
+  </div>
+</section>
+
+<sc-if value="{{ showBrief }}" hint-placeholder-val="{{ true }}">
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:2px solid var(--color-text);padding-top:12px">
+    <h2 style="margin:0;font-size:32px">Briefing para ilustração</h2><span style="font-size:14px;color:var(--color-neutral-700)">Anexe a folha do Antônio como referência de estilo em todos</span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0;border-top:2px solid var(--color-text);border-left:2px solid var(--color-text)">
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 01 · Turnaround</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Character sheet of Amber, a tall thin green alien villain for a hand-drawn 2D point-and-click adventure game, same storybook style as the reference image, thin irregular dark-brown outlines, soft colored-pencil and watercolor texture, plain cream paper background. Half funny, half creepy, never gory. About 7 heads tall, small oval head on a long neck, narrow elongated torso. Five yellow eyes in an arc on top of the head, one big in the center and two smaller on each side. Two shell-shaped ear antennae on the sides of the head. Thin wide mouth. Six long thin arms with three-fingered hands. No legs: the body tapers into a short tail ending in a small floating disc with a soft glow underneath, hovering above the ground. Wears a purple-grey inspector jumpsuit with a wide belt, suspenders and many pockets, covered with hanging tools: a three-nozzle tractor-beam flashlight, a big magnifying scanner, a seven-pointed wrench, pliers and gauges, and an old TV remote pinned to his chest like a medal. Pink glowing buttons on the tools. Views: front, three-quarter, side, back. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 02 · Expressões</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Expression sheet of Amber, the same green alien from the reference, same hand-drawn storybook style, plain cream paper background. Head, neck and upper arms only, same size and framing in every panel, 4 columns by 2 rows. Eight expressions: 1. suspicious, eyes half-closed and blinking out of sync; 2. menacing, leaning forward, arms spread; 3. examining, big center eye magnified through a scanner lens; 4. fake TV-host smile, too wide; 5. hit by loud noise, flinching, covering his ear antennae with all six hands; 6. confused, each eye looking a different way; 7. furious, darker green, pink tool lights glowing; 8. triumphant, dramatic soap-opera villain pose. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 03 · Ferramentas</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Prop sheet of alien tools for a hand-drawn 2D adventure game, same storybook style as the reference, plain cream paper background, silver-grey metal with pink glowing buttons. 1. tractor-beam gun shaped like a flashlight with three nozzles; 2. large magnifying scanner with a screen on the handle; 3. seven-pointed wrench; 4. pliers and small gauges on clips; 5. an old worn Earth TV remote with a ribbon, worn like a medal. No text, no labels.</p>
+    </div>
+    <div style="border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);padding:24px;display:flex;flex-direction:column;gap:12px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">Folha 04 · Escala</div>
+      <p style="margin:0;font-size:14px;line-height:1.7;font-family:ui-monospace,Menlo,monospace;background:var(--color-text);color:var(--color-bg);padding:20px">Height comparison lineup, same storybook style as the references, plain cream paper background with faint horizontal guide lines. Antônio, the 8-year-old boy with the yellow toy grabber arm, standing on the left, looking up nervously. Amber, the tall thin green six-armed alien, floating on the right, exactly twice the boy's height, leaning slightly toward him with his scanner. Full bodies, side by side, no text, no labels.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEN&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Idioma&quot;},&quot;showBrief&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { showEN: this.props.showEN ?? true, showBrief: this.props.showBrief ?? true };
+  }
+}
+</script>
+</body>
+</html>
