@@ -23,6 +23,7 @@
     "unset": "desliga flag",
     "give": "adiciona item ao inventário",
     "walkTo": "[x, y] Antônio anda até o ponto (y opcional = mantém)",
+    "foreground": "(na cena) recortes do cenário desenhados na frente de quem está atrás deles. rect como hotspot; depth = base do personagem que fica atrás (% medido do topo): o recorte cobre quem tem base até depth",
     "goScene": "fade 0.55s, troca de cena, fade de volta",
     "banner": "faixa de tutorial no topo até a próxima ação",
     "wait": "ms",
@@ -40,6 +41,9 @@
       "antonioHeight": 52,
       "start": { "x": 35 },
       "floor": { "nearY": 2, "farY": 10, "farScale": 0.86, "nearX": [6, 94], "farX": [8, 92] },
+      "foreground": [
+        { "id": "mesa-fundo", "image": "assets/foreground/sala-mesa-fundo.png", "rect": [44.012, 51.992, 16.999, 17.995], "depth": 64 }
+      ],
       "intro": [
         { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
         { "say": ["caio", "Anda, Antônio! O professor Beto já tá apitando!"] },
@@ -66,7 +70,7 @@
         { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [61, 88, 6.5, 8], "walk": 58,
           "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
           "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
-        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [58, 20, 9, 44], "walk": 55, "tap": [
+        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [48.5, 24, 10, 40], "walk": 55, "tap": [
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["lucia", "Bom recreio, Antônio."] }] },
           { "do": [{ "say": ["lucia", "Termine as três contas, Antônio."] }] } ] },
         { "id": "caio", "label": "Caio", "kind": "npc", "rect": [85, 40, 9, 56], "walk": 79, "tap": [

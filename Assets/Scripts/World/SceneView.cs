@@ -75,6 +75,15 @@ namespace RecreioEspacial.World
                 }
             }
 
+            foreach (var f in scene.Foreground)
+            {
+                var fs = GameAssets.Sprite(f.Image);
+                if (fs == null) continue;
+                // Desenha logo acima de quem tem a base em 'depth' (e abaixo de quem está mais perto).
+                var sr = NewSprite("Frente " + f.Id, fs, Stage.SortingOrderForBottom(100f - f.Depth) + 1);
+                FitToRect(sr, f.Rect);
+            }
+
             pulse = RectOutline.Create(transform, "Pulso de dica", 400);
             highlight = RectOutline.Create(transform, "Destaque teclado", 398);
             Refresh();

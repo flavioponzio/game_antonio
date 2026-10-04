@@ -130,6 +130,7 @@ namespace RecreioEspacial.Data
         public Dictionary<string, PuzzleDef> Puzzles = new Dictionary<string, PuzzleDef>();
         public List<ObjectiveDef> Objectives = new List<ObjectiveDef>();
         public RestrictionDef Restriction;
+        public List<ForegroundDef> Foreground = new List<ForegroundDef>();
 
         // Cutscene
         public List<PanelDef> Panels = new List<PanelDef>();
@@ -181,6 +182,18 @@ namespace RecreioEspacial.Data
                     FarXMin = fx.Count > 0 ? fx[0] : 6,
                     FarXMax = fx.Count > 1 ? fx[1] : 94,
                 };
+            }
+
+            foreach (var f in J.List(J.Get(d, "foreground")))
+            {
+                var fd = J.Dict(f);
+                s.Foreground.Add(new ForegroundDef
+                {
+                    Id = J.Str(fd, "id"),
+                    Image = J.Str(fd, "image"),
+                    Rect = J.Rect(J.Get(fd, "rect")),
+                    Depth = J.Float(fd, "depth", 100),
+                });
             }
 
             foreach (var h in J.List(J.Get(d, "hotspots")))
@@ -252,6 +265,17 @@ namespace RecreioEspacial.Data
                 h.Patch = new PatchDef { Flag = J.Str(pd, "flag"), Image = J.Str(pd, "image"), Rect = J.Rect(J.Get(pd, "rect")) };
             return h;
         }
+    }
+
+    /// <summary>
+    /// Recorte do cenário desenhado na frente dos personagens que estão atrás dele (ex.: mesa na frente da professora).
+    /// Depth = base (% medido do topo) do personagem que fica atrás; o recorte cobre quem tem base até esse valor.
+    /// </summary>
+    public class ForegroundDef
+    {
+        public string Id, Image;
+        public StageRect Rect;
+        public float Depth = 100;
     }
 
     public class PatchDef
