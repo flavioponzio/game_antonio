@@ -12,12 +12,13 @@ protótipo em HTML.
 
 ## Como abrir
 
-1. Instale o **Unity Hub** e um editor **Unity 6** (6000.0 LTS ou mais novo).
+1. Instale o **Unity Hub** e o editor **Unity 6.6 (6000.6.4f1)**, a versão usada no projeto.
+   O pacote Input System está na 1.20.0 (versões antigas, como a 1.11, não compilam no Unity 6.6).
 2. No Hub: **Add → Add project from disk** e escolha a pasta deste repositório.
    - Se o Hub disser que a versão `6000.0.58f2` não está instalada, escolha a versão Unity 6 que você tem.
 3. A primeira abertura demora (o Unity importa as imagens e cria a pasta `Library/`).
-   - Se aparecer um aviso sobre o **Input System** ("enable the new input backends?"), clique **Yes**.
-     O Unity reinicia. O jogo funciona com o sistema de entrada novo ou o antigo.
+   - O projeto usa o Input System (Project Settings → Player → Active Input Handling).
+     O código também funciona com o Input Manager antigo, se precisar.
 4. Abra a cena `Assets/Scenes/Main.unity` e aperte **Play**.
 
 > O jogo se monta sozinho por código ao apertar Play (câmera, cenário, personagens e interface).
