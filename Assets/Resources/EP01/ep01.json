@@ -42,7 +42,7 @@
       "start": { "x": 35 },
       "floor": { "nearY": 2, "farY": 10, "farScale": 0.86, "nearX": [6, 94], "farX": [8, 92] },
       "foreground": [
-        { "id": "carteira-quadro", "image": "assets/foreground/sala-carteira-quadro.png", "rect": [27.013, 57.967, 10.586, 24.038], "depth": 69.5 }
+        { "id": "carteira-quadro", "image": "assets/foreground/sala-carteira-quadro.png", "rect": [27.013, 57.967, 10.586, 24.038], "depth": 71 }
       ],
       "intro": [
         { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
@@ -70,7 +70,7 @@
         { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [61, 88, 6.5, 8], "walk": 58,
           "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
           "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
-        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [29.2, 33.5, 8.6, 36], "walk": 34, "tap": [
+        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [29.2, 35, 8.6, 36], "walk": 34, "tap": [
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["lucia", "Bom recreio, Antônio."] }] },
           { "do": [{ "say": ["lucia", "Termine as três contas, Antônio."] }] } ] },
         { "id": "caio", "label": "Caio", "kind": "npc", "rect": [85, 40, 9, 56], "walk": 79, "tap": [
