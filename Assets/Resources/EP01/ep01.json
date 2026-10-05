@@ -70,7 +70,7 @@
         { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [61, 88, 6.5, 8], "walk": 58,
           "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
           "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
-        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [48.5, 24, 10, 40], "walk": 55, "tap": [
+        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [49.4, 30, 8.2, 34], "walk": 55, "tap": [
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["lucia", "Bom recreio, Antônio."] }] },
           { "do": [{ "say": ["lucia", "Termine as três contas, Antônio."] }] } ] },
         { "id": "caio", "label": "Caio", "kind": "npc", "rect": [85, 40, 9, 56], "walk": 79, "tap": [
