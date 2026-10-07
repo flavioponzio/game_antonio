@@ -87,7 +87,8 @@ namespace RecreioEspacial.Core
             view = SceneView.Create(world, ep, state);
             antonio = AntonioController.Create(world,
                 GameAssets.Sprite(ep.Characters["antonio"].SpriteFront, new Vector2(0.5f, 0f)),
-                GameAssets.Sprite(ep.Characters["antonio"].SpriteSide, new Vector2(0.5f, 0f)));
+                GameAssets.Sprite(ep.Characters["antonio"].SpriteSide, new Vector2(0.5f, 0f)),
+                ep.Characters["antonio"].RigSide);
             antonio.gameObject.SetActive(false);
 
             ui = GameUI.Create(cam);

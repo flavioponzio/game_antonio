@@ -1,0 +1,196 @@
+{
+ "note": "Rig do Ant\u00f4nio de perfil. Coordenadas em pixels do recorte original (y para baixo). box = [x, y, w, h] da imagem da parte; pivot = junta onde a parte gira; order = ordem de desenho.",
+ "height": 518,
+ "root": [
+  104,
+  528
+ ],
+ "images": {
+  "body": {
+   "file": "assets/characters/antonio-rig/body.png",
+   "box": [
+    45,
+    150,
+    112,
+    256
+   ]
+  },
+  "head": {
+   "file": "assets/characters/antonio-rig/head.png",
+   "box": [
+    9,
+    9,
+    182,
+    184
+   ]
+  },
+  "arm-upper": {
+   "file": "assets/characters/antonio-rig/arm-upper.png",
+   "box": [
+    63,
+    207,
+    57,
+    129
+   ]
+  },
+  "arm-lower": {
+   "file": "assets/characters/antonio-rig/arm-lower.png",
+   "box": [
+    77,
+    329,
+    45,
+    60
+   ]
+  },
+  "grabber": {
+   "file": "assets/characters/antonio-rig/grabber.png",
+   "box": [
+    134,
+    340,
+    84,
+    83
+   ]
+  },
+  "leg-upper": {
+   "file": "assets/characters/antonio-rig/leg-upper.png",
+   "box": [
+    64,
+    386,
+    65,
+    61
+   ]
+  },
+  "leg-lower": {
+   "file": "assets/characters/antonio-rig/leg-lower.png",
+   "box": [
+    71,
+    437,
+    98,
+    88
+   ]
+  }
+ },
+ "parts": [
+  {
+   "name": "backArmUpper",
+   "image": "arm-upper",
+   "parent": "body",
+   "pivot": [
+    93,
+    230
+   ],
+   "tint": 0.8,
+   "order": 0
+  },
+  {
+   "name": "backArmLower",
+   "image": "arm-lower",
+   "parent": "backArmUpper",
+   "pivot": [
+    93,
+    331
+   ],
+   "tint": 0.8,
+   "order": 1
+  },
+  {
+   "name": "backLegUpper",
+   "image": "leg-upper",
+   "parent": "body",
+   "pivot": [
+    104,
+    384
+   ],
+   "tint": 0.82,
+   "order": 2
+  },
+  {
+   "name": "backLegLower",
+   "image": "leg-lower",
+   "parent": "backLegUpper",
+   "pivot": [
+    104,
+    442
+   ],
+   "tint": 0.82,
+   "order": 3
+  },
+  {
+   "name": "grabber",
+   "image": "grabber",
+   "parent": "frontArmLower",
+   "pivot": [
+    100,
+    372
+   ],
+   "tint": 1.0,
+   "order": 4
+  },
+  {
+   "name": "frontLegLower",
+   "image": "leg-lower",
+   "parent": "frontLegUpper",
+   "pivot": [
+    104,
+    442
+   ],
+   "tint": 1.0,
+   "order": 5
+  },
+  {
+   "name": "frontLegUpper",
+   "image": "leg-upper",
+   "parent": "body",
+   "pivot": [
+    104,
+    384
+   ],
+   "tint": 1.0,
+   "order": 6
+  },
+  {
+   "name": "body",
+   "image": "body",
+   "parent": "root",
+   "pivot": [
+    104,
+    384
+   ],
+   "tint": 1.0,
+   "order": 7
+  },
+  {
+   "name": "head",
+   "image": "head",
+   "parent": "body",
+   "pivot": [
+    100,
+    182
+   ],
+   "tint": 1.0,
+   "order": 8
+  },
+  {
+   "name": "frontArmLower",
+   "image": "arm-lower",
+   "parent": "frontArmUpper",
+   "pivot": [
+    93,
+    331
+   ],
+   "tint": 1.0,
+   "order": 9
+  },
+  {
+   "name": "frontArmUpper",
+   "image": "arm-upper",
+   "parent": "body",
+   "pivot": [
+    93,
+    230
+   ],
+   "tint": 1.0,
+   "order": 10
+  }
+ ]
+}

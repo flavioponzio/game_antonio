@@ -1,6 +1,7 @@
 using RecreioEspacial.Core;
 using RecreioEspacial.Data;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace RecreioEspacial.World
 {
@@ -44,8 +45,11 @@ namespace RecreioEspacial.World
         Transform body;
         SpriteRenderer sr, shadow;
         Sprite frontSprite, sideSprite;
+        SortingGroup sortingGroup;
+        /// <summary>Boneco recortado de perfil (opcional). Quando existe, substitui o sprite de perfil ao andar.</summary>
+        CutoutRig sideRig;
 
-        public static AntonioController Create(Transform parent, Sprite front, Sprite side)
+        public static AntonioController Create(Transform parent, Sprite front, Sprite side, string sideRigJson = null)
         {
             var go = new GameObject("Antonio");
             go.transform.SetParent(parent, false);
@@ -63,6 +67,13 @@ namespace RecreioEspacial.World
             a.body = b.transform;
             a.sr = b.AddComponent<SpriteRenderer>();
             a.sr.sprite = front;
+            // Agrupa sprite + partes do rig numa única camada de desenho (ordem por profundidade).
+            a.sortingGroup = b.AddComponent<SortingGroup>();
+            if (!string.IsNullOrEmpty(sideRigJson))
+            {
+                a.sideRig = CutoutRig.Load(b.transform, sideRigJson);
+                if (a.sideRig != null) a.sideRig.SetVisible(false);
+            }
             return a;
         }
 
@@ -218,21 +229,38 @@ namespace RecreioEspacial.World
             float walkAmt = Mathf.Min(1f, v / 14f);
             float sn = Mathf.Abs(Mathf.Sin(phase));
             bool moving = hasTarget || walkAmt > 0.05f;
-            bool useSide = moving && side && sideSprite != null;
-            var spr = useSide ? sideSprite : frontSprite;
+            bool useSide = moving && side && (sideSprite != null || sideRig != null);
+            bool useRig = useSide && sideRig != null;
+            var spr = useSide && !useRig ? sideSprite : frontSprite;
             if (sr.sprite != spr) sr.sprite = spr;
+            sr.enabled = !useRig;
+            if (sideRig != null)
+            {
+                sideRig.SetVisible(useRig);
+                if (useRig) sideRig.ApplyWalk(phase, walkAmt);
+            }
 
-            float bob = sn * 2.4f * walkAmt;                       // % da altura
-            float contact = (1f - sn) * walkAmt;
+            float bob, contact;
+            if (useRig)
+            {
+                // Com pernas de verdade: o corpo fica mais baixo quando as pernas estão abertas.
+                bob = (1f - sn) * 1.4f * walkAmt;
+                contact = 0f;
+            }
+            else
+            {
+                bob = sn * 2.4f * walkAmt;                       // % da altura
+                contact = (1f - sn) * walkAmt;
+            }
             float breathe = (1f - walkAmt) * 0.011f * Mathf.Sin(t * 2.3f);
             float sy = 1f - 0.05f * contact + breathe;
             float sx = 1f + 0.035f * contact - breathe * 0.4f;
-            float leanTarget = useSide ? Dir * 5f * walkAmt : 0f;
+            float leanTarget = useSide ? Dir * (useRig ? 2.5f : 5f) * walkAmt : 0f;
             lean += (leanTarget - lean) * Mathf.Min(1f, dt * 10f);
             float fx = useSide ? Dir : 1f;
 
             float heightUnits = Stage.H(antonioHeight * s);
-            float spriteUnits = spr != null ? spr.rect.height / spr.pixelsPerUnit : 1f;
+            float spriteUnits = useRig ? sideRig.HeightPx / 100f : spr != null ? spr.rect.height / spr.pixelsPerUnit : 1f;
             float k = heightUnits / spriteUnits;
 
             transform.localPosition = Stage.Point(X, Y + curLift);
@@ -241,7 +269,7 @@ namespace RecreioEspacial.World
             body.localScale = new Vector3(k * sx * fx, k * sy, 1f);
 
             int order = Stage.SortingOrderForBottom(Y) + 1;
-            sr.sortingOrder = order;
+            sortingGroup.sortingOrder = order;
 
             if (shadow != null)
             {

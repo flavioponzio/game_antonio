@@ -3,7 +3,7 @@
   "title": "A Última Aula",
   "coordinates": "Todas as posições em % de um palco 16:9 (referência 1920x1080). Hotspots: x,y = canto superior esquerdo medido do topo; w,h = largura/altura. Chão e personagens: x = centro horizontal, y = distância da base do palco (bottom %).",
   "characters": {
-    "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front.png", "side": "assets/characters/antonio-side.png" } },
+    "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front.png", "side": "assets/characters/antonio-side.png" }, "rigSide": "assets/characters/antonio-rig/rig.json" },
     "caio": { "name": "Caio", "sprite": "assets/characters/npc-caio.png" },
     "bia": { "name": "Bia", "sprite": "assets/characters/npc-bia.png" },
     "lucia": { "name": "Prof. Lúcia", "sprite": "assets/characters/npc-lucia.png" },

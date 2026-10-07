@@ -57,6 +57,7 @@ namespace RecreioEspacial.Data
                 var sprites = J.Dict(J.Get(d, "sprites"));
                 c.SpriteFront = J.Str(sprites, "front");
                 c.SpriteSide = J.Str(sprites, "side");
+                c.RigSide = J.Str(d, "rigSide");
                 ep.Characters[kv.Key] = c;
             }
 
@@ -87,6 +88,8 @@ namespace RecreioEspacial.Data
     public class CharacterDef
     {
         public string Id, Name, Sprite, SpriteFront, SpriteSide;
+        /// <summary>rig.json do boneco recortado de perfil (opcional).</summary>
+        public string RigSide;
         public bool FaceTowardAntonio, VoiceOnly;
     }
 

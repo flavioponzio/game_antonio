@@ -96,6 +96,16 @@ Para tirar regras que estavam escritas só em texto e deixá-las como dados:
   1–4 nos espaços do inventário.
 - Estojo e apontador ainda não têm ilustração: aparecem como caixas "arte pendente", como no protótipo.
 
+## Rig do Antônio (boneco recortado de perfil)
+
+Quando anda de lado, o Antônio usa um boneco recortado em partes (cabeça, tronco, braços, pernas e braço
+mecânico) com um ciclo de caminhada feito por código (`World/CutoutRig.cs`). As partes saíram do perfil da
+folha de turnaround (`Design/personagens/antonio-turnaround.jpg`) com o script
+`Design/tools/cortar_rig_antonio.py`, que também grava os pivôs das juntas em
+`Assets/Resources/EP01/assets/characters/antonio-rig/rig.json`. A perna e o braço de trás são cópias mais
+escuras dos da frente. Parado, ele continua usando a imagem de frente. Prévia das poses:
+`Design/personagens/antonio-rig-poses.png`.
+
 ## Estado atual e limitações
 
 - Feito: as 3 cenas jogáveis do começo ao fim, cutscene final, tela de fim com tempo de jogo, título
