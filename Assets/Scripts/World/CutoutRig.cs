@@ -19,6 +19,9 @@ namespace RecreioEspacial.World
 
         readonly Dictionary<string, Transform> joints = new Dictionary<string, Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        readonly Dictionary<string, SpriteRenderer> byPart = new Dictionary<string, SpriteRenderer>();
+        readonly HashSet<string> hidden = new HashSet<string>();
+        bool visible = true;
 
         public static CutoutRig Load(Transform parent, string jsonPath)
         {
@@ -85,6 +88,7 @@ namespace RecreioEspacial.World
                 art.color = new Color(tint, tint, tint, 1f);
                 art.sortingOrder = (int)Num(d, "order", 0);
                 rig.renderers.Add(art);
+                rig.byPart[name] = art;
             }
             return rig;
         }
@@ -95,9 +99,18 @@ namespace RecreioEspacial.World
             if (joints.TryGetValue(joint, out var t)) t.localRotation = Quaternion.Euler(0f, 0f, degrees);
         }
 
-        public void SetVisible(bool visible)
+        public void SetVisible(bool value)
         {
-            foreach (var r in renderers) r.enabled = visible;
+            visible = value;
+            foreach (var kv in byPart) kv.Value.enabled = visible && !hidden.Contains(kv.Key);
+        }
+
+        /// <summary>Esconde/mostra uma parte (ex.: o braço mecânico quando ele não está com o item).</summary>
+        public void SetPartHidden(string part, bool hide)
+        {
+            if (part == null) return;
+            if (hide) hidden.Add(part); else hidden.Remove(part);
+            if (byPart.TryGetValue(part, out var r)) r.enabled = visible && !hide;
         }
 
         /// <summary>

@@ -58,6 +58,9 @@ namespace RecreioEspacial.Data
                 c.SpriteFront = J.Str(sprites, "front");
                 c.SpriteSide = J.Str(sprites, "side");
                 c.RigSide = J.Str(d, "rigSide");
+                c.SpriteFrontHolding = J.Str(sprites, "frontHolding");
+                c.HoldingItem = J.Str(d, "holdingItem");
+                c.HoldingRigPart = J.Str(d, "holdingRigPart");
                 ep.Characters[kv.Key] = c;
             }
 
@@ -90,6 +93,8 @@ namespace RecreioEspacial.Data
         public string Id, Name, Sprite, SpriteFront, SpriteSide;
         /// <summary>rig.json do boneco recortado de perfil (opcional).</summary>
         public string RigSide;
+        /// <summary>Versão de frente segurando o item HoldingItem (ex.: braço mecânico); a parte HoldingRigPart do rig só aparece com ele.</summary>
+        public string SpriteFrontHolding, HoldingItem, HoldingRigPart;
         public bool FaceTowardAntonio, VoiceOnly;
     }
 

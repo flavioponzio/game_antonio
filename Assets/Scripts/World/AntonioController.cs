@@ -44,18 +44,24 @@ namespace RecreioEspacial.World
 
         Transform body;
         SpriteRenderer sr, shadow;
-        Sprite frontSprite, sideSprite;
+        Sprite frontSprite, sideSprite, frontHoldingSprite;
+        string holdingRigPart;
+        /// <summary>Está com o item na mão (usa a imagem de frente com o item e mostra a parte do rig).</summary>
+        public bool Holding { get; set; }
         SortingGroup sortingGroup;
         /// <summary>Boneco recortado de perfil (opcional). Quando existe, substitui o sprite de perfil ao andar.</summary>
         CutoutRig sideRig;
 
-        public static AntonioController Create(Transform parent, Sprite front, Sprite side, string sideRigJson = null)
+        public static AntonioController Create(Transform parent, Sprite front, Sprite side, string sideRigJson = null,
+            Sprite frontHolding = null, string holdingRigPart = null)
         {
             var go = new GameObject("Antonio");
             go.transform.SetParent(parent, false);
             var a = go.AddComponent<AntonioController>();
             a.frontSprite = front;
             a.sideSprite = side;
+            a.frontHoldingSprite = frontHolding;
+            a.holdingRigPart = holdingRigPart;
 
             var sh = new GameObject("Sombra");
             sh.transform.SetParent(go.transform, false);
@@ -231,11 +237,13 @@ namespace RecreioEspacial.World
             bool moving = hasTarget || walkAmt > 0.05f;
             bool useSide = moving && side && (sideSprite != null || sideRig != null);
             bool useRig = useSide && sideRig != null;
-            var spr = useSide && !useRig ? sideSprite : frontSprite;
+            var front = Holding && frontHoldingSprite != null ? frontHoldingSprite : frontSprite;
+            var spr = useSide && !useRig ? sideSprite : front;
             if (sr.sprite != spr) sr.sprite = spr;
             sr.enabled = !useRig;
             if (sideRig != null)
             {
+                sideRig.SetPartHidden(holdingRigPart, !Holding);
                 sideRig.SetVisible(useRig);
                 if (useRig) sideRig.ApplyWalk(phase, walkAmt);
             }
@@ -273,7 +281,7 @@ namespace RecreioEspacial.World
 
             if (shadow != null)
             {
-                float widthUnits = spr != null ? heightUnits * spr.rect.width / spr.rect.height : heightUnits * 0.5f;
+                float widthUnits = heightUnits * 0.53f; // largura do corpo (a imagem pode ter margem para o item)
                 float sc = 1f - bob * 0.06f;
                 shadow.transform.localPosition = new Vector3(0f, -curLift / 100f * Stage.Height + heightUnits * 0.013f, 0f);
                 shadow.transform.localScale = new Vector3(widthUnits * 0.78f * sc, heightUnits * 0.05f * sc, 1f);

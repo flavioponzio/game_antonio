@@ -88,7 +88,9 @@ namespace RecreioEspacial.Core
             antonio = AntonioController.Create(world,
                 GameAssets.Sprite(ep.Characters["antonio"].SpriteFront, new Vector2(0.5f, 0f)),
                 GameAssets.Sprite(ep.Characters["antonio"].SpriteSide, new Vector2(0.5f, 0f)),
-                ep.Characters["antonio"].RigSide);
+                ep.Characters["antonio"].RigSide,
+                GameAssets.Sprite(ep.Characters["antonio"].SpriteFrontHolding, new Vector2(0.5f, 0f)),
+                ep.Characters["antonio"].HoldingRigPart);
             antonio.gameObject.SetActive(false);
 
             ui = GameUI.Create(cam);
@@ -784,6 +786,8 @@ namespace RecreioEspacial.Core
         {
             if (ui == null || view == null) return;
             view.ShowDebugOutlines = showHotspots;
+            var antDef = ep.Characters["antonio"];
+            antonio.Holding = antDef.HoldingItem == null || state.Has(antDef.HoldingItem);
 
             if (!InPlayScene) return;
 

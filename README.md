@@ -103,7 +103,7 @@ mecânico) com um ciclo de caminhada feito por código (`World/CutoutRig.cs`). A
 folha de turnaround (`Design/personagens/antonio-turnaround.jpg`) com o script
 `Design/tools/cortar_rig_antonio.py`, que também grava os pivôs das juntas em
 `Assets/Resources/EP01/assets/characters/antonio-rig/rig.json`. A perna e o braço de trás são cópias mais
-escuras dos da frente. Parado, ele continua usando a imagem de frente. Prévia das poses:
+escuras dos da frente. Parado, ele usa a imagem de frente, também tirada do turnaround. O braço mecânico (de frente e no rig) só aparece depois que ele pega o item `braco` na mochila: veja `holdingItem` no JSON. A versão de frente sem a garra foi feita por `Design/tools/antonio_frente_sem_garra.py`, que espelha a mão aberta do outro lado. Prévia das poses:
 `Design/personagens/antonio-rig-poses.png`.
 
 ## Estado atual e limitações
