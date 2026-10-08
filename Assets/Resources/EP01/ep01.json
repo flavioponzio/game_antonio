@@ -1,6 +1,7 @@
 {
   "episode": "EP01",
   "title": "A Última Aula",
+  "floorDoc": "floor { y, x:[min,max] } = chão 2D lateral (uma linha, sem profundidade). floor { nearY, farY, farScale, nearX, farX } = chão com perspectiva (modelo antigo).",
   "coordinates": "Todas as posições em % de um palco 16:9 (referência 1920x1080). Hotspots: x,y = canto superior esquerdo medido do topo; w,h = largura/altura. Chão e personagens: x = centro horizontal, y = distância da base do palco (bottom %).",
   "characters": {
     "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front-sem-garra.png", "frontHolding": "assets/characters/antonio-front-garra.png", "side": "assets/characters/antonio-side.png" }, "rigSide": "assets/characters/antonio-rig/rig.json", "holdingItem": "braco", "holdingRigPart": "grabber" },
@@ -40,7 +41,7 @@
       "background": "assets/scenes/ep01-sala.png",
       "antonioHeight": 52,
       "start": { "x": 35 },
-      "floor": { "nearY": 2, "farY": 10, "farScale": 0.86, "nearX": [6, 94], "farX": [8, 92] },
+      "floor": { "y": 2, "x": [6, 94] },
       "foreground": [
         { "id": "carteira-quadro", "image": "assets/foreground/sala-carteira-quadro.png", "rect": [27.013, 57.967, 10.586, 24.038], "depth": 71 }
       ],

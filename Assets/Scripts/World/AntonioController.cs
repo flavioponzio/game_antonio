@@ -137,7 +137,11 @@ namespace RecreioEspacial.World
         public void StopMove() => hasTarget = false;
 
         /// <summary>Entrada direta das setas/WASD (zero = solto).</summary>
-        public void SetKeyboardInput(Vector2 dir) => keyInput = dir;
+        public void SetKeyboardInput(Vector2 dir)
+        {
+            if (floor.IsFlat) dir.y = 0f; // 2D lateral: cima/baixo não fazem nada
+            keyInput = dir;
+        }
 
         /// <summary>Teleporta (usado ao trocar de cena / debug).</summary>
         public void Place(float x, float y)

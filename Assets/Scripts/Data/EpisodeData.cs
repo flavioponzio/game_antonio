@@ -124,6 +124,9 @@ namespace RecreioEspacial.Data
 
     public class FloorDef
     {
+        /// <summary>Chão de uma linha só (jogo 2D lateral): anda apenas para os lados.</summary>
+        public bool IsFlat => FarY <= NearY;
+
         public float NearY = 2, FarY = 2, FarScale = 1;
         public float NearXMin = 6, NearXMax = 94, FarXMin = 6, FarXMax = 94;
     }
@@ -176,7 +179,15 @@ namespace RecreioEspacial.Data
                 };
 
             var fl = J.Dict(J.Get(d, "floor"));
-            if (fl.Count > 0)
+            if (fl.Count > 0 && fl.ContainsKey("y"))
+            {
+                // Chão 2D (vista lateral): uma linha só, sem profundidade. { "y": 3, "x": [6, 94] }
+                float y = J.Float(fl, "y", 2);
+                var xr = J.FloatList(J.Get(fl, "x"));
+                float x0 = xr.Count > 0 ? xr[0] : 6, x1 = xr.Count > 1 ? xr[1] : 94;
+                s.Floor = new FloorDef { NearY = y, FarY = y, FarScale = 1, NearXMin = x0, NearXMax = x1, FarXMin = x0, FarXMax = x1 };
+            }
+            else if (fl.Count > 0)
             {
                 var nx = J.FloatList(J.Get(fl, "nearX"));
                 var fx = J.FloatList(J.Get(fl, "farX"));
