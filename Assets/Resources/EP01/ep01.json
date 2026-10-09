@@ -41,7 +41,7 @@
       "background": "assets/scenes/ep01-sala-2d.png",
       "camera": "pan",
       "antonioHeight": 46,
-      "start": { "x": 30 },
+      "start": { "x": 44 },
       "floor": { "y": 2, "x": [3, 96] },
       "intro": [
         { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
