@@ -267,6 +267,7 @@ namespace RecreioEspacial.Core
             view.Build(scene);
             antonio.gameObject.SetActive(true);
             antonio.EnterScene(scene);
+            if (scene.Sit != null) antonio.Sit(scene.Sit.X, scene.Sit.SeatY, scene.Sit.Dir);
             Stage.CameraX = CameraTarget();
             UpdateCamera(0f);
             ui.ShowScreen(GameUI.UiScreen.Play);
@@ -507,6 +508,11 @@ namespace RecreioEspacial.Core
 
         IEnumerator WalkTo(float x, float? y)
         {
+            if (antonio.Seated)
+            {
+                antonio.StandUp();
+                yield return Wait(0.25f);
+            }
             int id = antonio.MoveTo(x, y);
             while (antonio.IsMovingTo(id)) yield return null;
         }
@@ -539,11 +545,12 @@ namespace RecreioEspacial.Core
             banner = null;
 
             float? walk = view.WalkOf(h);
-            if (walk.HasValue) yield return WalkTo(walk.Value, null);
+            bool fromChair = antonio.Seated && currentScene.Sit != null && currentScene.Sit.Reach.Contains(h.Id);
+            if (walk.HasValue && !fromChair) yield return WalkTo(walk.Value, null);
             else antonio.StopMove();
 
             float cx = view.RectOf(h).CenterX;
-            if (Mathf.Abs(cx - antonio.X) > 2f) antonio.Dir = cx < antonio.X ? -1 : 1;
+            if (!antonio.Seated && Mathf.Abs(cx - antonio.X) > 2f) antonio.Dir = cx < antonio.X ? -1 : 1;
 
             if (item != null)
             {
@@ -567,6 +574,7 @@ namespace RecreioEspacial.Core
             if (state.Busy || ui.PuzzleOpen) return;
             if (Restricted && currentScene.Restriction.NoWalk) return;
             state.SelectedItem = null;
+            antonio.StandUp();
             antonio.MoveTo(x, yFromBottom);
         }
 
@@ -755,6 +763,7 @@ namespace RecreioEspacial.Core
             var axis = canMove ? GameInput.MoveAxis() : Vector2.zero;
             if (axis.sqrMagnitude > 0f)
             {
+                antonio.StandUp();
                 lastInputKeyboard = true;
                 state.IdleSeconds = 0;
             }
@@ -859,7 +868,7 @@ namespace RecreioEspacial.Core
             if (bubbleWho == "antonio")
             {
                 x = antonio.X;
-                b = antonio.Y + antonio.HeightPct + antonio.CurrentLift + 1f;
+                b = antonio.TopPct + 1f;
             }
             else
             {

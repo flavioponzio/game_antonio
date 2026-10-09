@@ -120,6 +120,36 @@ namespace RecreioEspacial.World
         /// <summary>Altura atual do Antônio em % do palco (com a escala de profundidade).</summary>
         public float HeightPct => antonioHeight * ScaleAt(Y);
 
+        // ---------- Sentado ----------
+        bool seated;
+        float seatY;
+        /// <summary>Sentado na cadeira (pose do rig de perfil).</summary>
+        public bool Seated => seated && sideRig != null;
+
+        /// <summary>Senta: x = quadril, seatY = altura do assento (% da base), dir = para onde olha.</summary>
+        public void Sit(float x, float seatYFromBottom, int dir)
+        {
+            seated = true;
+            X = x;
+            seatY = seatYFromBottom;
+            Dir = dir < 0 ? -1 : 1;
+            hasTarget = false;
+            v = 0f;
+        }
+
+        /// <summary>Levanta da cadeira com um pulinho (fica em pé no mesmo x).</summary>
+        public void StandUp()
+        {
+            if (!seated) return;
+            seated = false;
+            curLift = 4f;
+        }
+
+        /// <summary>Topo da cabeça em % (medido da base), para posicionar o balão.</summary>
+        public float TopPct => Seated
+            ? seatY + antonioHeight * sideRig.HipToTopPx / sideRig.HeightPx
+            : Y + HeightPct + curLift;
+
         // ---------- Comandos ----------
 
         /// <summary>Começa a andar até (x, y). y null = mantém a profundidade. Devolve um id (0 = já está lá).</summary>
@@ -166,6 +196,7 @@ namespace RecreioEspacial.World
         void Step(float dt)
         {
             t += dt;
+            if (Seated) return;
             float scale = ScaleAt(Y);
             float wf = Stage.WidthFactor; // em cenas largas, 1% vale menos tela: compensa a velocidade
             float vmax = MaxSpeed * scale * wf;
@@ -237,6 +268,7 @@ namespace RecreioEspacial.World
         {
             if (sr == null) return;
             curLift += (Lift - curLift) * Mathf.Min(1f, dt * 7f);
+            if (Seated) { UpdateSeatedVisual(); return; }
 
             float s = ScaleAt(Y);
             float walkAmt = Mathf.Min(1f, v / 14f);
@@ -285,6 +317,7 @@ namespace RecreioEspacial.World
 
             int order = Stage.SortingOrderForBottom(Y) + 1;
             sortingGroup.sortingOrder = order;
+            if (shadow != null) shadow.enabled = true;
 
             if (shadow != null)
             {
@@ -297,6 +330,23 @@ namespace RecreioEspacial.World
                 shadow.color = c;
                 shadow.sortingOrder = order - 1;
             }
+        }
+
+        void UpdateSeatedVisual()
+        {
+            float heightUnits = Stage.H(antonioHeight);
+            float k = heightUnits / (sideRig.HeightPx / 100f);
+            sr.enabled = false;
+            sideRig.SetPartHidden(holdingRigPart, !Holding);
+            sideRig.SetVisible(true);
+            sideRig.ApplySit(Mathf.Sin(t * 2.3f));
+            // o quadril (pivô do tronco) fica na altura do assento
+            transform.localPosition = Stage.Point(X, seatY);
+            body.localPosition = new Vector3(0f, -sideRig.HipHeightPx / 100f * k, 0f);
+            body.localRotation = Quaternion.identity;
+            body.localScale = new Vector3(k * Dir, k, 1f);
+            sortingGroup.sortingOrder = Stage.SortingOrderForBottom(Y) + 1;
+            if (shadow != null) shadow.enabled = false;
         }
     }
 }

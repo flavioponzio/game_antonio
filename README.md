@@ -105,6 +105,14 @@ A sala nova (`ep01-sala-2d.png`) veio do Nano Banana; a margem de papel foi cort
 `Design/tools/sala_corrige_lousa.py` (reaproveita os algarismos de giz do próprio desenho). Mapa dos hotspots:
 `Design/sala-2d-layout.png`.
 
+## Arte feita por código e poses a partir das ilustrações
+
+- Objetos pequenos (estojo, apontador) são desenhados por `Design/tools/desenha_objetos.py`, imitando o traço
+  (contorno marrom irregular + textura de lápis de cor). No JSON, o campo `"art"` de um hotspot desenha a imagem
+  no retângulo dele.
+- O Antônio começa a sala sentado (`"sit"` na cena): é o rig de perfil numa pose sentada. O que está em
+  `sit.reach` ele faz da cadeira; para o resto (ou ao andar) ele se levanta.
+
 ## Rig do Antônio (boneco recortado de perfil)
 
 Quando anda de lado, o Antônio usa um boneco recortado em partes (cabeça, tronco, braços, pernas e braço

@@ -42,6 +42,7 @@
       "camera": "pan",
       "antonioHeight": 46,
       "start": { "x": 44 },
+      "sit": { "x": 34.3, "seatY": 17.6, "dir": -1, "reach": ["caderno", "lousa", "relogio", "janela", "desenhos", "lucia", "caio", "estojo"] },
       "floor": { "y": 2, "x": [3, 96] },
       "intro": [
         { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
@@ -65,8 +66,8 @@
           { "if": { "notFlags": ["sharp"] }, "do": [{ "say": ["antonio", "Sem ponta não dá pra escrever."] }] },
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["antonio", "Ganhei uma estrelinha."] }] },
           { "do": [{ "openPuzzle": "multiplicacao" }] } ] },
-        { "id": "estojo", "label": "Estojo do Caio", "kind": "prop", "rect": [74, 65.5, 5, 6], "walk": 77, "tap": [{ "do": [{ "say": ["antonio", "O estojo do Caio: 3 divisões, 5 lápis de cor em cada."] }] }] },
-        { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [45, 89, 4, 6], "walk": 47,
+        { "id": "estojo", "label": "Estojo do Caio", "kind": "prop", "art": "assets/props/prop-estojo.png", "rect": [73, 66.5, 7, 6], "walk": 77, "tap": [{ "do": [{ "say": ["antonio", "O estojo do Caio: 3 divisões, 5 lápis de cor em cada."] }] }] },
+        { "id": "apontador", "label": "Apontador", "kind": "prop", "art": "assets/props/prop-apontador.png", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [45.5, 91, 3, 5], "walk": 47,
           "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
           "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
         { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [13.9, 39, 10.1, 58], "walk": 25, "tap": [

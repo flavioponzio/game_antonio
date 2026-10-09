@@ -109,6 +109,17 @@ namespace RecreioEspacial.Data
     /// Restrição de cena enquanto uma flag está ligada (ex.: nas costas do Caio):
     /// só os hotspots em Allow respondem, os outros dizem Say; NoWalk impede andar.
     /// </summary>
+    /// <summary>
+    /// Antônio começa sentado: x = quadril, seatY = altura do assento (% da base), dir = para onde olha (-1 esquerda).
+    /// Reach = hotspots que ele usa sem levantar; para os outros (ou ao andar) ele se levanta.
+    /// </summary>
+    public class SitDef
+    {
+        public float X, SeatY;
+        public int Dir = 1;
+        public List<string> Reach = new List<string>();
+    }
+
     public class RestrictionDef
     {
         public string Flag, Say;
@@ -141,6 +152,8 @@ namespace RecreioEspacial.Data
         public Dictionary<string, PuzzleDef> Puzzles = new Dictionary<string, PuzzleDef>();
         public List<ObjectiveDef> Objectives = new List<ObjectiveDef>();
         public RestrictionDef Restriction;
+        /// <summary>Antônio começa a cena sentado (opcional).</summary>
+        public SitDef Sit;
         /// <summary>"camera": "pan" — cenário mais largo que a tela; a câmera acompanha o Antônio. x em % da imagem toda.</summary>
         public bool Pan;
         public List<ForegroundDef> Foreground = new List<ForegroundDef>();
@@ -171,6 +184,15 @@ namespace RecreioEspacial.Data
             };
 
             s.Pan = J.Str(d, "camera") == "pan";
+            var sd = J.Dict(J.Get(d, "sit"));
+            if (sd.Count > 0)
+                s.Sit = new SitDef
+                {
+                    X = J.Float(sd, "x", 50),
+                    SeatY = J.Float(sd, "seatY", 15),
+                    Dir = (int)J.Float(sd, "dir", 1),
+                    Reach = J.StrList(J.Get(sd, "reach")),
+                };
             var rd = J.Dict(J.Get(d, "restrictWhenFlag"));
             if (rd.Count > 0)
                 s.Restriction = new RestrictionDef
@@ -257,6 +279,8 @@ namespace RecreioEspacial.Data
         public List<RuleDef> Tap = new List<RuleDef>();
         public Dictionary<string, List<RuleDef>> Use = new Dictionary<string, List<RuleDef>>();
         public PatchDef Patch;
+        /// <summary>Imagem do objeto desenhada no rect (aparece quando o hotspot está visível).</summary>
+        public string Art;
 
         public bool IsNpc => Kind == "npc";
         public bool IsProp => Kind == "prop";
@@ -272,6 +296,7 @@ namespace RecreioEspacial.Data
                 Walk = J.NullableFloat(J.Get(d, "walk")),
                 Show = Condition.Parse(J.Get(d, "show")),
                 Tap = RuleDef.ParseList(J.Get(d, "tap")),
+                Art = J.Str(d, "art"),
             };
             if (h.Label == null) h.Label = h.Id;
 

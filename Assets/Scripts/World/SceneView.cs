@@ -69,6 +69,13 @@ namespace RecreioEspacial.World
                     var hotspot = h;
                     npcs[h.Id] = NpcActor.Create(transform, h.Id, spr, ch.FaceTowardAntonio, () => RectOf(hotspot));
                 }
+                else if (!string.IsNullOrEmpty(h.Art) && GameAssets.Sprite(h.Art) != null)
+                {
+                    // Objeto com arte própria (ex.: estojo, apontador): fica atrás dos personagens.
+                    var art = NewSprite("Objeto " + h.Id, GameAssets.Sprite(h.Art), -20);
+                    FitToRect(art, RectOf(h));
+                    placeholders[h.Id] = art.gameObject;
+                }
                 else if (h.IsNpc || h.IsProp)
                 {
                     placeholders[h.Id] = MakePlaceholder(h);

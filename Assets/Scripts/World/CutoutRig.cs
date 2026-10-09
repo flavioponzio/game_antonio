@@ -16,6 +16,10 @@ namespace RecreioEspacial.World
     public class CutoutRig : MonoBehaviour
     {
         public float HeightPx { get; private set; } = 500f;
+        /// <summary>Altura do quadril (pivô do tronco) acima do chão, em pixels do rig.</summary>
+        public float HipHeightPx { get; private set; } = 144f;
+        /// <summary>Do quadril ao topo da cabeça, em pixels do rig.</summary>
+        public float HipToTopPx { get; private set; } = 374f;
 
         readonly Dictionary<string, Transform> joints = new Dictionary<string, Transform>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
@@ -40,6 +44,7 @@ namespace RecreioEspacial.World
             var rig = go.AddComponent<CutoutRig>();
             rig.HeightPx = Num(root, "height", 500f);
             var rootPt = Vec(root, "root");
+            rig.HipToTopPx = rig.HeightPx - 144f;
 
             var images = root.TryGetValue("images", out var im) ? im as Dictionary<string, object> : null;
             var parts = root.TryGetValue("parts", out var pl) ? pl as List<object> : null;
@@ -56,6 +61,13 @@ namespace RecreioEspacial.World
                 var j = new GameObject(name).transform;
                 j.SetParent(go.transform, false);
                 rig.joints[name] = j;
+            }
+
+            var bodyDef = defs.Find(x => Str(x, "name") == "body");
+            if (bodyDef != null)
+            {
+                rig.HipHeightPx = rootPt.y - Vec(bodyDef, "pivot").y;
+                rig.HipToTopPx = rig.HeightPx - rig.HipHeightPx;
             }
 
             foreach (var d in defs)
@@ -116,6 +128,21 @@ namespace RecreioEspacial.World
         /// <summary>
         /// Ciclo de caminhada procedural. phase avança π a cada passo; amount (0..1) = quanto está andando.
         /// </summary>
+        /// <summary>Pose sentada de perfil: coxas na horizontal, canelas para baixo, mãos sobre a carteira.</summary>
+        public void ApplySit(float breathe)
+        {
+            SetAngle("body", -6f);
+            SetAngle("head", -6f + breathe * 2f);
+            SetAngle("frontLegUpper", 96f);
+            SetAngle("backLegUpper", 92f);
+            SetAngle("frontLegLower", -96f);
+            SetAngle("backLegLower", -90f);
+            SetAngle("frontArmUpper", 55f + breathe);
+            SetAngle("frontArmLower", 45f);
+            SetAngle("backArmUpper", 62f + breathe);
+            SetAngle("backArmLower", 42f);
+        }
+
         public void ApplyWalk(float phase, float amount)
         {
             float s = Mathf.Sin(phase), c = Mathf.Cos(phase);
@@ -131,6 +158,7 @@ namespace RecreioEspacial.World
             SetAngle("frontArmLower", (6f + 6f * Mathf.Max(0f, -s)) * amount);
             SetAngle("backArmLower", (6f + 6f * Mathf.Max(0f, s)) * amount);
             SetAngle("head", 1.5f * c * amount);
+            SetAngle("body", 0f);
         }
 
         static Vector3 PxToLocal(Vector2 deltaPx) => new Vector3(deltaPx.x / 100f, -deltaPx.y / 100f, 0f);
