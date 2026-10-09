@@ -14,7 +14,8 @@ namespace RecreioEspacial.World
     {
         const float Accel = 140f;          // %/s²
         const float MaxSpeed = 30f;        // %/s (multiplicado pela escala de profundidade)
-        const float YMetric = 0.5625f;     // distância vertical vale 9/16
+        // distância vertical vale altura/largura da cena (9/16 numa cena do tamanho da tela)
+        static float YMetric => Stage.Height / Stage.Width;
         const float StepLength = 4.2f;     // distância de um passo (× escala)
 
         public float X { get; private set; } = 50f;
@@ -166,7 +167,9 @@ namespace RecreioEspacial.World
         {
             t += dt;
             float scale = ScaleAt(Y);
-            float vmax = MaxSpeed * scale;
+            float wf = Stage.WidthFactor; // em cenas largas, 1% vale menos tela: compensa a velocidade
+            float vmax = MaxSpeed * scale * wf;
+            float accel = Accel * wf;
             bool keyboard = keyInput.sqrMagnitude > 0.01f;
             float moved = 0f, dxMoved = 0f, dyMetricMoved = 0f;
 
@@ -174,7 +177,7 @@ namespace RecreioEspacial.World
             {
                 hasTarget = false;
                 heading = keyInput.normalized;
-                v = Mathf.Min(vmax, v + Accel * dt);
+                v = Mathf.Min(vmax, v + accel * dt);
             }
 
             if (hasTarget)
@@ -182,8 +185,8 @@ namespace RecreioEspacial.World
                 float dx = tx - X, dy = (ty - Y) * YMetric;
                 float d = Mathf.Sqrt(dx * dx + dy * dy);
                 // Freia para parar exatamente no alvo (v² / 2a)
-                if (d <= v * v / (2f * Accel) + 0.05f) v = Mathf.Max(6f, v - Accel * dt);
-                else v = Mathf.Min(vmax, v + Accel * dt);
+                if (d <= v * v / (2f * accel) + 0.05f) v = Mathf.Max(6f, v - accel * dt);
+                else v = Mathf.Min(vmax, v + accel * dt);
                 float step = Mathf.Min(d, v * dt);
                 if (d > 0.001f)
                 {
@@ -204,7 +207,7 @@ namespace RecreioEspacial.World
             else if (v > 0f)
             {
                 // Teclado: anda na direção pedida; ao soltar, desliza freando.
-                if (!keyboard) v = Mathf.Max(0f, v - Accel * dt);
+                if (!keyboard) v = Mathf.Max(0f, v - accel * dt);
                 float step = v * dt;
                 var before = new Vector2(X, Y);
                 var p = Clamp(X + heading.x * step, Y + heading.y * step / YMetric);
@@ -218,7 +221,7 @@ namespace RecreioEspacial.World
 
             if (moved > 0f)
             {
-                phase += moved / (StepLength * ScaleAt(Y)) * Mathf.PI;
+                phase += moved / (StepLength * wf * ScaleAt(Y)) * Mathf.PI;
                 if (Mathf.Abs(dxMoved) > 0.2f || keyboard && Mathf.Abs(dxMoved) > 0.0001f) Dir = dxMoved < 0 ? -1 : 1;
                 side = Mathf.Abs(dxMoved) > Mathf.Abs(dyMetricMoved) * 0.6f;
             }

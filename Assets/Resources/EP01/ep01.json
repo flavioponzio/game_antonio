@@ -38,13 +38,11 @@
   "scenes": {
     "sala": {
       "title": "Cena 1 · Sala de aula",
-      "background": "assets/scenes/ep01-sala.png",
-      "antonioHeight": 52,
-      "start": { "x": 35 },
-      "floor": { "y": 2, "x": [6, 94] },
-      "foreground": [
-        { "id": "carteira-quadro", "image": "assets/foreground/sala-carteira-quadro.png", "rect": [27.013, 57.967, 10.586, 24.038], "depth": 71 }
-      ],
+      "background": "assets/scenes/ep01-sala-2d.png",
+      "camera": "pan",
+      "antonioHeight": 46,
+      "start": { "x": 30 },
+      "floor": { "y": 2, "x": [3, 96] },
       "intro": [
         { "say": ["lucia", "Só sai quem me mostrar as três contas."] },
         { "say": ["caio", "Anda, Antônio! O professor Beto já tá apitando!"] },
@@ -52,29 +50,29 @@
         { "set": { "pulse": "caderno" } }
       ],
       "hotspots": [
-        { "id": "lousa", "label": "Lousa", "rect": [12, 21, 31, 37], "walk": 32, "tap": [{ "do": [{ "say": ["antonio", "As contas da tarefa. Preciso fazer no caderno."] }] }] },
-        { "id": "janela", "label": "Janela", "rect": [58.4, 5, 36, 53], "walk": 76, "tap": [{ "do": [{ "say": ["antonio", "A quadra... A janela tem 2 fileiras com 3 vidros."] }] }] },
-        { "id": "desenhos", "label": "Desenhos", "rect": [44.5, 29, 12.4, 23], "walk": 48, "tap": [{ "do": [{ "say": ["antonio", "Quatro bichinhos. Cada um com 2 orelhas."] }] }] },
-        { "id": "relogio", "label": "Relógio", "rect": [25.8, 10.3, 5.3, 10.3], "walk": 30, "tap": [{ "do": [{ "say": ["antonio", "Quase dez horas."] }] }] },
-        { "id": "porta", "label": "Porta", "rect": [0, 21, 7.1, 53], "walk": 9, "tap": [
+        { "id": "lousa", "label": "Lousa", "rect": [3, 13, 23, 55], "walk": 10, "tap": [{ "do": [{ "say": ["antonio", "As contas da tarefa. Preciso fazer no caderno."] }] }] },
+        { "id": "janela", "label": "Janela", "rect": [40, 16, 33.5, 43], "walk": 56, "tap": [{ "do": [{ "say": ["antonio", "A quadra... A janela tem 2 fileiras com 3 vidros."] }] }] },
+        { "id": "desenhos", "label": "Desenhos", "rect": [26, 28, 13, 30], "walk": 33, "tap": [{ "do": [{ "say": ["antonio", "Quatro bichinhos. Cada um com 2 orelhas."] }] }] },
+        { "id": "relogio", "label": "Relógio", "rect": [13.5, 3, 4.5, 14], "walk": 16, "tap": [{ "do": [{ "say": ["antonio", "Quase dez horas."] }] }] },
+        { "id": "porta", "label": "Porta", "rect": [89, 17, 8, 78], "walk": 92, "tap": [
           { "if": { "notFlags": ["mathDone"] }, "do": [{ "say": ["antonio", "Ainda não posso sair."] }] },
           { "do": [{ "goScene": "portao" }] } ] },
-        { "id": "mochila", "label": "Mochila", "rect": [23.2, 63, 6.4, 18.7], "walk": 31, "tap": [
+        { "id": "mochila", "label": "Mochila", "rect": [34.5, 68, 5.5, 20], "walk": 37, "tap": [
           { "if": { "has": ["braco"] }, "do": [{ "say": ["antonio", "Só sobrou o lanche."] }] },
           { "do": [{ "give": "braco" }, { "say": ["antonio", "Meu braço mecânico!"] }, { "banner": "Toque num item do inventário e depois onde quer usar." }] } ] },
-        { "id": "caderno", "label": "Caderno", "rect": [44.5, 74.2, 16, 11], "walk": 47, "tap": [
+        { "id": "caderno", "label": "Caderno", "rect": [24, 69, 10, 7], "walk": 29, "tap": [
           { "if": { "notFlags": ["broken"] }, "do": [{ "unset": "pulse" }, { "say": ["antonio", "Vamos lá..."] }, { "set": "broken" }, { "say": ["antonio", "Quebrou a ponta... claro."] }] },
           { "if": { "notFlags": ["sharp"] }, "do": [{ "say": ["antonio", "Sem ponta não dá pra escrever."] }] },
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["antonio", "Ganhei uma estrelinha."] }] },
           { "do": [{ "openPuzzle": "multiplicacao" }] } ] },
-        { "id": "estojo", "label": "Estojo do Caio", "kind": "prop", "rect": [71, 62, 7, 8], "walk": 72, "tap": [{ "do": [{ "say": ["antonio", "O estojo do Caio: 3 divisões, 5 lápis de cor em cada."] }] }] },
-        { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [61, 88, 6.5, 8], "walk": 58,
+        { "id": "estojo", "label": "Estojo do Caio", "kind": "prop", "rect": [74, 65.5, 5, 6], "walk": 77, "tap": [{ "do": [{ "say": ["antonio", "O estojo do Caio: 3 divisões, 5 lápis de cor em cada."] }] }] },
+        { "id": "apontador", "label": "Apontador", "kind": "prop", "show": { "flags": ["thrown"], "notFlags": ["sharp"] }, "rect": [45, 89, 4, 6], "walk": 47,
           "tap": [{ "do": [{ "say": ["antonio", "Rolou lá pra baixo. Minha mão não passa."] }] }],
           "use": { "braco": [{ "do": [{ "say": ["antonio", "Peguei!"] }, { "set": "sharp" }, { "say": ["antonio", "Pronto. Ponta nova."] }] }] } },
-        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [29.2, 35, 8.6, 36], "walk": 34, "tap": [
+        { "id": "lucia", "label": "Prof. Lúcia", "kind": "npc", "rect": [13.9, 39, 10.1, 58], "walk": 25, "tap": [
           { "if": { "flags": ["mathDone"] }, "do": [{ "say": ["lucia", "Bom recreio, Antônio."] }] },
           { "do": [{ "say": ["lucia", "Termine as três contas, Antônio."] }] } ] },
-        { "id": "caio", "label": "Caio", "kind": "npc", "rect": [85, 40, 9, 56], "walk": 79, "tap": [
+        { "id": "caio", "label": "Caio", "kind": "npc", "rect": [78.8, 47, 10.5, 50], "walk": 76, "tap": [
           { "if": { "flags": ["broken"], "notFlags": ["thrown"] }, "do": [{ "say": ["caio", "Quebrou? Pega aí!"] }, { "set": "thrown" }, { "say": ["caio", "...Ops."] }, { "say": ["antonio", "Rolou pra baixo da carteira."] }] },
           { "if": { "notFlags": ["broken"] }, "do": [{ "say": ["caio", "Faz logo! Eu já terminei."] }] },
           { "do": [{ "say": ["caio", "Matemática é o pior."] }] } ] }
@@ -89,7 +87,7 @@
           "messages": { "correct": "Isso!", "allCorrect": "Pronto! Agora é só mostrar.", "wrong": "Hm... não. Apaga e tenta de novo." },
           "keepsAnswersWhenClosed": true,
           "onShow": [
-            { "walkTo": [34] },
+            { "walkTo": [25] },
             { "say": ["lucia", "Muito bem, Antônio! Pode ir."] },
             { "set": "mathDone" },
             { "say": ["caio", "Finalmente! Bora!"] },

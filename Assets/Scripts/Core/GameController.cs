@@ -245,6 +245,16 @@ namespace RecreioEspacial.Core
             ResetBubble();
             ClosePuzzle();
 
+            // Largura da cena: cenário largo (câmera acompanha) ou do tamanho da tela.
+            float sceneWidth = Stage.ScreenWidth;
+            if (scene.Pan)
+            {
+                var bg = GameAssets.Sprite(scene.Background);
+                if (bg != null) sceneWidth = Stage.Height * bg.rect.width / bg.rect.height;
+            }
+            Stage.SetSceneWidth(scene.IsCutscene ? Stage.ScreenWidth : sceneWidth);
+            Stage.CameraX = 0f;
+
             if (scene.IsCutscene)
             {
                 view.Clear();
@@ -257,6 +267,8 @@ namespace RecreioEspacial.Core
             view.Build(scene);
             antonio.gameObject.SetActive(true);
             antonio.EnterScene(scene);
+            Stage.CameraX = CameraTarget();
+            UpdateCamera(0f);
             ui.ShowScreen(GameUI.UiScreen.Play);
             ui.SetSceneTitle(scene.Title);
             // Ponto de salvamento: "Continuar" recomeça esta cena com o progresso até aqui.
@@ -585,7 +597,7 @@ namespace RecreioEspacial.Core
 
                 var r = view.RectOf(h);
                 float target = view.WalkOf(h) ?? r.CenterX;
-                float d = Mathf.Abs(target - antonio.X);
+                float d = Mathf.Abs(target - antonio.X) * Stage.WidthFactor; // em % da tela
                 if (!Restricted && d > reach) continue;
                 float score = d + r.W * r.H * 0.0005f; // empate: o objeto menor (mais específico)
                 if (score < bestScore)
@@ -782,9 +794,22 @@ namespace RecreioEspacial.Core
             if (GameInput.DebugKeyDown(8)) StartAt("final");
         }
 
+        float CameraTarget() =>
+            Mathf.Clamp(Stage.X(antonio.X), -Stage.MaxCameraX, Stage.MaxCameraX);
+
+        /// <summary>Câmera segue o Antônio suavemente em cenários largos.</summary>
+        void UpdateCamera(float dt)
+        {
+            if (!InPlayScene) Stage.CameraX = 0f;
+            else if (dt <= 0f) Stage.CameraX = CameraTarget();
+            else Stage.CameraX += (CameraTarget() - Stage.CameraX) * Mathf.Min(1f, dt * 3.5f);
+            cam.transform.position = new Vector3(Stage.CameraX, 0f, -10f);
+        }
+
         void LateUpdate()
         {
             if (ui == null || view == null) return;
+            UpdateCamera(Time.deltaTime);
             view.ShowDebugOutlines = showHotspots;
             var antDef = ep.Characters["antonio"];
             antonio.Holding = antDef.HoldingItem == null || state.Has(antDef.HoldingItem);
@@ -846,7 +871,7 @@ namespace RecreioEspacial.Core
                     b = r.TopFromBottom + 1f;
                 }
             }
-            ui.ShowBubble(ep.NameOf(bubbleWho), bubbleText, Mathf.Clamp(x, 17f, 83f), Mathf.Min(76f, b));
+            ui.ShowBubble(ep.NameOf(bubbleWho), bubbleText, Mathf.Clamp(Stage.ToScreenPct(x), 17f, 83f), Mathf.Min(76f, b));
         }
     }
 }

@@ -47,7 +47,7 @@ namespace RecreioEspacial.World
             rect = r;
             style = s;
             // Pulso: 0,25% da largura do palco
-            thickness = s == Style.Pulse ? Stage.W(0.25f) : s == Style.Highlight ? Stage.W(0.2f) : Stage.W(0.15f);
+            thickness = s == Style.Pulse ? Stage.ScreenW(0.25f) : s == Style.Highlight ? Stage.ScreenW(0.2f) : Stage.ScreenW(0.15f);
             var color = s == Style.Highlight ? Tokens.Bg : Tokens.Accent;
             if (s == Style.Debug) color = Tokens.Accent.WithAlpha(0.8f);
             foreach (var b in bars) b.color = color;
@@ -70,7 +70,7 @@ namespace RecreioEspacial.World
             transform.localScale = new Vector3(s, s, 1f);
 
             // Brilho que se espalha e some (box-shadow do protótipo)
-            float spread = Stage.W(1.2f) * w;
+            float spread = Stage.ScreenW(1.2f) * w;
             var gc = (style == Style.Pulse ? Tokens.Accent : Tokens.Bg).WithAlpha(0.7f * (1f - w));
             foreach (var g in glow) g.color = gc;
             Layout(glow, size + Vector2.one * (2f * thickness), Mathf.Max(0.001f, spread));

@@ -96,6 +96,15 @@ Para tirar regras que estavam escritas só em texto e deixá-las como dados:
   1–4 nos espaços do inventário.
 - Estojo e apontador ainda não têm ilustração: aparecem como caixas "arte pendente", como no protótipo.
 
+## Cenário largo (câmera que acompanha)
+
+Uma cena com `"camera": "pan"` usa um fundo mais largo que a tela (a sala nova tem proporção ~2,45:1): a imagem
+ocupa a altura toda e a câmera acompanha o Antônio na horizontal. Nessas cenas, os % de x dos hotspots são da
+largura da imagem inteira. O chão `floor { "y", "x" }` é uma linha só (2D lateral).
+A sala nova (`ep01-sala-2d.png`) veio do Nano Banana; a margem de papel foi cortada e a lousa corrigida por
+`Design/tools/sala_corrige_lousa.py` (reaproveita os algarismos de giz do próprio desenho). Mapa dos hotspots:
+`Design/sala-2d-layout.png`.
+
 ## Rig do Antônio (boneco recortado de perfil)
 
 Quando anda de lado, o Antônio usa um boneco recortado em partes (cabeça, tronco, braços, pernas e braço

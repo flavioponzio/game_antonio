@@ -5,13 +5,29 @@ namespace RecreioEspacial.Core
 {
     /// <summary>
     /// Conversão entre % do palco (como no JSON) e unidades do mundo Unity.
-    /// O palco tem 19,2 × 10,8 unidades (1920×1080 a 100 PPU), centrado na origem.
+    /// A tela tem 19,2 × 10,8 unidades (1920×1080 a 100 PPU). A cena é centrada na origem e pode ser mais
+    /// larga que a tela (cenário com câmera que acompanha o Antônio): aí os % de x são da largura da cena.
     /// </summary>
     public static class Stage
     {
-        public const float Width = 19.2f;
+        public const float ScreenWidth = 19.2f;
         public const float Height = 10.8f;
-        public const float Aspect = Width / Height;
+        /// <summary>Proporção da TELA (16:9), usada nas tarjas.</summary>
+        public const float Aspect = ScreenWidth / Height;
+
+        /// <summary>Largura da cena atual em unidades (= tela, ou mais em cenários largos).</summary>
+        public static float Width { get; private set; } = ScreenWidth;
+        /// <summary>Posição x da câmera (0 = centro da cena).</summary>
+        public static float CameraX { get; set; }
+
+        public static void SetSceneWidth(float width) => Width = Mathf.Max(ScreenWidth, width);
+        public static float MaxCameraX => (Width - ScreenWidth) / 2f;
+        /// <summary>Quanto 1% da cena vale em % da tela (1 em cenas normais, menos em cenas largas).</summary>
+        public static float WidthFactor => ScreenWidth / Width;
+        /// <summary>Largura em % da TELA → unidades (para espessuras de contorno etc.).</summary>
+        public static float ScreenW(float pct) => pct / 100f * ScreenWidth;
+        /// <summary>x em % da cena → x em % da tela, considerando a câmera.</summary>
+        public static float ToScreenPct(float xPct) => ((X(xPct) - CameraX) / ScreenWidth + 0.5f) * 100f;
         /// <summary>1 "cqw" do protótipo HTML = 1% da largura do palco, em pixels de referência (1920 px).</summary>
         public const float Cq = 19.2f;
 

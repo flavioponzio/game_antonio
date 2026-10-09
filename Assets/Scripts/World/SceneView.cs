@@ -232,7 +232,7 @@ namespace RecreioEspacial.World
             box.sortingOrder = -10;
             box.transform.localScale = new Vector3(size.x, size.y, 1f);
 
-            float th = Stage.W(0.2f);
+            float th = Stage.ScreenW(0.2f);
             AddBar(root.transform, new Vector2(0, size.y / 2 - th / 2), new Vector2(size.x, th));
             AddBar(root.transform, new Vector2(0, -size.y / 2 + th / 2), new Vector2(size.x, th));
             AddBar(root.transform, new Vector2(-size.x / 2 + th / 2, 0), new Vector2(th, size.y));
@@ -241,7 +241,7 @@ namespace RecreioEspacial.World
             var font = GameAssets.Font(GameAssets.Weight.ExtraBold);
             var textGo = new GameObject("Texto");
             textGo.transform.SetParent(root.transform, false);
-            float pad = Stage.W(0.5f);
+            float pad = Stage.ScreenW(0.5f);
             textGo.transform.localPosition = new Vector3(-size.x / 2 + pad, size.y / 2 - pad, 0);
             var tm = textGo.AddComponent<TextMesh>();
             tm.font = font;

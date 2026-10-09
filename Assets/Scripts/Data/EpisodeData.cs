@@ -141,6 +141,8 @@ namespace RecreioEspacial.Data
         public Dictionary<string, PuzzleDef> Puzzles = new Dictionary<string, PuzzleDef>();
         public List<ObjectiveDef> Objectives = new List<ObjectiveDef>();
         public RestrictionDef Restriction;
+        /// <summary>"camera": "pan" — cenário mais largo que a tela; a câmera acompanha o Antônio. x em % da imagem toda.</summary>
+        public bool Pan;
         public List<ForegroundDef> Foreground = new List<ForegroundDef>();
 
         // Cutscene
@@ -168,6 +170,7 @@ namespace RecreioEspacial.Data
                 Then = J.Str(d, "then"),
             };
 
+            s.Pan = J.Str(d, "camera") == "pan";
             var rd = J.Dict(J.Get(d, "restrictWhenFlag"));
             if (rd.Count > 0)
                 s.Restriction = new RestrictionDef
