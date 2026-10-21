@@ -155,6 +155,22 @@ namespace RecreioEspacial.World
                     bestIndex = i;
                 }
             }
+            if (best != null) return best;
+
+            // Segunda chance: objetos pequenos (ex.: apontador) ganham uma margem mínima de clique,
+            // de ~5% da largura e ~9% da altura da TELA, centrada neles.
+            float minW = 5f * Stage.WidthFactor, minH = 9f, bestDist = float.MaxValue;
+            foreach (var h in Scene.Hotspots)
+            {
+                if (!IsVisible(h)) continue;
+                var r = RectOf(h);
+                if (r.W >= minW && r.H >= minH) continue;
+                float w = Mathf.Max(r.W, minW), hh = Mathf.Max(r.H, minH);
+                float cx = r.CenterX, cy = r.Y + r.H / 2f;
+                if (Mathf.Abs(x - cx) > w / 2f || Mathf.Abs(yFromTop - cy) > hh / 2f) continue;
+                float dist = Mathf.Abs(x - cx) / w + Mathf.Abs(yFromTop - cy) / hh;
+                if (dist < bestDist) { best = h; bestDist = dist; }
+            }
             return best;
         }
 

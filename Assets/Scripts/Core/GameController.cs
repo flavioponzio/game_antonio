@@ -848,7 +848,8 @@ namespace RecreioEspacial.Core
             view.SetPulse(pulseId);
 
             string pulseItem = state.HintLevel >= 3 && objective != null ? objective.Item : null;
-            ui.SetInventory(state.Inventory, ep, state.SelectedItem, pulseItem);
+            var heldItem = ep.Characters["antonio"].HoldingItem;
+            ui.SetInventory(state.Inventory, ep, state.SelectedItem, pulseItem, heldItem != null && state.Has(heldItem) ? heldItem : null);
             ui.SetHintLevel(state.HintLevel);
             ui.SetBanner(banner);
 

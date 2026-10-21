@@ -232,7 +232,7 @@ namespace RecreioEspacial.UI
             var nrt = number.rectTransform;
             nrt.anchorMin = nrt.anchorMax = nrt.pivot = new Vector2(1, 1);
             nrt.anchoredPosition = new Vector2(-pad * 0.6f, -pad * 0.4f);
-            nrt.sizeDelta = new Vector2(Cq(2f), Cq(1.4f));
+            nrt.sizeDelta = new Vector2(Cq(7f), Cq(1.4f));
 
             var pulse = frame.gameObject.AddComponent<UiPulse>();
             pulse.enabled = false;
@@ -446,7 +446,8 @@ namespace RecreioEspacial.UI
         // Inventário
         // =====================================================================
 
-        public void SetInventory(IList<string> items, EpisodeData ep, string selected, string pulseItem)
+        /// <summary>held = item que está na mão (usado direto ao tocar nos objetos): aparece destacado com "na mão".</summary>
+        public void SetInventory(IList<string> items, EpisodeData ep, string selected, string pulseItem, string held = null)
         {
             while (slots.Count < items.Count) slots.Add(MakeSlot(slots.Count));
             for (int i = 0; i < slots.Count; i++)
@@ -462,9 +463,12 @@ namespace RecreioEspacial.UI
                 s.Icon.color = icon != null ? Color.white : new Color(1, 1, 1, 0);
                 s.Label.text = def != null ? def.Label : id;
                 bool sel = id == selected;
-                s.Frame.color = sel ? Tokens.AccentLight : Tokens.Bg;
+                bool inHand = id == held && !sel;
+                s.Frame.color = sel ? Tokens.AccentLight : inHand ? Color.Lerp(Tokens.Bg, Tokens.AccentLight, 0.55f) : Tokens.Bg;
                 bool pulse = id == pulseItem;
-                s.Border.effectColor = sel || pulse ? Tokens.Accent : Tokens.Ink;
+                s.Border.effectColor = sel || pulse || inHand ? Tokens.Accent : Tokens.Ink;
+                s.Number.text = inHand ? "NA MÃO" : (i + 1).ToString();
+                s.Number.color = inHand ? Tokens.AccentDark : Tokens.Neutral700;
                 s.Pulse.enabled = pulse;
             }
         }
