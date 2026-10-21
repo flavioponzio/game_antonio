@@ -90,7 +90,8 @@ namespace RecreioEspacial.Core
                 GameAssets.Sprite(ep.Characters["antonio"].SpriteSide, new Vector2(0.5f, 0f)),
                 ep.Characters["antonio"].RigSide,
                 GameAssets.Sprite(ep.Characters["antonio"].SpriteFrontHolding, new Vector2(0.5f, 0f)),
-                ep.Characters["antonio"].HoldingRigPart);
+                ep.Characters["antonio"].HoldingRigPart,
+                ep.Characters["antonio"].Frames);
             antonio.gameObject.SetActive(false);
 
             ui = GameUI.Create(cam);
@@ -551,6 +552,7 @@ namespace RecreioEspacial.Core
 
             float cx = view.RectOf(h).CenterX;
             if (!antonio.Seated && Mathf.Abs(cx - antonio.X) > 2f) antonio.Dir = cx < antonio.X ? -1 : 1;
+            antonio.Pose = antonio.Seated ? null : PoseFor(h);
 
             // Item na mão (ex.: braço mecânico): se o objeto tem uma ação para ele, usa direto, sem selecionar.
             bool selected = item != null;
@@ -572,7 +574,21 @@ namespace RecreioEspacial.Core
                 var rule = FirstMatch(h.Tap);
                 if (rule != null) yield return RunActions(rule.Do);
             }
+            antonio.Pose = null;
             state.HintLevel = 0;
+        }
+
+        /// <summary>Pose do Antônio ao interagir: a do JSON, ou olhar para cima/baixo conforme a altura do objeto.</summary>
+        string PoseFor(HotspotDef h)
+        {
+            if (!string.IsNullOrEmpty(h.Pose)) return h.Pose;
+            var r = view.RectOf(h);
+            if (h.IsNpc) return "front34";
+            float headTop = 100f - antonio.TopPct;         // topo da cabeça, medido do topo da tela
+            float center = r.Y + r.H / 2f;
+            if (center < headTop - 4f) return "lookUp";
+            if (center > 100f - antonio.Y - antonio.HeightPct * 0.35f) return "lookDown";
+            return null;
         }
 
         void OnGroundClicked(float x, float yFromBottom)

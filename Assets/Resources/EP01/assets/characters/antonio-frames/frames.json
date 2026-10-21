@@ -1,0 +1,300 @@
+{
+ "note": "Quadros do Ant\u00f4nio (folha de poses). pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro \"front\" (define a escala de todos). hold = m\u00e3o que segura o bra\u00e7o mec\u00e2nico: hand (px do quadro, y para baixo), flip, angle (graus, + = anti-hor\u00e1rio). Os quadros olham para a direita.",
+ "refHeight": 490,
+ "facing": 1,
+ "frames": {
+  "front": {
+   "file": "assets/characters/antonio-frames/front.png",
+   "size": [
+    196,
+    490
+   ],
+   "pivot": [
+    0.486,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     22,
+     335
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "front34": {
+   "file": "assets/characters/antonio-frames/front34.png",
+   "size": [
+    195,
+    489
+   ],
+   "pivot": [
+    0.4865,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     22,
+     336
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "side": {
+   "file": "assets/characters/antonio-frames/side.png",
+   "size": [
+    183,
+    483
+   ],
+   "pivot": [
+    0.502,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     85,
+     328
+    ],
+    "flip": true,
+    "angle": 10
+   }
+  },
+  "back34": {
+   "file": "assets/characters/antonio-frames/back34.png",
+   "size": [
+    188,
+    486
+   ],
+   "pivot": [
+    0.4977,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     128,
+     328
+    ],
+    "flip": true,
+    "angle": 0
+   }
+  },
+  "back": {
+   "file": "assets/characters/antonio-frames/back.png",
+   "size": [
+    196,
+    489
+   ],
+   "pivot": [
+    0.4964,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     167,
+     324
+    ],
+    "flip": true,
+    "angle": 0
+   }
+  },
+  "walk1": {
+   "file": "assets/characters/antonio-frames/walk1.png",
+   "size": [
+    269,
+    478
+   ],
+   "pivot": [
+    0.5398,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     235,
+     313
+    ],
+    "flip": true,
+    "angle": 15
+   }
+  },
+  "walk2": {
+   "file": "assets/characters/antonio-frames/walk2.png",
+   "size": [
+    281,
+    478
+   ],
+   "pivot": [
+    0.5637,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     245,
+     303
+    ],
+    "flip": true,
+    "angle": 25
+   }
+  },
+  "run1": {
+   "file": "assets/characters/antonio-frames/run1.png",
+   "size": [
+    339,
+    469
+   ],
+   "pivot": [
+    0.62,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     290,
+     259
+    ],
+    "flip": true,
+    "angle": 55
+   }
+  },
+  "run2": {
+   "file": "assets/characters/antonio-frames/run2.png",
+   "size": [
+    329,
+    465
+   ],
+   "pivot": [
+    0.6194,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     285,
+     258
+    ],
+    "flip": true,
+    "angle": 55
+   }
+  },
+  "blink": {
+   "file": "assets/characters/antonio-frames/blink.png",
+   "size": [
+    219,
+    492
+   ],
+   "pivot": [
+    0.4945,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     22,
+     340
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "jump": {
+   "file": "assets/characters/antonio-frames/jump.png",
+   "size": [
+    306,
+    414
+   ],
+   "pivot": [
+    0.5084,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     277,
+     187
+    ],
+    "flip": true,
+    "angle": 70
+   }
+  },
+  "land": {
+   "file": "assets/characters/antonio-frames/land.png",
+   "size": [
+    285,
+    389
+   ],
+   "pivot": [
+    0.5495,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     235,
+     272
+    ],
+    "flip": true,
+    "angle": 20
+   }
+  },
+  "crouch": {
+   "file": "assets/characters/antonio-frames/crouch.png",
+   "size": [
+    240,
+    327
+   ],
+   "pivot": [
+    0.5461,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     120,
+     305
+    ],
+    "flip": true,
+    "angle": 60
+   }
+  },
+  "lookUp": {
+   "file": "assets/characters/antonio-frames/lookUp.png",
+   "size": [
+    213,
+    438
+   ],
+   "pivot": [
+    0.5031,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     58,
+     318
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "lookDown": {
+   "file": "assets/characters/antonio-frames/lookDown.png",
+   "size": [
+    246,
+    401
+   ],
+   "pivot": [
+    0.5196,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     26,
+     262
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  }
+ },
+ "held": {
+  "file": "assets/characters/antonio-frames/grabber.png",
+  "grip": [
+   0.9897959183673469,
+   1.0
+  ],
+  "note": "bra\u00e7o mec\u00e2nico desenhado atr\u00e1s do corpo, com a pegada (grip) na m\u00e3o (hold.hand, em px do quadro)"
+ }
+}

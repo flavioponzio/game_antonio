@@ -114,6 +114,15 @@ A sala nova (`ep01-sala-2d.png`) veio do Nano Banana; a margem de papel foi cort
 - O Antônio começa a sala sentado (`"sit"` na cena): é o rig de perfil numa pose sentada. O que está em
   `sit.reach` ele faz da cadeira; para o resto (ou ao andar) ele se levanta.
 
+## Quadros do Antônio (folha de poses)
+
+Em pé, andando e pulando, o Antônio usa os quadros da folha de poses (`Design/personagens/antonio-folha-poses.webp`),
+recortados por `Design/tools/recorta_folha_poses.py` para `Assets/Resources/EP01/assets/characters/antonio-frames/`:
+parado (`front`, com piscada `blink`), andando (`walk1`/`walk2` alternados a cada passo), pulo (`land` antes e
+depois, `jump` no ar), olhar para cima/baixo (`lookUp`/`lookDown`, automático pela altura do objeto) e de costas
+para a parede (`back34`, campo `"pose"` do hotspot). O braço mecânico é desenhado atrás do corpo, preso na mão de
+cada quadro (`hold` em `frames.json`). Sentado, ele ainda usa o rig recortado.
+
 ## Rig do Antônio (boneco recortado de perfil)
 
 Quando anda de lado, o Antônio usa um boneco recortado em partes (cabeça, tronco, braços, pernas e braço

@@ -61,6 +61,7 @@ namespace RecreioEspacial.Data
                 c.SpriteFrontHolding = J.Str(sprites, "frontHolding");
                 c.HoldingItem = J.Str(d, "holdingItem");
                 c.HoldingRigPart = J.Str(d, "holdingRigPart");
+                c.Frames = J.Str(d, "frames");
                 ep.Characters[kv.Key] = c;
             }
 
@@ -95,6 +96,8 @@ namespace RecreioEspacial.Data
         public string RigSide;
         /// <summary>Versão de frente segurando o item HoldingItem (ex.: braço mecânico); a parte HoldingRigPart do rig só aparece com ele.</summary>
         public string SpriteFrontHolding, HoldingItem, HoldingRigPart;
+        /// <summary>frames.json da folha de poses (opcional). Quando existe, é usada em pé, andando e pulando.</summary>
+        public string Frames;
         public bool FaceTowardAntonio, VoiceOnly;
     }
 
@@ -281,6 +284,8 @@ namespace RecreioEspacial.Data
         public PatchDef Patch;
         /// <summary>Imagem do objeto desenhada no rect (aparece quando o hotspot está visível).</summary>
         public string Art;
+        /// <summary>Pose do Antônio ao interagir (lookUp, lookDown, back34, front34…). Vazio = automática pela altura.</summary>
+        public string Pose;
 
         public bool IsNpc => Kind == "npc";
         public bool IsProp => Kind == "prop";
@@ -297,6 +302,7 @@ namespace RecreioEspacial.Data
                 Show = Condition.Parse(J.Get(d, "show")),
                 Tap = RuleDef.ParseList(J.Get(d, "tap")),
                 Art = J.Str(d, "art"),
+                Pose = J.Str(d, "pose"),
             };
             if (h.Label == null) h.Label = h.Id;
 

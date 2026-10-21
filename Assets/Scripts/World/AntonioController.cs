@@ -115,12 +115,21 @@ namespace RecreioEspacial.World
         string holdingRigPart;
         /// <summary>Está com o item na mão (usa a imagem de frente com o item e mostra a parte do rig).</summary>
         public bool Holding { get; set; }
+
+        // ---------- Quadros (folha de poses) ----------
+        FrameSet frames;
+        Transform heldGrip;
+        SpriteRenderer heldSr;
+        float blinkTimer = 3f, blinkLeft;
+        /// <summary>Pose pedida pelo jogo durante uma interação (lookUp, lookDown, back34, front34…). Null = normal.</summary>
+        public string Pose { get; set; }
+        public bool UsesFrames => frames != null;
         SortingGroup sortingGroup;
         /// <summary>Boneco recortado de perfil (opcional). Quando existe, substitui o sprite de perfil ao andar.</summary>
         CutoutRig sideRig;
 
         public static AntonioController Create(Transform parent, Sprite front, Sprite side, string sideRigJson = null,
-            Sprite frontHolding = null, string holdingRigPart = null)
+            Sprite frontHolding = null, string holdingRigPart = null, string framesJson = null)
         {
             var go = new GameObject("Antonio");
             go.transform.SetParent(parent, false);
@@ -142,6 +151,21 @@ namespace RecreioEspacial.World
             a.sr.sprite = front;
             // Agrupa sprite + partes do rig numa única camada de desenho (ordem por profundidade).
             a.sortingGroup = b.AddComponent<SortingGroup>();
+            if (!string.IsNullOrEmpty(framesJson))
+            {
+                a.frames = FrameSet.Load(framesJson);
+                if (a.frames != null && a.frames.Held != null)
+                {
+                    // braço mecânico atrás do corpo, com a pegada na mão do quadro atual
+                    a.heldGrip = new GameObject("Mao").transform;
+                    a.heldGrip.SetParent(b.transform, false);
+                    a.heldSr = new GameObject("Item na mao").AddComponent<SpriteRenderer>();
+                    a.heldSr.transform.SetParent(a.heldGrip, false);
+                    a.heldSr.sprite = a.frames.Held;
+                    a.heldSr.sortingOrder = -1;
+                    a.heldSr.enabled = false;
+                }
+            }
             if (!string.IsNullOrEmpty(sideRigJson))
             {
                 a.sideRig = CutoutRig.Load(b.transform, sideRigJson);
@@ -336,6 +360,7 @@ namespace RecreioEspacial.World
             if (sr == null) return;
             curLift += (Lift - curLift) * Mathf.Min(1f, dt * 7f);
             if (Seated) { UpdateSeatedVisual(); return; }
+            if (frames != null) { UpdateFrameVisual(dt); return; }
 
             float s = ScaleAt(Y);
             float walkAmt = Mathf.Min(1f, v / 14f);
@@ -402,6 +427,76 @@ namespace RecreioEspacial.World
             }
         }
 
+        /// <summary>Escolhe o quadro da folha de poses conforme o estado.</summary>
+        string PickFrame(bool moving, float dt)
+        {
+            if (jumpPhase == JumpPhase.Air) return "jump";
+            if (jumpPhase != JumpPhase.None) return "land";
+            if (moving) return ((int)(phase / Mathf.PI) & 1) == 0 ? "walk1" : "walk2";
+            if (!string.IsNullOrEmpty(Pose) && frames.Get(Pose) != null) return Pose;
+            // piscada de vez em quando
+            if (blinkLeft > 0f) { blinkLeft -= dt; return "blink"; }
+            blinkTimer -= dt;
+            if (blinkTimer <= 0f) { blinkTimer = Random.Range(2.5f, 5f); blinkLeft = 0.14f; }
+            return "front";
+        }
+
+        static bool Symmetric(string frame) => frame == "front" || frame == "back" || frame == "blink";
+
+        void UpdateFrameVisual(float dt)
+        {
+            float s = ScaleAt(Y);
+            float walkAmt = Mathf.Min(1f, v / 14f);
+            float sn = Mathf.Abs(Mathf.Sin(phase));
+            bool moving = hasTarget || walkAmt > 0.05f;
+            string name = PickFrame(moving, dt);
+            var f = frames.Get(name) ?? frames.Get("front");
+            sr.enabled = true;
+            if (f != null && sr.sprite != f.Sprite) sr.sprite = f.Sprite;
+            if (sideRig != null) sideRig.SetVisible(false);
+
+            // movimento leve por cima dos quadros (os desenhos já trazem a pose)
+            float bob = moving && jumpPhase == JumpPhase.None ? sn * 1.3f * walkAmt : 0f;
+            float breathe = !moving && jumpPhase == JumpPhase.None ? 0.008f * Mathf.Sin(t * 2.3f) : 0f;
+            var squash = Vector2.Lerp(Vector2.one, JumpSquash(), 0.4f);
+            float sy = (1f + breathe) * squash.y, sx = (1f - breathe * 0.4f) * squash.x;
+            float fx = Symmetric(name) ? 1f : Dir;
+
+            float heightUnits = Stage.H(antonioHeight * s);
+            float k = heightUnits / (frames.RefHeightPx / 100f);
+            transform.localPosition = Stage.Point(X, Y + curLift + jumpY);
+            body.localPosition = new Vector3(0f, bob / 100f * heightUnits, 0f);
+            body.localRotation = Quaternion.identity;
+            body.localScale = new Vector3(k * sx * fx, k * sy, 1f);
+
+            if (heldSr != null)
+            {
+                bool show = Holding && f != null && f.HasHold;
+                heldSr.enabled = show;
+                if (show)
+                {
+                    heldGrip.localPosition = FrameSet.HandLocal(f);
+                    heldGrip.localRotation = Quaternion.Euler(0f, 0f, f.HoldAngle);
+                    heldSr.transform.localScale = new Vector3(f.HoldFlip ? -1f : 1f, 1f, 1f);
+                }
+            }
+
+            int order = Stage.SortingOrderForBottom(Y) + 1;
+            sortingGroup.sortingOrder = order;
+            if (shadow != null)
+            {
+                shadow.enabled = true;
+                float widthUnits = heightUnits * 0.53f;
+                float sc = (1f - bob * 0.06f) * (1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.35f);
+                shadow.transform.localPosition = new Vector3(0f, -(curLift + jumpY) / 100f * Stage.Height + heightUnits * 0.013f, 0f);
+                shadow.transform.localScale = new Vector3(widthUnits * 0.78f * sc, heightUnits * 0.05f * sc, 1f);
+                var c = shadow.color;
+                c.a = curLift > 3f ? 0f : (1f - bob * 0.12f) * (1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.5f);
+                shadow.color = c;
+                shadow.sortingOrder = order - 1;
+            }
+        }
+
         void UpdateSeatedVisual()
         {
             float heightUnits = Stage.H(antonioHeight);
@@ -410,6 +505,7 @@ namespace RecreioEspacial.World
             sideRig.SetPartHidden(holdingRigPart, !Holding);
             sideRig.SetVisible(true);
             sideRig.ApplySit(Mathf.Sin(t * 2.3f));
+            if (heldSr != null) heldSr.enabled = false;
             // o quadril (pivô do tronco) fica na altura do assento
             transform.localPosition = Stage.Point(X, seatY);
             body.localPosition = new Vector3(0f, -sideRig.HipHeightPx / 100f * k, 0f);
