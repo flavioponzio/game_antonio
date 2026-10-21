@@ -60,7 +60,7 @@
           { "do": [{ "goScene": "portao" }] } ] },
         { "id": "mochila", "label": "Mochila", "rect": [34.5, 68, 5.5, 20], "walk": 37, "tap": [
           { "if": { "has": ["braco"] }, "do": [{ "say": ["antonio", "Só sobrou o lanche."] }] },
-          { "do": [{ "give": "braco" }, { "say": ["antonio", "Meu braço mecânico!"] }, { "banner": "Toque num item do inventário e depois onde quer usar." }] } ] },
+          { "do": [{ "give": "braco" }, { "say": ["antonio", "Meu braço mecânico!"] }, { "banner": "Com o braço mecânico na mão, é só tocar no que quer pegar." }] } ] },
         { "id": "caderno", "label": "Caderno", "rect": [24, 69, 10, 7], "walk": 29, "tap": [
           { "if": { "notFlags": ["broken"] }, "do": [{ "unset": "pulse" }, { "say": ["antonio", "Vamos lá..."] }, { "set": "broken" }, { "say": ["antonio", "Quebrou a ponta... claro."] }] },
           { "if": { "notFlags": ["sharp"] }, "do": [{ "say": ["antonio", "Sem ponta não dá pra escrever."] }] },
@@ -100,7 +100,7 @@
         { "if": { "notFlags": ["broken"] }, "target": "caderno", "text": "Toque no caderno, em cima da carteira." },
         { "if": { "notFlags": ["thrown"] }, "target": "caio", "text": "Converse com o Caio. Ele tem apontador." },
         { "if": { "notHas": ["braco"] }, "target": "mochila", "text": "Veja o que tem na mochila." },
-        { "if": { "notFlags": ["sharp"] }, "target": "apontador", "item": "braco", "text": "Toque no braço mecânico e depois no apontador." },
+        { "if": { "notFlags": ["sharp"] }, "target": "apontador", "text": "Toque no apontador. O braço mecânico alcança." },
         { "if": { "notFlags": ["mathDone"] }, "target": "caderno", "text": "Resolva as contas. As pistas estão na sala: janela, desenhos e estojo." },
         { "target": "porta", "text": "Saia pela porta." }
       ]
@@ -142,9 +142,9 @@
           { "do": [{ "say": ["caio", "Sobe nas minhas costas!"] }, { "npcMove": ["caio", 1100] }, { "set": "shoulders" }, { "walkTo": [31, 2], "parallelWait": 1100 }, { "face": 1 }, { "lift": 22 }, { "wait": 450 }, { "say": ["antonio", "Daqui dá pra alcançar."] }] } ] }
       ],
       "objectives": [
-        { "if": { "notFlags": ["hasFrisbee", "tried"] }, "target": "frisbee", "item": "braco", "text": "Tente pegar o frisbee com o braço mecânico." },
+        { "if": { "notFlags": ["hasFrisbee", "tried"] }, "target": "frisbee", "text": "Tente pegar o frisbee com o braço mecânico." },
         { "if": { "notFlags": ["hasFrisbee", "shoulders"] }, "target": "caio", "text": "Sozinho não alcança. Peça ajuda ao Caio." },
-        { "if": { "notFlags": ["hasFrisbee"] }, "target": "frisbee", "item": "braco", "text": "Agora use o braço mecânico no frisbee." },
+        { "if": { "notFlags": ["hasFrisbee"] }, "target": "frisbee", "text": "Agora toque no frisbee para pegar com o braço." },
         { "target": "caminho", "text": "Siga o caminho até a quadra." }
       ]
     },
@@ -183,7 +183,7 @@
       ],
       "objectives": [
         { "if": { "notFlags": ["corda"] }, "target": "corda", "item": "frisbee", "text": "O braço não alcança. Jogue o frisbee na corda." },
-        { "if": { "notFlags": ["apito"] }, "target": "apito", "item": "braco", "text": "Pegue o apito pela grade com o braço mecânico." },
+        { "if": { "notFlags": ["apito"] }, "target": "apito", "text": "Toque no apito. O braço mecânico passa pela grade." },
         { "target": "saco", "text": "Guarde tudo no saco de rede." }
       ]
     },

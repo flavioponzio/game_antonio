@@ -552,9 +552,15 @@ namespace RecreioEspacial.Core
             float cx = view.RectOf(h).CenterX;
             if (!antonio.Seated && Mathf.Abs(cx - antonio.X) > 2f) antonio.Dir = cx < antonio.X ? -1 : 1;
 
+            // Item na mão (ex.: braço mecânico): se o objeto tem uma ação para ele, usa direto, sem selecionar.
+            bool selected = item != null;
+            var held = ep.Characters["antonio"].HoldingItem;
+            if (!selected && held != null && state.Has(held) && h.Use.TryGetValue(held, out var heldRules) && FirstMatch(heldRules) != null)
+                item = held;
+
             if (item != null)
             {
-                state.SelectedItem = null;
+                if (selected) state.SelectedItem = null;
                 RuleDef rule = null;
                 if (h.Use.TryGetValue(item, out var rules)) rule = FirstMatch(rules);
                 if (rule != null) yield return RunActions(rule.Do);
