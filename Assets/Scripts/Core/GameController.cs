@@ -779,6 +779,17 @@ namespace RecreioEspacial.Core
                     if (h != null) OnHotspotClicked(h);
                 }
             }
+            if (GameInput.JumpPressed)
+            {
+                lastInputKeyboard = true;
+                state.IdleSeconds = 0;
+                if (bubbleActive) skipRequested = true;
+                else if (canMove)
+                {
+                    if (antonio.Seated) antonio.StandUp();
+                    else antonio.Jump();
+                }
+            }
             if (GameInput.HintPressed && !ui.PuzzleOpen) OnHint();
             if (GameInput.CancelPressed)
             {

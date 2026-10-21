@@ -28,6 +28,72 @@ namespace RecreioEspacial.World
         public bool IsWalking => hasTarget || v > 0.5f;
         public float CurrentLift => curLift;
 
+        // ---------- Pulo ----------
+        enum JumpPhase { None, Crouch, Air, Land }
+        const float JumpHeight = 9f;      // % da altura da tela
+        const float JumpAirTime = 0.5f;   // segundos no ar
+        const float CrouchTime = 0.08f, LandTime = 0.12f;
+        static float JumpGravity => 8f * JumpHeight / (JumpAirTime * JumpAirTime);
+        static float JumpSpeed => JumpGravity * JumpAirTime / 2f;
+        JumpPhase jumpPhase;
+        float jumpTimer, jumpY, jumpV;
+
+        public bool IsJumping => jumpPhase != JumpPhase.None;
+
+        /// <summary>Pula (agacha, sobe, cai e amortece). Falso se já está pulando ou sentado.</summary>
+        public bool Jump()
+        {
+            if (Seated || jumpPhase != JumpPhase.None) return false;
+            jumpPhase = JumpPhase.Crouch;
+            jumpTimer = 0f;
+            return true;
+        }
+
+        void StepJump(float dt)
+        {
+            if (jumpPhase == JumpPhase.None) return;
+            jumpTimer += dt;
+            switch (jumpPhase)
+            {
+                case JumpPhase.Crouch:
+                    if (jumpTimer >= CrouchTime) { jumpPhase = JumpPhase.Air; jumpV = JumpSpeed; jumpTimer = 0f; }
+                    break;
+                case JumpPhase.Air:
+                    jumpY += jumpV * dt;
+                    jumpV -= JumpGravity * dt;
+                    if (jumpY <= 0f) { jumpY = 0f; jumpPhase = JumpPhase.Land; jumpTimer = 0f; }
+                    break;
+                case JumpPhase.Land:
+                    if (jumpTimer >= LandTime) jumpPhase = JumpPhase.None;
+                    break;
+            }
+        }
+
+        /// <summary>Amassa/estica (squash &amp; stretch) do pulo: (sx, sy).</summary>
+        Vector2 JumpSquash()
+        {
+            switch (jumpPhase)
+            {
+                case JumpPhase.Crouch:
+                {
+                    float k = Mathf.Clamp01(jumpTimer / CrouchTime);
+                    return new Vector2(1f + 0.07f * k, 1f - 0.11f * k);
+                }
+                case JumpPhase.Air:
+                {
+                    float rise = Mathf.Clamp(jumpV / JumpSpeed, -1f, 1f);
+                    float stretch = 0.07f * Mathf.Abs(rise);
+                    return new Vector2(1f - stretch * 0.6f, 1f + stretch);
+                }
+                case JumpPhase.Land:
+                {
+                    float k = 1f - Mathf.Clamp01(jumpTimer / LandTime);
+                    return new Vector2(1f + 0.09f * k, 1f - 0.13f * k);
+                }
+                default: return Vector2.one;
+            }
+        }
+
         FloorDef floor = new FloorDef();
         float antonioHeight = 50f;
 
@@ -148,7 +214,7 @@ namespace RecreioEspacial.World
         /// <summary>Topo da cabeça em % (medido da base), para posicionar o balão.</summary>
         public float TopPct => Seated
             ? seatY + antonioHeight * sideRig.HipToTopPx / sideRig.HeightPx
-            : Y + HeightPct + curLift;
+            : Y + HeightPct + curLift + jumpY;
 
         // ---------- Comandos ----------
 
@@ -197,6 +263,7 @@ namespace RecreioEspacial.World
         {
             t += dt;
             if (Seated) return;
+            StepJump(dt);
             float scale = ScaleAt(Y);
             float wf = Stage.WidthFactor; // em cenas largas, 1% vale menos tela: compensa a velocidade
             float vmax = MaxSpeed * scale * wf;
@@ -285,6 +352,7 @@ namespace RecreioEspacial.World
                 sideRig.SetPartHidden(holdingRigPart, !Holding);
                 sideRig.SetVisible(useRig);
                 if (useRig) sideRig.ApplyWalk(phase, walkAmt);
+                if (useRig && jumpPhase == JumpPhase.Air) sideRig.ApplyJump(Mathf.Clamp(jumpV / JumpSpeed, -1f, 1f));
             }
 
             float bob, contact;
@@ -300,8 +368,10 @@ namespace RecreioEspacial.World
                 contact = (1f - sn) * walkAmt;
             }
             float breathe = (1f - walkAmt) * 0.011f * Mathf.Sin(t * 2.3f);
-            float sy = 1f - 0.05f * contact + breathe;
-            float sx = 1f + 0.035f * contact - breathe * 0.4f;
+            var squash = JumpSquash();
+            if (jumpPhase != JumpPhase.None) { bob = 0f; contact = 0f; breathe = 0f; }
+            float sy = (1f - 0.05f * contact + breathe) * squash.y;
+            float sx = (1f + 0.035f * contact - breathe * 0.4f) * squash.x;
             float leanTarget = useSide ? Dir * (useRig ? 2.5f : 5f) * walkAmt : 0f;
             lean += (leanTarget - lean) * Mathf.Min(1f, dt * 10f);
             float fx = useSide ? Dir : 1f;
@@ -310,7 +380,7 @@ namespace RecreioEspacial.World
             float spriteUnits = useRig ? sideRig.HeightPx / 100f : spr != null ? spr.rect.height / spr.pixelsPerUnit : 1f;
             float k = heightUnits / spriteUnits;
 
-            transform.localPosition = Stage.Point(X, Y + curLift);
+            transform.localPosition = Stage.Point(X, Y + curLift + jumpY);
             body.localPosition = new Vector3(0f, bob / 100f * heightUnits, 0f);
             body.localRotation = Quaternion.Euler(0f, 0f, -lean); // CSS rotate(+) = horário
             body.localScale = new Vector3(k * sx * fx, k * sy, 1f);
@@ -322,11 +392,11 @@ namespace RecreioEspacial.World
             if (shadow != null)
             {
                 float widthUnits = heightUnits * 0.53f; // largura do corpo (a imagem pode ter margem para o item)
-                float sc = 1f - bob * 0.06f;
-                shadow.transform.localPosition = new Vector3(0f, -curLift / 100f * Stage.Height + heightUnits * 0.013f, 0f);
+                float sc = (1f - bob * 0.06f) * (1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.35f);
+                shadow.transform.localPosition = new Vector3(0f, -(curLift + jumpY) / 100f * Stage.Height + heightUnits * 0.013f, 0f);
                 shadow.transform.localScale = new Vector3(widthUnits * 0.78f * sc, heightUnits * 0.05f * sc, 1f);
                 var c = shadow.color;
-                c.a = curLift > 3f ? 0f : 1f - bob * 0.12f;
+                c.a = curLift > 3f ? 0f : (1f - bob * 0.12f) * (1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.5f);
                 shadow.color = c;
                 shadow.sortingOrder = order - 1;
             }

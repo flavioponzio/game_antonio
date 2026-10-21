@@ -79,7 +79,8 @@ namespace RecreioEspacial.Core
             return new Vector2(x, y);
         }
 
-        public static bool InteractPressed => IsDown(KeyId.E) || IsDown(KeyId.Space);
+        public static bool InteractPressed => IsDown(KeyId.E);
+        public static bool JumpPressed => IsDown(KeyId.Space);
         public static bool HintPressed => IsDown(KeyId.H);
         public static bool CancelPressed => IsDown(KeyId.Escape);
 

@@ -29,9 +29,10 @@ protótipo em HTML.
 | Ação | Mouse / toque | Teclado |
 |---|---|---|
 | Andar | tocar no chão | setas / WASD |
-| Interagir | tocar no objeto ou pessoa | **E** ou **Espaço** (no objeto destacado) |
+| Interagir | tocar no objeto ou pessoa | **E** (no objeto destacado) |
 | Usar item | tocar no item e depois no objeto | **1–4** escolhem o item; depois E |
 | Pular fala | tocar no balão / em qualquer lugar | E / Espaço |
+| Pular | — | **Espaço** |
 | Dica | botão **Dica** | **H** |
 | Cancelar | tocar no item de novo | **Esc** (também fecha o caderno) |
 

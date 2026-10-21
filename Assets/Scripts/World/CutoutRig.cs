@@ -143,6 +143,22 @@ namespace RecreioEspacial.World
             SetAngle("backArmLower", 42f);
         }
 
+        /// <summary>Pose no ar: joelhos dobrados e braços para cima. rise = +1 subindo … -1 caindo.</summary>
+        public void ApplyJump(float rise)
+        {
+            float tuck = 1f - 0.35f * Mathf.Abs(rise); // mais encolhido no alto do pulo
+            SetAngle("body", 0f);
+            SetAngle("head", 3f * rise);
+            SetAngle("frontLegUpper", 38f * tuck);
+            SetAngle("frontLegLower", -62f * tuck);
+            SetAngle("backLegUpper", -6f * tuck);
+            SetAngle("backLegLower", -48f * tuck);
+            SetAngle("frontArmUpper", 35f + 20f * rise);
+            SetAngle("frontArmLower", 25f);
+            SetAngle("backArmUpper", -18f - 10f * rise);
+            SetAngle("backArmLower", 20f);
+        }
+
         public void ApplyWalk(float phase, float amount)
         {
             float s = Mathf.Sin(phase), c = Mathf.Cos(phase);

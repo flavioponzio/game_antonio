@@ -266,7 +266,7 @@ namespace RecreioEspacial.UI
             UiKit.Anchor(title.rectTransform, new Vector2(0, 0.5f), new Vector2(pad, -Cq(5f)), new Vector2(Cq(90), Cq(12f)));
 
             string howTo = "Toque no cenário para andar e interagir. Toque num item do inventário e depois onde quer usar. " +
-                           "Toque no balão para pular a fala.\nNo teclado: setas/WASD andam, E ou Espaço interage, 1–4 escolhem item, H pede dica.";
+                           "Toque no balão para pular a fala.\nNo teclado: setas/WASD andam, E interage, Espaço pula, 1–4 escolhem item, H pede dica.";
             var how = UiKit.Label("ComoJogar", titleLayer, howTo, GameAssets.Weight.Regular, Cq(1.5f), Tokens.Ink);
             how.lineSpacing = 1.2f;
             UiKit.Anchor(how.rectTransform, new Vector2(0, 0), new Vector2(pad, pad), new Vector2(Cq(46f), Cq(10f)));
