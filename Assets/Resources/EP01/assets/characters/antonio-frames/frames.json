@@ -1,12 +1,16 @@
 {
- "note": "Quadros do Ant\u00f4nio (folha de poses v3, 5x4). file = sem garra, fileHolding = com o bra\u00e7o mec\u00e2nico. pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro \"front\". Os quadros olham para a direita.",
+ "note": "Quadros do Antônio (folha de poses v3, 5x4). file = sem garra, fileHolding = com o braço mecânico. pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro \"front\". Os quadros olham para a direita.",
  "refHeight": 484,
- "stride": 0.39,
+ "stride": 0.33,
  "walkCycle": [
-  "walk3",
-  "side",
-  "walk4",
-  "side"
+  "walk8_1",
+  "walk8_2",
+  "walk8_3",
+  "walk8_4",
+  "walk8_5",
+  "walk8_6",
+  "walk8_7",
+  "walk8_8"
  ],
  "frames": {
   "front": {
@@ -246,6 +250,102 @@
    ],
    "pivot": [
     0.5923,
+    0.0
+   ]
+  },
+  "walk8_1": {
+   "file": "assets/characters/antonio-frames/walk8_1.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_1-garra.png",
+   "size": [
+    281,
+    448
+   ],
+   "pivot": [
+    0.5276,
+    0.0
+   ]
+  },
+  "walk8_2": {
+   "file": "assets/characters/antonio-frames/walk8_2.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_2-garra.png",
+   "size": [
+    242,
+    434
+   ],
+   "pivot": [
+    0.5493,
+    0.0
+   ]
+  },
+  "walk8_3": {
+   "file": "assets/characters/antonio-frames/walk8_3.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_3-garra.png",
+   "size": [
+    225,
+    451
+   ],
+   "pivot": [
+    0.5841,
+    0.0
+   ]
+  },
+  "walk8_4": {
+   "file": "assets/characters/antonio-frames/walk8_4.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_4-garra.png",
+   "size": [
+    249,
+    464
+   ],
+   "pivot": [
+    0.517,
+    0.0
+   ]
+  },
+  "walk8_5": {
+   "file": "assets/characters/antonio-frames/walk8_5.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_5-garra.png",
+   "size": [
+    262,
+    455
+   ],
+   "pivot": [
+    0.52,
+    0.0
+   ]
+  },
+  "walk8_6": {
+   "file": "assets/characters/antonio-frames/walk8_6.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_6-garra.png",
+   "size": [
+    251,
+    430
+   ],
+   "pivot": [
+    0.6095,
+    0.0
+   ]
+  },
+  "walk8_7": {
+   "file": "assets/characters/antonio-frames/walk8_7.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_7-garra.png",
+   "size": [
+    236,
+    437
+   ],
+   "pivot": [
+    0.5788,
+    0.0
+   ]
+  },
+  "walk8_8": {
+   "file": "assets/characters/antonio-frames/walk8_8.png",
+   "fileHolding": "assets/characters/antonio-frames/walk8_8-garra.png",
+   "size": [
+    251,
+    436
+   ],
+   "pivot": [
+    0.5886,
     0.0
    ]
   }

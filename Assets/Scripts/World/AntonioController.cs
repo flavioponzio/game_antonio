@@ -13,7 +13,7 @@ namespace RecreioEspacial.World
     public class AntonioController : MonoBehaviour
     {
         const float Accel = 140f;          // %/s²
-        const float MaxSpeed = 26f;        // %/s (multiplicado pela escala de profundidade)
+        const float MaxSpeed = 22f;        // %/s (multiplicado pela escala de profundidade)
         // distância vertical vale altura/largura da cena (9/16 numa cena do tamanho da tela)
         static float YMetric => Stage.Height / Stage.Width;
         const float StepLength = 4.2f;     // distância de um passo (× escala); os quadros desenhados usam a do frames.json
