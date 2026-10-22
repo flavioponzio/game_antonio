@@ -1,16 +1,22 @@
 {
- "note": "Quadros do Ant\u00f4nio (folha de poses 5x4). file = sem garra, fileHolding = com o bra\u00e7o mec\u00e2nico. pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro \"front\". Os quadros olham para a direita. walkCycle = quadros do andar em ordem (um ciclo = 2 passos).",
- "refHeight": 492,
+ "note": "Quadros do Ant\u00f4nio (folha de poses v3, 5x4). file = sem garra, fileHolding = com o bra\u00e7o mec\u00e2nico. pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro \"front\". Os quadros olham para a direita.",
+ "refHeight": 484,
+ "walkCycle": [
+  "walk3",
+  "side",
+  "walk4",
+  "side"
+ ],
  "frames": {
   "front": {
    "file": "assets/characters/antonio-frames/front.png",
    "fileHolding": "assets/characters/antonio-frames/front-garra.png",
    "size": [
-    262,
-    492
+    256,
+    484
    ],
    "pivot": [
-    0.6076,
+    0.6257,
     0.0
    ]
   },
@@ -18,11 +24,11 @@
    "file": "assets/characters/antonio-frames/front34.png",
    "fileHolding": "assets/characters/antonio-frames/front34-garra.png",
    "size": [
-    248,
-    492
+    246,
+    482
    ],
    "pivot": [
-    0.6034,
+    0.6202,
     0.0
    ]
   },
@@ -30,11 +36,11 @@
    "file": "assets/characters/antonio-frames/side.png",
    "fileHolding": "assets/characters/antonio-frames/side-garra.png",
    "size": [
-    186,
-    490
+    170,
+    480
    ],
    "pivot": [
-    0.5095,
+    0.5054,
     0.0
    ]
   },
@@ -42,11 +48,11 @@
    "file": "assets/characters/antonio-frames/back34.png",
    "fileHolding": "assets/characters/antonio-frames/back34-garra.png",
    "size": [
-    222,
-    492
+    196,
+    476
    ],
    "pivot": [
-    0.5698,
+    0.5514,
     0.0
    ]
   },
@@ -54,11 +60,11 @@
    "file": "assets/characters/antonio-frames/back.png",
    "fileHolding": "assets/characters/antonio-frames/back-garra.png",
    "size": [
-    248,
-    496
+    244,
+    480
    ],
    "pivot": [
-    0.4007,
+    0.3883,
     0.0
    ]
   },
@@ -66,11 +72,11 @@
    "file": "assets/characters/antonio-frames/walk1.png",
    "fileHolding": "assets/characters/antonio-frames/walk1-garra.png",
    "size": [
-    332,
-    479
+    338,
+    480
    ],
    "pivot": [
-    0.6348,
+    0.6216,
     0.0
    ]
   },
@@ -78,11 +84,11 @@
    "file": "assets/characters/antonio-frames/walk2.png",
    "fileHolding": "assets/characters/antonio-frames/walk2-garra.png",
    "size": [
-    295,
-    477
+    302,
+    484
    ],
    "pivot": [
-    0.5913,
+    0.5813,
     0.0
    ]
   },
@@ -90,11 +96,11 @@
    "file": "assets/characters/antonio-frames/run1.png",
    "fileHolding": "assets/characters/antonio-frames/run1-garra.png",
    "size": [
-    341,
-    463
+    345,
+    473
    ],
    "pivot": [
-    0.6554,
+    0.669,
     0.0
    ]
   },
@@ -102,11 +108,11 @@
    "file": "assets/characters/antonio-frames/run2.png",
    "fileHolding": "assets/characters/antonio-frames/run2-garra.png",
    "size": [
-    336,
-    468
+    359,
+    487
    ],
    "pivot": [
-    0.6578,
+    0.6681,
     0.0
    ]
   },
@@ -114,11 +120,11 @@
    "file": "assets/characters/antonio-frames/blink.png",
    "fileHolding": "assets/characters/antonio-frames/blink-garra.png",
    "size": [
-    277,
-    468
+    276,
+    482
    ],
    "pivot": [
-    0.6112,
+    0.6235,
     0.0
    ]
   },
@@ -126,11 +132,11 @@
    "file": "assets/characters/antonio-frames/jump.png",
    "fileHolding": "assets/characters/antonio-frames/jump-garra.png",
    "size": [
-    332,
-    415
+    339,
+    430
    ],
    "pivot": [
-    0.5274,
+    0.4934,
     0.0
    ]
   },
@@ -138,11 +144,11 @@
    "file": "assets/characters/antonio-frames/land.png",
    "fileHolding": "assets/characters/antonio-frames/land-garra.png",
    "size": [
-    327,
-    405
+    341,
+    415
    ],
    "pivot": [
-    0.638,
+    0.6566,
     0.0
    ]
   },
@@ -150,11 +156,11 @@
    "file": "assets/characters/antonio-frames/crouch.png",
    "fileHolding": "assets/characters/antonio-frames/crouch-garra.png",
    "size": [
-    304,
-    372
+    311,
+    378
    ],
    "pivot": [
-    0.5971,
+    0.6067,
     0.0
    ]
   },
@@ -162,11 +168,11 @@
    "file": "assets/characters/antonio-frames/lookUp.png",
    "fileHolding": "assets/characters/antonio-frames/lookUp-garra.png",
    "size": [
-    233,
-    457
+    245,
+    482
    ],
    "pivot": [
-    0.5329,
+    0.5587,
     0.0
    ]
   },
@@ -174,11 +180,11 @@
    "file": "assets/characters/antonio-frames/lookDown.png",
    "fileHolding": "assets/characters/antonio-frames/lookDown-garra.png",
    "size": [
-    299,
-    438
+    324,
+    452
    ],
    "pivot": [
-    0.6246,
+    0.6303,
     0.0
    ]
   },
@@ -186,12 +192,12 @@
    "file": "assets/characters/antonio-frames/sit.png",
    "fileHolding": "assets/characters/antonio-frames/sit-garra.png",
    "size": [
-    297,
-    453
+    298,
+    444
    ],
    "pivot": [
-    0.2525,
-    0.223
+    0.2685,
+    0.2095
    ]
   },
   "walk3": {
@@ -199,10 +205,10 @@
    "fileHolding": "assets/characters/antonio-frames/walk3-garra.png",
    "size": [
     293,
-    449
+    457
    ],
    "pivot": [
-    0.5712,
+    0.5801,
     0.0
    ]
   },
@@ -210,11 +216,11 @@
    "file": "assets/characters/antonio-frames/walk4.png",
    "fileHolding": "assets/characters/antonio-frames/walk4-garra.png",
    "size": [
-    297,
-    449
+    278,
+    459
    ],
    "pivot": [
-    0.6,
+    0.571,
     0.0
    ]
   },
@@ -222,11 +228,11 @@
    "file": "assets/characters/antonio-frames/talk.png",
    "fileHolding": "assets/characters/antonio-frames/talk-garra.png",
    "size": [
-    317,
-    468
+    323,
+    482
    ],
    "pivot": [
-    0.5268,
+    0.5288,
     0.0
    ]
   },
@@ -234,17 +240,13 @@
    "file": "assets/characters/antonio-frames/pickUp.png",
    "fileHolding": "assets/characters/antonio-frames/pickUp-garra.png",
    "size": [
-    349,
-    424
+    356,
+    442
    ],
    "pivot": [
-    0.5952,
+    0.5923,
     0.0
    ]
   }
- },
- "walkCycle": [
-  "walk3",
-  "walk4"
- ]
+ }
 }

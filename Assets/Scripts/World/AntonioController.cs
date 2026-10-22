@@ -442,7 +442,8 @@ namespace RecreioEspacial.World
                 var cyc = frames.WalkCycle;
                 if (cyc.Count > 0)
                 {
-                    int i = (int)(Mathf.Repeat(phase, 2f * Mathf.PI) / (2f * Mathf.PI) * cyc.Count);
+                    // cada quadro fica centrado na sua fatia: o 1º no ponto mais baixo do passo (phase 0)
+                    int i = (int)Mathf.Repeat(phase / (2f * Mathf.PI) * cyc.Count + 0.5f, cyc.Count);
                     return cyc[Mathf.Clamp(i, 0, cyc.Count - 1)];
                 }
                 if (frames.Get("walk4") != null) return "walk" + (1 + (((int)(phase / (Mathf.PI / 2f))) & 3));
@@ -473,7 +474,9 @@ namespace RecreioEspacial.World
             if (sideRig != null) sideRig.SetVisible(false);
 
             // movimento leve por cima dos quadros (os desenhos já trazem a pose)
-            float bob = moving && jumpPhase == JumpPhase.None ? sn * 1.3f * walkAmt : 0f;
+            // com passada + quadro de passagem no ciclo, o sobe-e-desce já vem do desenho: só um toque por cima
+            float bobAmt = frames.WalkCycle.Count > 2 ? 0.4f : 1.3f;
+            float bob = moving && jumpPhase == JumpPhase.None ? sn * bobAmt * walkAmt : 0f;
             float breathe = !moving && jumpPhase == JumpPhase.None ? 0.008f * Mathf.Sin(t * 2.3f) : 0f;
             var squash = Vector2.Lerp(Vector2.one, JumpSquash(), 0.4f);
             float sy = (1f + breathe) * squash.y, sx = (1f - breathe * 0.4f) * squash.x;

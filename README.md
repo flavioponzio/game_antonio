@@ -116,12 +116,21 @@ A sala nova (`ep01-sala-2d.png`) veio do Nano Banana; a margem de papel foi cort
 
 ## Quadros do Antônio (folha de poses)
 
-O Antônio usa os 20 quadros da folha de poses com a garra (`Design/personagens/antonio-folha-poses-garra.webp`),
-recortados por `Design/tools/recorta_folha_poses.py` (medidas em `mede_folha_poses.py`) para
-`Assets/Resources/EP01/assets/characters/antonio-frames/`. Cada pose tem duas versões: `nome.png` (sem garra, gerada
-apagando a garra do desenho) e `nome-garra.png`; a versão com garra entra depois que ele pega o braço mecânico.
+O Antônio usa os 20 quadros da folha de poses v3 com a garra (`Design/personagens/antonio-folha-poses-v3.png`, PNG com
+fundo transparente). Para refazer os quadros:
+
+1. `python3 Design/tools/solidifica_folha.py folha.png folha-solida.png` — deixa o interior do desenho opaco (a
+   transparência que o ChatGPT gera vem com furos e partes meio transparentes).
+2. `python3 Design/tools/recorta_folha_poses.py folha-solida.png Design/tools/folha_poses_v3_medidas.json saida/` —
+   recorta, iguala o tamanho das linhas da folha (cada linha veio numa escala) e grava o `frames.json`.
+
+Os quadros vão para `Assets/Resources/EP01/assets/characters/antonio-frames/`. Cada pose tem duas versões: `nome.png`
+(sem garra, gerada apagando a garra do desenho) e `nome-garra.png`; a versão com garra entra depois que ele pega o
+braço mecânico.
 - parado: `front`, com piscada `blink`; falando: `talk` alternando com `front`
-- andando: `walk1` → `walk4` (4 quadros a cada 2 passos)
+- andando: `walkCycle` do `frames.json` = `walk3` → `side` → `walk4` → `side` (passada, passagem, passada, passagem).
+  Prévia: `Design/personagens/antonio-caminhada-previa.gif`. A folha não tem um ciclo de caminhada de verdade; quando
+  vier uma tira de caminhada própria, é só recortar os quadros e trocar a lista `walkCycle`.
 - pulo: `land` antes e depois, `jump` no ar
 - interações: `lookUp`/`lookDown` automáticos pela altura do objeto, `front34` com NPCs, `back34` na lousa,
   janela e desenhos, `pickUp` no apontador (campo `"pose"` do hotspot)

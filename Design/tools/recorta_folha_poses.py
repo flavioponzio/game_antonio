@@ -1,88 +1,66 @@
-"""Recorta a folha de poses (5x4, com a garra) em quadros com e sem garra e grava frames.json.
-Uso: python3 -I cut_frames2.py <folha> <measure.json> <pasta_saida>"""
+"""Recorta a folha de poses v3 (5x4, PNG com transparência, com a garra) em quadros com e sem garra + frames.json.
+Uso: python3 -I cut_frames3.py <folha_solida.png> <measure.json> <pasta_saida>
+(a folha passa antes por solidify.py, que deixa o interior opaco)"""
 import sys, json, os
 import numpy as np, cv2
 from PIL import Image
 src, mjson, out = sys.argv[1], sys.argv[2], sys.argv[3]
 os.makedirs(out, exist_ok=True)
-im = np.array(Image.open(src).convert('RGB'))
+sheet = np.array(Image.open(src).convert('RGBA'))
 boxes = json.load(open(mjson))
 ROWS = {'front':0,'front34':0,'side':0,'back34':0,'back':0,'walk1':1,'walk2':1,'run1':1,'run2':1,'blink':1,
         'jump':2,'land':2,'crouch':2,'lookUp':2,'lookDown':2,'sit':3,'walk3':3,'walk4':3,'talk':3,'pickUp':3}
-# escala por linha: meio-termo (média geométrica) entre igualar a altura em pé e igualar a largura da cabeça
-ROW_SCALE = [1.0, 1.136, 1.178, 1.219]
+# a folha desenha cada linha num tamanho: escala pela altura das poses em pé (blink, lookUp, talk = mesma altura do front)
+ROW_SCALE = [1.0, 241 / 204, 241 / 195, 241 / 191]
+FRAME_SCALE = {}
+# onde a garra cobria muito do corpo (perfil: na frente do short e da perna), fecha um vão maior
+CLOSE = {'side': 35, 'back': 21}
 UP = 2.0
-def alpha_of(c):
-    H, W = c.shape[:2]
-    nw = (c.astype(int).sum(2) > 735).astype(np.uint8); m = np.zeros((H + 2, W + 2), np.uint8)
-    for p in [(0, 0), (W - 1, 0), (0, H - 1), (W - 1, H - 1)]:
-        if nw[p[1], p[0]]: cv2.floodFill(nw, m, p, 2)
-    a = np.where(nw == 2, 0, 255).astype(np.uint8)
-    n, lab, st, _ = cv2.connectedComponentsWithStats((a > 0).astype(np.uint8), 8)
-    # fundo branco preso entre braço/garra/pernas (não alcançado pelo flood fill): áreas grandes e uniformes
-    ssum = c.astype(int).sum(2)
-    holes = ((ssum >= 754) & (a > 0)).astype(np.uint8)
-    nh, labh, sth, _ = cv2.connectedComponentsWithStats(holes, 8)
-    for i in range(1, nh):
-        if sth[i, cv2.CC_STAT_AREA] >= 60 and ssum[labh == i].mean() >= 758:
-            a[cv2.dilate((labh == i).astype(np.uint8), np.ones((3, 3), np.uint8)) > 0] = 0
-    n, lab, st, _ = cv2.connectedComponentsWithStats((a > 0).astype(np.uint8), 8)
-    hsv0 = cv2.cvtColor(c, cv2.COLOR_RGB2HSV).astype(int)
-    yel = (hsv0[..., 0] >= 17) & (hsv0[..., 0] <= 34) & (hsv0[..., 1] > 100) & (hsv0[..., 2] > 130)
-    keep = {1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))}
-    keep |= {i for i in range(1, n) if (yel & (lab == i)).sum() >= 20}   # garra solta do corpo também fica
-    a[~np.isin(lab, list(keep))] = 0
-    return a
+def yellow_of(hsv, a, s=100, v=130):
+    return (hsv[..., 0] >= 17) & (hsv[..., 0] <= 34) & (hsv[..., 1] > s) & (hsv[..., 2] > v) & (a > 0)
+def biggest(mask):
+    n, lab, st, _ = cv2.connectedComponentsWithStats(mask.astype(np.uint8), 8)
+    return lab == 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA])) if n > 1 else mask
 def soften(a):
     a2 = cv2.GaussianBlur(a, (3, 3), 0); a2[cv2.erode(a, np.ones((3, 3), np.uint8)) > 0] = 255; return a2
 meta = {}
 for name, b in boxes.items():
     x, y, w, h = b['box']; pad = 8
-    c = im[max(0, y - pad):y + h + pad, max(0, x - pad):x + w + pad].copy()
-    a = alpha_of(c)
+    cr = sheet[max(0, y - pad):y + h + pad, max(0, x - pad):x + w + pad].copy()
+    c = np.ascontiguousarray(cr[..., :3]); a0 = cr[..., 3]
+    # só o personagem (tira letras e sujeira): componentes grandes
+    n, lab, st, _ = cv2.connectedComponentsWithStats((a0 > 100).astype(np.uint8), 8)
+    keep = [i for i in range(1, n) if st[i, cv2.CC_STAT_AREA] >= 150]
+    a = np.where(np.isin(lab, keep) | ((a0 > 0) & (cv2.dilate(np.isin(lab, keep).astype(np.uint8), np.ones((3, 3), np.uint8)) > 0)), a0, 0).astype(np.uint8)
     I = c.astype(int)
-    # --- versão sem garra: tira amarelo + contorno; preenche onde ela passava na frente do corpo
     hsv = cv2.cvtColor(c, cv2.COLOR_RGB2HSV).astype(int)
-    yellow = (hsv[..., 0] >= 17) & (hsv[..., 0] <= 34) & (hsv[..., 1] > 100) & (hsv[..., 2] > 130) & (a > 0)
+    # --- versão sem garra: tira amarelo + contorno; preenche onde ela passava na frente do corpo
+    yellow = yellow_of(hsv, a)
     n_, lab_, st_, _ = cv2.connectedComponentsWithStats(yellow.astype(np.uint8), 8)
     yellow = np.isin(lab_, [i for i in range(1, n_) if st_[i, cv2.CC_STAT_AREA] >= 25])
     core = yellow.astype(np.uint8)
-    near_wide = cv2.dilate(core, np.ones((23, 23), np.uint8)) > 0
-    near = cv2.dilate(core, np.ones((11, 11), np.uint8)) > 0
-    # amarelado fraco (bordas borradas do cabo) e contorno escuro colado na garra
+    near_wide = cv2.dilate(core, np.ones((19, 19), np.uint8)) > 0
+    near = cv2.dilate(core, np.ones((9, 9), np.uint8)) > 0
     yellowish = (hsv[..., 0] >= 13) & (hsv[..., 0] <= 38) & (hsv[..., 1] > 45) & (hsv[..., 2] > 95)
-    skin = (hsv[..., 0] >= 5) & (hsv[..., 0] <= 16) & (hsv[..., 1] < 140) & (hsv[..., 2] > 170)
-    grab = (yellow | (near_wide & yellowish & ~skin) | (near & (I.sum(2) < 430))) & (a > 0)
+    skin = (hsv[..., 0] >= 3) & (hsv[..., 0] <= 16) & (hsv[..., 1] > 25) & (hsv[..., 1] < 150) & (hsv[..., 2] > 160)
+    grab = (yellow | (near_wide & yellowish & ~skin) | (near & (I.sum(2) < 400) & ~skin)) & (a > 0)
     grab = cv2.dilate(grab.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool) & (a > 0) & ~(skin & ~near)
-    body = (a > 0) & ~grab
-    n, lab, st, _ = cv2.connectedComponentsWithStats(body.astype(np.uint8), 8)
-    body = lab == 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
-    # restos finos do cabo grudados na mão: abertura só perto da garra
+    body = biggest((a > 0) & ~grab)
     opened = cv2.morphologyEx(body.astype(np.uint8), cv2.MORPH_OPEN, np.ones((7, 7), np.uint8)) > 0
-    body = np.where(near_wide, opened, body)
-    n, lab, st, _ = cv2.connectedComponentsWithStats(body.astype(np.uint8), 8)
-    body = lab == 1 + int(np.argmax(st[1:, cv2.CC_STAT_AREA]))
-    closed = cv2.morphologyEx(body.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8)) > 0
+    body = biggest(np.where(near_wide, opened, body))
+    closed = cv2.morphologyEx(body.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((CLOSE.get(name, 7),) * 2, np.uint8)) > 0
     fill = grab & closed & ~body
-    c2 = cv2.inpaint(c, fill.astype(np.uint8) * 255, 4, cv2.INPAINT_TELEA)
-    fill &= c2.astype(int).sum(2) < 690   # preenchimento quase branco = era fundo: fica transparente
-    # halo cinza-claro do borrado da garra, do lado de fora do corpo
-    sat = hsv[..., 1]
-    inner = cv2.erode((body | fill).astype(np.uint8), np.ones((9, 9), np.uint8)) > 0
-    halo = near_wide & (I.sum(2) > 600) & (sat < 45) & ~inner
-    body &= ~halo; fill &= ~halo
-    a_ng = np.where(body | fill, 255, 0).astype(np.uint8)
-    n2, lab2, st2, _ = cv2.connectedComponentsWithStats((a_ng > 0).astype(np.uint8), 8)
-    a_ng[lab2 != 1 + int(np.argmax(st2[1:, cv2.CC_STAT_AREA]))] = 0   # só o personagem (tira objeto do chão etc.)
+    # preenche só com cores do corpo: tudo que não é corpo entra na máscara (o fundo transparente tem cor qualquer)
+    solid_body = body & (a > 200)
+    c2 = c.copy()
+    c2[fill] = cv2.inpaint(c, (~solid_body).astype(np.uint8) * 255, 4, cv2.INPAINT_TELEA)[fill]
+    a_ng = np.where(body, a, np.where(fill, 255, 0)).astype(np.uint8)
+    a_ng[~biggest(a_ng > 0)] = 0
     a_ng = cv2.morphologyEx(a_ng, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-    s = ROW_SCALE[ROWS[name]] * UP
-    def save(rgb, al, fname):
-        al = soften(al); ys, xs = np.where(al > 0)
-        img = Image.fromarray(np.dstack([rgb, al]), 'RGBA')
-        return img
-    with_g = save(c, a, None); no_g = save(c2, a_ng, None)
-    # mesma moldura para as duas versões (a da versão com garra), redimensionada igual
-    ys, xs = np.where(np.array(with_g)[..., 3] > 0); box = (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1)
+    s = FRAME_SCALE.get(name, ROW_SCALE[ROWS[name]]) * UP
+    with_g = Image.fromarray(np.dstack([c, a]), 'RGBA')
+    no_g = Image.fromarray(np.dstack([c2, soften(a_ng)]), 'RGBA')
+    ys, xs = np.where(a > 0); box = (xs.min(), ys.min(), xs.max() + 1, ys.max() + 1)
     with_g, no_g = with_g.crop(box), no_g.crop(box)
     size = (round(with_g.width * s), round(with_g.height * s))
     with_g = with_g.resize(size, Image.LANCZOS); no_g = no_g.resize(size, Image.LANCZOS)
@@ -91,28 +69,31 @@ for name, b in boxes.items():
     with_g.save(f'{out}/{name}-garra.png'); no_g.save(f'{out}/{name}.png')
     meta[name] = {'file': f'assets/characters/antonio-frames/{name}.png', 'fileHolding': f'assets/characters/antonio-frames/{name}-garra.png',
                   'size': list(size), 'pivot': [round(px / size[0], 4), 0.0]}
-# ---- acabamento das versões sem garra ----
-def mirror_hand(path, A, sx0, sx1, y0, y1, dx0, dx1):
-    im2 = np.array(Image.open(path).convert('RGBA')); out2 = im2.copy(); J = im2[..., :3].astype(int)
-    navy = (J[..., 2] - J[..., 0] > 12) & (J.sum(2) < 400)
-    reg = np.zeros(im2.shape[:2], bool); reg[y0:y1, dx0:dx1] = True
-    out2[reg & ~navy, 3] = 0
-    for yy in range(y0, y1):
-        for xx in range(sx0, sx1):
-            if im2[yy, xx, 3] > 0 and not navy[yy, xx] and 0 <= A - xx < im2.shape[1]: out2[yy, A - xx] = im2[yy, xx]
-    Image.fromarray(out2, 'RGBA').save(path)
-# pose de frente: o punho tinha o furo do cabo -> usa a mão aberta do outro lado, espelhada
-mirror_hand(f'{out}/front.png', 316, 219, 259, 298, 358, 52, 101)
+# restos amarelos nas versões sem garra: pinta com a cor vizinha
 for name in meta:
     path = f'{out}/{name}.png'
     im2 = np.array(Image.open(path).convert('RGBA')); rgb = np.ascontiguousarray(im2[..., :3]); hsv2 = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV).astype(int)
-    left = (hsv2[..., 0] >= 17) & (hsv2[..., 0] <= 36) & (hsv2[..., 1] > 70) & (hsv2[..., 2] > 120) & (im2[..., 3] > 0)
+    left = yellow_of(hsv2, im2[..., 3], 70, 120)
     if left.any():
         rgb = cv2.inpaint(rgb, cv2.dilate(left.astype(np.uint8), np.ones((3, 3), np.uint8)) * 255, 3, cv2.INPAINT_TELEA)
         Image.fromarray(np.dstack([rgb, im2[..., 3]]), 'RGBA').save(path)
+# pose de frente: a garra cruzava a perna esquerda -> copia a perna direita, espelhada (eixo x = 318)
+f = np.array(Image.open(f'{out}/front.png').convert('RGBA')); g = f.copy(); A = 318
+for yy in range(350, 406):
+    g[yy, 95:150] = 0
+    for xx in range(168, 224):
+        if 95 <= A - xx < 150: g[yy, A - xx] = f[yy, xx]
+Image.fromarray(g, 'RGBA').save(f'{out}/front.png')
+# pose de costas: a garra cobria a perna direita -> copia a esquerda, espelhada (eixo x = 182)
+f = np.array(Image.open(f'{out}/back.png').convert('RGBA')); g = f.copy(); A = 182
+for yy in range(362, 434):
+    g[yy, 92:160] = 0
+    for xx in range(22, 91):
+        if 92 <= A - xx < 160: g[yy, A - xx] = f[yy, xx]
+Image.fromarray(g, 'RGBA').save(f'{out}/back.png')
 # sentado: pivô = ponto do bumbum sobre o assento (medido no quadro)
-meta['sit']['pivot'] = [round(75 / meta['sit']['size'][0], 4), round(1 - 352 / meta['sit']['size'][1], 4)]
-json.dump({'note': 'Quadros do Antônio (folha de poses 5x4). file = sem garra, fileHolding = com o braço mecânico. '
+meta['sit']['pivot'] = [round(80 / meta['sit']['size'][0], 4), round(1 - 351 / meta['sit']['size'][1], 4)]
+json.dump({'note': 'Quadros do Antônio (folha de poses v3, 5x4). file = sem garra, fileHolding = com o braço mecânico. '
                    'pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro "front". Os quadros olham para a direita.',
-           'refHeight': meta['front']['size'][1], 'walkCycle': ['walk3', 'walk4'], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
+           'refHeight': meta['front']['size'][1], 'walkCycle': ['walk3', 'side', 'walk4', 'side'], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
 print({k: v['size'] for k, v in meta.items()})
