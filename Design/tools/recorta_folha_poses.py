@@ -95,5 +95,5 @@ Image.fromarray(g, 'RGBA').save(f'{out}/back.png')
 meta['sit']['pivot'] = [round(80 / meta['sit']['size'][0], 4), round(1 - 351 / meta['sit']['size'][1], 4)]
 json.dump({'note': 'Quadros do Antônio (folha de poses v3, 5x4). file = sem garra, fileHolding = com o braço mecânico. '
                    'pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro "front". Os quadros olham para a direita.',
-           'refHeight': meta['front']['size'][1], 'walkCycle': ['walk3', 'side', 'walk4', 'side'], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
+           'refHeight': meta['front']['size'][1], 'stride': 0.39, 'walkCycle': ['walk3', 'side', 'walk4', 'side'], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
 print({k: v['size'] for k, v in meta.items()})

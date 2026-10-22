@@ -8,6 +8,7 @@ namespace RecreioEspacial.World
     /// <summary>
     /// Quadros de animação de um personagem (folha de poses), lidos de um frames.json:
     ///   refHeight: altura em px do quadro "front" (define a escala de todos)
+    ///   walkCycle: quadros da caminhada em ordem (2 passos); stride: passada como fração da altura
     ///   frames: { nome: { file, fileHolding?, size:[w,h], pivot:[x 0..1, y 0..1], hold?:{ hand:[px,py], flip, angle } } }
     ///   held: { file, grip:[x 0..1, y 0..1] } — item desenhado na mão (ex.: braço mecânico)
     /// Os quadros olham para a direita; para a esquerda, espelha.
@@ -28,6 +29,8 @@ namespace RecreioEspacial.World
         public float RefHeightPx = 490f;
         /// <summary>Quadros do ciclo de caminhada, em ordem (um ciclo = 2 passos). Vazio = walk1..walk4 / walk1..walk2.</summary>
         public readonly List<string> WalkCycle = new List<string>();
+        /// <summary>Passada do desenho (distância entre os pés na passada) como fração da altura do personagem. 0 = padrão do código.</summary>
+        public float Stride;
         public readonly Dictionary<string, Frame> Frames = new Dictionary<string, Frame>();
         public Sprite Held;
 
@@ -43,7 +46,7 @@ namespace RecreioEspacial.World
             }
             if (!(MiniJson.Parse(text.text) is Dictionary<string, object> root)) return null;
 
-            var set = new FrameSet { RefHeightPx = Num(root, "refHeight", 490f) };
+            var set = new FrameSet { RefHeightPx = Num(root, "refHeight", 490f), Stride = Num(root, "stride", 0f) };
             if (root.TryGetValue("walkCycle", out var wc) && wc is List<object> wl)
                 foreach (var o in wl) if (o is string ws) set.WalkCycle.Add(ws);
             if (root.TryGetValue("frames", out var fo) && fo is Dictionary<string, object> frames)

@@ -13,10 +13,10 @@ namespace RecreioEspacial.World
     public class AntonioController : MonoBehaviour
     {
         const float Accel = 140f;          // %/s²
-        const float MaxSpeed = 30f;        // %/s (multiplicado pela escala de profundidade)
+        const float MaxSpeed = 26f;        // %/s (multiplicado pela escala de profundidade)
         // distância vertical vale altura/largura da cena (9/16 numa cena do tamanho da tela)
         static float YMetric => Stage.Height / Stage.Width;
-        const float StepLength = 4.2f;     // distância de um passo (× escala)
+        const float StepLength = 4.2f;     // distância de um passo (× escala); os quadros desenhados usam a do frames.json
 
         public float X { get; private set; } = 50f;
         public float Y { get; private set; } = 2f;
@@ -347,7 +347,11 @@ namespace RecreioEspacial.World
 
             if (moved > 0f)
             {
-                phase += moved / (StepLength * wf * ScaleAt(Y)) * Mathf.PI;
+                // com quadros desenhados, um passo = a passada do desenho (fração da altura do Antônio), para o pé não deslizar
+                float stepLen = frames != null && frames.Stride > 0f
+                    ? frames.Stride * antonioHeight * Stage.Height / Stage.ScreenWidth
+                    : StepLength;
+                phase += moved / (stepLen * wf * ScaleAt(Y)) * Mathf.PI;
                 if (Mathf.Abs(dxMoved) > 0.2f || keyboard && Mathf.Abs(dxMoved) > 0.0001f) Dir = dxMoved < 0 ? -1 : 1;
                 side = Mathf.Abs(dxMoved) > Mathf.Abs(dyMetricMoved) * 0.6f;
             }

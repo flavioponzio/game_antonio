@@ -129,7 +129,8 @@ Os quadros vão para `Assets/Resources/EP01/assets/characters/antonio-frames/`. 
 braço mecânico.
 - parado: `front`, com piscada `blink`; falando: `talk` alternando com `front`
 - andando: `walkCycle` do `frames.json` = `walk3` → `side` → `walk4` → `side` (passada, passagem, passada, passagem).
-  Prévia: `Design/personagens/antonio-caminhada-previa.gif`. A folha não tem um ciclo de caminhada de verdade; quando
+  `stride` = passada do desenho (distância entre os pés) em fração da altura: define o ritmo dos passos (o pé não
+  desliza). Prévia: `Design/personagens/antonio-caminhada-previa.gif`. A folha não tem um ciclo de caminhada de verdade; quando
   vier uma tira de caminhada própria, é só recortar os quadros e trocar a lista `walkCycle`.
 - pulo: `land` antes e depois, `jump` no ar
 - interações: `lookUp`/`lookDown` automáticos pela altura do objeto, `front34` com NPCs, `back34` na lousa,
