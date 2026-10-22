@@ -5,11 +5,11 @@
  "walkCycle": [
   "walk8_1",
   "walk8_2",
-  "walk8_3",
+  "pass1",
   "walk8_4",
   "walk8_5",
   "walk8_6",
-  "walk8_7",
+  "pass2",
   "walk8_8"
  ],
  "frames": {
@@ -346,6 +346,46 @@
    ],
    "pivot": [
     0.5886,
+    0.0
+   ]
+  },
+  "pass1": {
+   "file": "assets/characters/antonio-frames/pass1.png",
+   "fileHolding": "assets/characters/antonio-frames/pass1-garra.png",
+   "size": [
+    188,
+    489
+   ],
+   "pivot": [
+    0.4957,
+    0.0
+   ],
+   "sizeHolding": [
+    198,
+    489
+   ],
+   "pivotHolding": [
+    0.5253,
+    0.0
+   ]
+  },
+  "pass2": {
+   "file": "assets/characters/antonio-frames/pass2.png",
+   "fileHolding": "assets/characters/antonio-frames/pass2-garra.png",
+   "size": [
+    190,
+    486
+   ],
+   "pivot": [
+    0.4788,
+    0.0
+   ],
+   "sizeHolding": [
+    185,
+    486
+   ],
+   "pivotHolding": [
+    0.5186,
     0.0
    ]
   }

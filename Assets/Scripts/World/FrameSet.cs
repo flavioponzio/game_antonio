@@ -9,7 +9,7 @@ namespace RecreioEspacial.World
     /// Quadros de animação de um personagem (folha de poses), lidos de um frames.json:
     ///   refHeight: altura em px do quadro "front" (define a escala de todos)
     ///   walkCycle: quadros da caminhada em ordem (2 passos); stride: passada como fração da altura
-    ///   frames: { nome: { file, fileHolding?, size:[w,h], pivot:[x 0..1, y 0..1], hold?:{ hand:[px,py], flip, angle } } }
+    ///   frames: { nome: { file, fileHolding?, size:[w,h], pivot:[x 0..1, y 0..1], pivotHolding?, hold?:{ hand:[px,py], flip, angle } } }
     ///   held: { file, grip:[x 0..1, y 0..1] } — item desenhado na mão (ex.: braço mecânico)
     /// Os quadros olham para a direita; para a esquerda, espelha.
     /// </summary>
@@ -58,7 +58,8 @@ namespace RecreioEspacial.World
                     var sprite = GameAssets.Sprite(d.TryGetValue("file", out var f) ? f as string : null, pivot);
                     if (sprite == null) continue;
                     var fr = new Frame { Sprite = sprite, Size = Vec(d, "size", new Vector2(sprite.rect.width, sprite.rect.height)), Pivot = pivot };
-                    if (d.TryGetValue("fileHolding", out var fh) && fh is string fhs) fr.SpriteHolding = GameAssets.Sprite(fhs, pivot);
+                    // a versão com o item pode ser outro desenho, com pivô próprio
+                    if (d.TryGetValue("fileHolding", out var fh) && fh is string fhs) fr.SpriteHolding = GameAssets.Sprite(fhs, Vec(d, "pivotHolding", pivot));
                     if (d.TryGetValue("hold", out var ho) && ho is Dictionary<string, object> h)
                     {
                         fr.HasHold = true;

@@ -131,7 +131,9 @@ braço mecânico.
 - andando: `walkCycle` do `frames.json` = `walk8_1` → `walk8_8` (2 passos: contato, descida, passagem, subida), da folha
   de caminhada (`Design/personagens/Folha de animação_ menino caminhando com garra dourada.png`), montados por
   `Design/tools/monta_caminhada.py`. A versão com garra usa os mesmos desenhos da linha 1 com a garra da linha 2 colada
-  na mão de trás. `stride` = abertura dos pés na passada em fração da altura: define o ritmo dos passos.
+  na mão de trás. No meio de cada passo entram `pass1` e `pass2` (pernas juntas, uma levantada), de
+  `Menino em Dois Passos de Caminhada.png` e `Menino em caminhada com garra dourada.png`, montados por
+  `Design/tools/monta_passagem.py` (a versão com garra é outro desenho, com `pivotHolding` próprio). `stride` = abertura dos pés na passada em fração da altura: define o ritmo dos passos.
   Prévia: `Design/personagens/antonio-caminhada-previa.gif`.
 - pulo: `land` antes e depois, `jump` no ar
 - interações: `lookUp`/`lookDown` automáticos pela altura do objeto, `front34` com NPCs, `back34` na lousa,
