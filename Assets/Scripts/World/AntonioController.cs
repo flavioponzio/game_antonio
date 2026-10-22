@@ -438,7 +438,13 @@ namespace RecreioEspacial.World
             if (jumpPhase != JumpPhase.None) return "land";
             if (moving)
             {
-                // 4 quadros por ciclo (2 passos) se existirem; senão, 2
+                // ciclo definido no frames.json (um ciclo = 2 passos = phase 2π)
+                var cyc = frames.WalkCycle;
+                if (cyc.Count > 0)
+                {
+                    int i = (int)(Mathf.Repeat(phase, 2f * Mathf.PI) / (2f * Mathf.PI) * cyc.Count);
+                    return cyc[Mathf.Clamp(i, 0, cyc.Count - 1)];
+                }
                 if (frames.Get("walk4") != null) return "walk" + (1 + (((int)(phase / (Mathf.PI / 2f))) & 3));
                 return ((int)(phase / Mathf.PI) & 1) == 0 ? "walk1" : "walk2";
             }

@@ -114,5 +114,5 @@ for name in meta:
 meta['sit']['pivot'] = [round(75 / meta['sit']['size'][0], 4), round(1 - 352 / meta['sit']['size'][1], 4)]
 json.dump({'note': 'Quadros do Antônio (folha de poses 5x4). file = sem garra, fileHolding = com o braço mecânico. '
                    'pivot = (x do tronco, base) normalizado 0..1. refHeight = altura em px do quadro "front". Os quadros olham para a direita.',
-           'refHeight': meta['front']['size'][1], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
+           'refHeight': meta['front']['size'][1], 'walkCycle': ['walk3', 'walk4'], 'frames': meta}, open(f'{out}/frames.json', 'w'), indent=1)
 print({k: v['size'] for k, v in meta.items()})

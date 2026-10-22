@@ -26,6 +26,8 @@ namespace RecreioEspacial.World
         }
 
         public float RefHeightPx = 490f;
+        /// <summary>Quadros do ciclo de caminhada, em ordem (um ciclo = 2 passos). Vazio = walk1..walk4 / walk1..walk2.</summary>
+        public readonly List<string> WalkCycle = new List<string>();
         public readonly Dictionary<string, Frame> Frames = new Dictionary<string, Frame>();
         public Sprite Held;
 
@@ -42,6 +44,8 @@ namespace RecreioEspacial.World
             if (!(MiniJson.Parse(text.text) is Dictionary<string, object> root)) return null;
 
             var set = new FrameSet { RefHeightPx = Num(root, "refHeight", 490f) };
+            if (root.TryGetValue("walkCycle", out var wc) && wc is List<object> wl)
+                foreach (var o in wl) if (o is string ws) set.WalkCycle.Add(ws);
             if (root.TryGetValue("frames", out var fo) && fo is Dictionary<string, object> frames)
             {
                 foreach (var kv in frames)
