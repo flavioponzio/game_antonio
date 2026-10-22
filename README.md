@@ -128,10 +128,11 @@ Os quadros vão para `Assets/Resources/EP01/assets/characters/antonio-frames/`. 
 (sem garra, gerada apagando a garra do desenho) e `nome-garra.png`; a versão com garra entra depois que ele pega o
 braço mecânico.
 - parado: `front`, com piscada `blink`; falando: `talk` alternando com `front`
-- andando: `walkCycle` do `frames.json` = `walk3` → `side` → `walk4` → `side` (passada, passagem, passada, passagem).
-  `stride` = passada do desenho (distância entre os pés) em fração da altura: define o ritmo dos passos (o pé não
-  desliza). Prévia: `Design/personagens/antonio-caminhada-previa.gif`. A folha não tem um ciclo de caminhada de verdade; quando
-  vier uma tira de caminhada própria, é só recortar os quadros e trocar a lista `walkCycle`.
+- andando: `walkCycle` do `frames.json` = `walk8_1` → `walk8_8` (2 passos: contato, descida, passagem, subida), da folha
+  de caminhada (`Design/personagens/Folha de animação_ menino caminhando com garra dourada.png`), montados por
+  `Design/tools/monta_caminhada.py`. A versão com garra usa os mesmos desenhos da linha 1 com a garra da linha 2 colada
+  na mão de trás. `stride` = abertura dos pés na passada em fração da altura: define o ritmo dos passos.
+  Prévia: `Design/personagens/antonio-caminhada-previa.gif`.
 - pulo: `land` antes e depois, `jump` no ar
 - interações: `lookUp`/`lookDown` automáticos pela altura do objeto, `front34` com NPCs, `back34` na lousa,
   janela e desenhos, `pickUp` no apontador (campo `"pose"` do hotspot)
