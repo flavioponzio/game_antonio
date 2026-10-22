@@ -8,7 +8,7 @@ namespace RecreioEspacial.World
     /// <summary>
     /// Quadros de animação de um personagem (folha de poses), lidos de um frames.json:
     ///   refHeight: altura em px do quadro "front" (define a escala de todos)
-    ///   frames: { nome: { file, size:[w,h], pivot:[x 0..1, y 0..1], hold:{ hand:[px,py], flip, angle } } }
+    ///   frames: { nome: { file, fileHolding?, size:[w,h], pivot:[x 0..1, y 0..1], hold?:{ hand:[px,py], flip, angle } } }
     ///   held: { file, grip:[x 0..1, y 0..1] } — item desenhado na mão (ex.: braço mecânico)
     /// Os quadros olham para a direita; para a esquerda, espelha.
     /// </summary>
@@ -17,6 +17,8 @@ namespace RecreioEspacial.World
         public class Frame
         {
             public Sprite Sprite;
+            /// <summary>Versão segurando o item (ex.: com o braço mecânico). Pode ser nula.</summary>
+            public Sprite SpriteHolding;
             public Vector2 Size, Pivot;
             public bool HasHold, HoldFlip;
             public Vector2 Hand;
@@ -49,6 +51,7 @@ namespace RecreioEspacial.World
                     var sprite = GameAssets.Sprite(d.TryGetValue("file", out var f) ? f as string : null, pivot);
                     if (sprite == null) continue;
                     var fr = new Frame { Sprite = sprite, Size = Vec(d, "size", new Vector2(sprite.rect.width, sprite.rect.height)), Pivot = pivot };
+                    if (d.TryGetValue("fileHolding", out var fh) && fh is string fhs) fr.SpriteHolding = GameAssets.Sprite(fhs, pivot);
                     if (d.TryGetValue("hold", out var ho) && ho is Dictionary<string, object> h)
                     {
                         fr.HasHold = true;

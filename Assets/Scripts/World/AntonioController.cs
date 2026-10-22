@@ -214,7 +214,9 @@ namespace RecreioEspacial.World
         bool seated;
         float seatY;
         /// <summary>Sentado na cadeira (pose do rig de perfil).</summary>
-        public bool Seated => seated && sideRig != null;
+        public bool Seated => seated && (sideRig != null || frames?.Get("sit") != null);
+        /// <summary>O Antônio está falando (boca abre e fecha com o quadro "talk").</summary>
+        public bool Talking { get; set; }
 
         /// <summary>Senta: x = quadril, seatY = altura do assento (% da base), dir = para onde olha.</summary>
         public void Sit(float x, float seatYFromBottom, int dir)
@@ -237,7 +239,9 @@ namespace RecreioEspacial.World
 
         /// <summary>Topo da cabeça em % (medido da base), para posicionar o balão.</summary>
         public float TopPct => Seated
-            ? seatY + antonioHeight * sideRig.HipToTopPx / sideRig.HeightPx
+            ? (frames?.Get("sit") is FrameSet.Frame sf
+                ? seatY + antonioHeight * (sf.Size.y * (1f - sf.Pivot.y)) / frames.RefHeightPx
+                : seatY + antonioHeight * sideRig.HipToTopPx / sideRig.HeightPx)
             : Y + HeightPct + curLift + jumpY;
 
         // ---------- Comandos ----------
@@ -432,8 +436,14 @@ namespace RecreioEspacial.World
         {
             if (jumpPhase == JumpPhase.Air) return "jump";
             if (jumpPhase != JumpPhase.None) return "land";
-            if (moving) return ((int)(phase / Mathf.PI) & 1) == 0 ? "walk1" : "walk2";
+            if (moving)
+            {
+                // 4 quadros por ciclo (2 passos) se existirem; senão, 2
+                if (frames.Get("walk4") != null) return "walk" + (1 + (((int)(phase / (Mathf.PI / 2f))) & 3));
+                return ((int)(phase / Mathf.PI) & 1) == 0 ? "walk1" : "walk2";
+            }
             if (!string.IsNullOrEmpty(Pose) && frames.Get(Pose) != null) return Pose;
+            if (Talking && frames.Get("talk") != null) return ((int)(t / 0.16f) & 1) == 0 ? "talk" : "front";
             // piscada de vez em quando
             if (blinkLeft > 0f) { blinkLeft -= dt; return "blink"; }
             blinkTimer -= dt;
@@ -452,7 +462,8 @@ namespace RecreioEspacial.World
             string name = PickFrame(moving, dt);
             var f = frames.Get(name) ?? frames.Get("front");
             sr.enabled = true;
-            if (f != null && sr.sprite != f.Sprite) sr.sprite = f.Sprite;
+            var fs = f == null ? null : Holding && f.SpriteHolding != null ? f.SpriteHolding : f.Sprite;
+            if (fs != null && sr.sprite != fs) sr.sprite = fs;
             if (sideRig != null) sideRig.SetVisible(false);
 
             // movimento leve por cima dos quadros (os desenhos já trazem a pose)
@@ -471,7 +482,7 @@ namespace RecreioEspacial.World
 
             if (heldSr != null)
             {
-                bool show = Holding && f != null && f.HasHold;
+                bool show = Holding && f != null && f.HasHold && f.SpriteHolding == null;
                 heldSr.enabled = show;
                 if (show)
                 {
@@ -499,6 +510,26 @@ namespace RecreioEspacial.World
 
         void UpdateSeatedVisual()
         {
+            var sit = frames?.Get("sit");
+            if (sit != null)
+            {
+                // desenho sentado da folha de poses: pivô = bumbum sobre o assento
+                float hu = Stage.H(antonioHeight);
+                float kk = hu / (frames.RefHeightPx / 100f);
+                sr.enabled = true;
+                var ss = Holding && sit.SpriteHolding != null ? sit.SpriteHolding : sit.Sprite;
+                if (sr.sprite != ss) sr.sprite = ss;
+                if (sideRig != null) sideRig.SetVisible(false);
+                if (heldSr != null) heldSr.enabled = false;
+                float br = 0.006f * Mathf.Sin(t * 2.3f);
+                transform.localPosition = Stage.Point(X, seatY);
+                body.localPosition = Vector3.zero;
+                body.localRotation = Quaternion.identity;
+                body.localScale = new Vector3(kk * Dir, kk * (1f + br), 1f);
+                sortingGroup.sortingOrder = Stage.SortingOrderForBottom(Y) + 1;
+                if (shadow != null) shadow.enabled = false;
+                return;
+            }
             float heightUnits = Stage.H(antonioHeight);
             float k = heightUnits / (sideRig.HeightPx / 100f);
             sr.enabled = false;

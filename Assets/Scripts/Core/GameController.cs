@@ -886,6 +886,7 @@ namespace RecreioEspacial.Core
             view.SetHighlight(keyTarget?.Id);
             ui.SetHover(bubbleActive ? null : hoverLabel);
 
+            antonio.Talking = bubbleActive && bubbleWho == "antonio";
             foreach (var npc in view.Npcs)
             {
                 npc.AntonioX = antonio.X;

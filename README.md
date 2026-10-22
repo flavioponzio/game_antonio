@@ -116,12 +116,16 @@ A sala nova (`ep01-sala-2d.png`) veio do Nano Banana; a margem de papel foi cort
 
 ## Quadros do Antônio (folha de poses)
 
-Em pé, andando e pulando, o Antônio usa os quadros da folha de poses (`Design/personagens/antonio-folha-poses.webp`),
-recortados por `Design/tools/recorta_folha_poses.py` para `Assets/Resources/EP01/assets/characters/antonio-frames/`:
-parado (`front`, com piscada `blink`), andando (`walk1`/`walk2` alternados a cada passo), pulo (`land` antes e
-depois, `jump` no ar), olhar para cima/baixo (`lookUp`/`lookDown`, automático pela altura do objeto) e de costas
-para a parede (`back34`, campo `"pose"` do hotspot). O braço mecânico é desenhado atrás do corpo, preso na mão de
-cada quadro (`hold` em `frames.json`). Sentado, ele ainda usa o rig recortado.
+O Antônio usa os 20 quadros da folha de poses com a garra (`Design/personagens/antonio-folha-poses-garra.webp`),
+recortados por `Design/tools/recorta_folha_poses.py` (medidas em `mede_folha_poses.py`) para
+`Assets/Resources/EP01/assets/characters/antonio-frames/`. Cada pose tem duas versões: `nome.png` (sem garra, gerada
+apagando a garra do desenho) e `nome-garra.png`; a versão com garra entra depois que ele pega o braço mecânico.
+- parado: `front`, com piscada `blink`; falando: `talk` alternando com `front`
+- andando: `walk1` → `walk4` (4 quadros a cada 2 passos)
+- pulo: `land` antes e depois, `jump` no ar
+- interações: `lookUp`/`lookDown` automáticos pela altura do objeto, `front34` com NPCs, `back34` na lousa,
+  janela e desenhos, `pickUp` no apontador (campo `"pose"` do hotspot)
+- sentado: `sit` (pivô no bumbum, sobre o assento da cadeira)
 
 ## Rig do Antônio (boneco recortado de perfil)
 
