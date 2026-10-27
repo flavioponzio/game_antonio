@@ -11,6 +11,7 @@ namespace RecreioEspacial.World
     ///   images: { nome: { file, box:[x,y,w,h] } }  — recorte de cada parte, em pixels da arte original (y para baixo)
     ///   parts:  [ { name, image, parent, pivot:[x,y], tint, order } ] — pivot = junta onde a parte gira
     ///   root:   [x,y] — ponto do chão (entre os pés); height: altura do personagem em pixels
+    ///   stride: passo em fração da altura; parts[].sole: [[x,y],[x,y]] calcanhar e ponta do pé (nas canelas)
     /// A escala vem de fora (1 pixel = 0,01 unidade antes de escalar).
     /// </summary>
     public class CutoutRig : MonoBehaviour
@@ -21,7 +22,14 @@ namespace RecreioEspacial.World
         /// <summary>Do quadril ao topo da cabeça, em pixels do rig.</summary>
         public float HipToTopPx { get; private set; } = 374f;
 
+        /// <summary>Quanto o pé de apoio anda para trás num passo, em fração da altura (rig.json "stride"). 0 = não informado.</summary>
+        public float Stride { get; private set; }
+        /// <summary>O rig tem a sola dos pés marcada ("sole" nas canelas): dá para andar com o pé sempre no chão.</summary>
+        public bool CanWalk => soles.Count > 0;
+
         readonly Dictionary<string, Transform> joints = new Dictionary<string, Transform>();
+        // calcanhar e ponta do pé de cada canela, em unidades locais da junta
+        readonly List<KeyValuePair<Transform, Vector3>> soles = new List<KeyValuePair<Transform, Vector3>>();
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         readonly Dictionary<string, SpriteRenderer> byPart = new Dictionary<string, SpriteRenderer>();
         readonly HashSet<string> hidden = new HashSet<string>();
@@ -43,6 +51,7 @@ namespace RecreioEspacial.World
             go.transform.SetParent(parent, false);
             var rig = go.AddComponent<CutoutRig>();
             rig.HeightPx = Num(root, "height", 500f);
+            rig.Stride = Num(root, "stride", 0f);
             var rootPt = Vec(root, "root");
             rig.HipToTopPx = rig.HeightPx - 144f;
 
@@ -84,6 +93,10 @@ namespace RecreioEspacial.World
                     parentPivot = Vec(pd, "pivot");
                 }
                 joint.localPosition = PxToLocal(pivot - parentPivot);
+                if (d.TryGetValue("sole", out var so) && so is List<object> sl)
+                    foreach (var sp in sl)
+                        if (sp is List<object> pt && pt.Count >= 2 && pt[0] is double sx && pt[1] is double sy)
+                            rig.soles.Add(new KeyValuePair<Transform, Vector3>(joint, PxToLocal(new Vector2((float)sx, (float)sy) - pivot)));
 
                 // imagem da parte, com o pivô do sprite na junta
                 string imageKey = Str(d, "image");
@@ -125,12 +138,10 @@ namespace RecreioEspacial.World
             if (byPart.TryGetValue(part, out var r)) r.enabled = visible && !hide;
         }
 
-        /// <summary>
-        /// Ciclo de caminhada procedural. phase avança π a cada passo; amount (0..1) = quanto está andando.
-        /// </summary>
         /// <summary>Pose sentada de perfil: coxas na horizontal, canelas para baixo, mãos sobre a carteira.</summary>
         public void ApplySit(float breathe)
         {
+            transform.localPosition = Vector3.zero;
             SetAngle("body", -6f);
             SetAngle("head", -6f + breathe * 2f);
             SetAngle("frontLegUpper", 96f);
@@ -146,6 +157,7 @@ namespace RecreioEspacial.World
         /// <summary>Pose no ar: joelhos dobrados e braços para cima. rise = +1 subindo … -1 caindo.</summary>
         public void ApplyJump(float rise)
         {
+            transform.localPosition = Vector3.zero;
             float tuck = 1f - 0.35f * Mathf.Abs(rise); // mais encolhido no alto do pulo
             SetAngle("body", 0f);
             SetAngle("head", 3f * rise);
@@ -159,22 +171,51 @@ namespace RecreioEspacial.World
             SetAngle("backArmLower", 20f);
         }
 
+        // joelho em 8 pontos de um ciclo (phase 0 = passagem com a perna no ar, π/2 = calcanhar no chão,
+        // π = passagem com a perna de apoio, 3π/2 = saindo do chão na ponta do pé)
+        static readonly float[] KneeKeys = { -45f, -20f, -5f, -8f, -3f, -5f, -20f, -55f };
+
+        /// <summary>Interpolação suave (Catmull-Rom) e periódica entre pontos igualmente espaçados num ciclo de 2π.</summary>
+        static float Periodic(float[] keys, float phase)
+        {
+            int n = keys.Length;
+            float u = Mathf.Repeat(phase / (2f * Mathf.PI), 1f) * n;
+            int i = (int)u;
+            float f = u - i;
+            float p0 = keys[(i - 1 + n) % n], p1 = keys[i % n], p2 = keys[(i + 1) % n], p3 = keys[(i + 2) % n];
+            return 0.5f * (2f * p1 + (-p0 + p2) * f + (2f * p0 - 5f * p1 + 4f * p2 - p3) * f * f + (-p0 + 3f * p1 - 3f * p2 + p3) * f * f * f);
+        }
+
+        /// <summary>
+        /// Ciclo de caminhada. phase avança π a cada passo; amount (0..1) = quanto está andando.
+        /// Coxas balançam ±27°, o joelho segue KneeKeys e os braços vão ao contrário da perna do mesmo lado.
+        /// Depois chame GroundFeet para o pé mais baixo ficar no chão (o sobe-e-desce sai daí).
+        /// </summary>
         public void ApplyWalk(float phase, float amount)
         {
-            float s = Mathf.Sin(phase), c = Mathf.Cos(phase);
-            const float thigh = 22f, knee = 40f, arm = 18f;
-            SetAngle("frontLegUpper", thigh * s * amount);
-            SetAngle("backLegUpper", -thigh * s * amount);
-            // o joelho dobra enquanto a perna passa para a frente
-            SetAngle("frontLegLower", -knee * Mathf.Max(0f, c) * amount);
-            SetAngle("backLegLower", -knee * Mathf.Max(0f, -c) * amount);
-            // braços ao contrário das pernas
-            SetAngle("frontArmUpper", -arm * s * amount);
-            SetAngle("backArmUpper", arm * s * amount);
-            SetAngle("frontArmLower", (6f + 6f * Mathf.Max(0f, -s)) * amount);
-            SetAngle("backArmLower", (6f + 6f * Mathf.Max(0f, s)) * amount);
-            SetAngle("head", 1.5f * c * amount);
-            SetAngle("body", 0f);
+            const float thigh = 27f, arm = 20f;
+            SetAngle("frontLegUpper", thigh * Mathf.Sin(phase) * amount);
+            SetAngle("frontLegLower", Periodic(KneeKeys, phase) * amount);
+            SetAngle("backLegUpper", thigh * Mathf.Sin(phase + Mathf.PI) * amount);
+            SetAngle("backLegLower", Periodic(KneeKeys, phase + Mathf.PI) * amount);
+            float sf = Mathf.Sin(phase + Mathf.PI), sb = Mathf.Sin(phase);
+            SetAngle("frontArmUpper", arm * sf * amount);
+            SetAngle("frontArmLower", (8f + 16f * Mathf.Max(0f, sf)) * amount);
+            SetAngle("backArmUpper", arm * sb * amount);
+            SetAngle("backArmLower", (8f + 16f * Mathf.Max(0f, sb)) * amount);
+            SetAngle("body", -3f * amount);
+            SetAngle("head", (2f + 1.5f * Mathf.Cos(2f * phase)) * amount);
+        }
+
+        /// <summary>Sobe ou desce o boneco para a sola mais baixa encostar no chão (y = 0 do rig).</summary>
+        public void GroundFeet()
+        {
+            transform.localPosition = Vector3.zero;
+            if (soles.Count == 0) return;
+            float minY = float.MaxValue;
+            foreach (var s in soles)
+                minY = Mathf.Min(minY, transform.InverseTransformPoint(s.Key.TransformPoint(s.Value)).y);
+            transform.localPosition = new Vector3(0f, -minY * transform.localScale.y, 0f);
         }
 
         static Vector3 PxToLocal(Vector2 deltaPx) => new Vector3(deltaPx.x / 100f, -deltaPx.y / 100f, 0f);

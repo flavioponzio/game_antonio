@@ -1,0 +1,253 @@
+{
+ "note": "Rig do Antônio de perfil (v4, folha de peças do ChatGPT). Coordenadas em pixels do perfil montado (y para baixo). box = [x, y, w, h] da imagem; pivot = junta onde a parte gira; order = ordem de desenho.",
+ "height": 913,
+ "root": [
+  1283,
+  989
+ ],
+ "stride": 0.358,
+ "images": {
+  "head": {
+   "file": "assets/characters/antonio-rig4/head.png",
+   "box": [
+    1152,
+    76,
+    271,
+    272
+   ]
+  },
+  "armUpF": {
+   "file": "assets/characters/antonio-rig4/armUpF.png",
+   "box": [
+    1232,
+    384,
+    84,
+    242
+   ]
+  },
+  "armLoF": {
+   "file": "assets/characters/antonio-rig4/armLoF.png",
+   "box": [
+    1256,
+    534,
+    61,
+    197
+   ]
+  },
+  "armUpB": {
+   "file": "assets/characters/antonio-rig4/armUpB.png",
+   "box": [
+    1237,
+    385,
+    85,
+    243
+   ]
+  },
+  "armLoB": {
+   "file": "assets/characters/antonio-rig4/armLoB.png",
+   "box": [
+    1260,
+    533,
+    62,
+    198
+   ]
+  },
+  "legUpF": {
+   "file": "assets/characters/antonio-rig4/legUpF.png",
+   "box": [
+    1234,
+    645,
+    111,
+    159
+   ]
+  },
+  "legLoF": {
+   "file": "assets/characters/antonio-rig4/legLoF.png",
+   "box": [
+    1235,
+    756,
+    156,
+    235
+   ]
+  },
+  "legUpB": {
+   "file": "assets/characters/antonio-rig4/legUpB.png",
+   "box": [
+    1224,
+    645,
+    119,
+    165
+   ]
+  },
+  "legLoB": {
+   "file": "assets/characters/antonio-rig4/legLoB.png",
+   "box": [
+    1231,
+    760,
+    165,
+    237
+   ]
+  },
+  "body": {
+   "file": "assets/characters/antonio-rig4/body.png",
+   "box": [
+    1220,
+    337,
+    157,
+    352
+   ]
+  },
+  "grabber": {
+   "file": "assets/characters/antonio-rig4/grabber.png",
+   "box": [
+    1277,
+    671,
+    83,
+    136
+   ]
+  }
+ },
+ "parts": [
+  {
+   "name": "backArmUpper",
+   "image": "armUpB",
+   "parent": "body",
+   "pivot": [
+    1278.0,
+    420.0
+   ],
+   "tint": 1.0,
+   "order": 0
+  },
+  {
+   "name": "backArmLower",
+   "image": "armLoB",
+   "parent": "backArmUpper",
+   "pivot": [
+    1280.2,
+    553.6
+   ],
+   "tint": 1.0,
+   "order": 1
+  },
+  {
+   "name": "backLegLower",
+   "image": "legLoB",
+   "parent": "backLegUpper",
+   "pivot": [
+    1283.0,
+    787.0
+   ],
+   "tint": 1.0,
+   "order": 2,
+   "sole": [
+    [
+     1238,
+     982
+    ],
+    [
+     1393,
+     982
+    ]
+   ]
+  },
+  {
+   "name": "backLegUpper",
+   "image": "legUpB",
+   "parent": "body",
+   "pivot": [
+    1275.0,
+    665.0
+   ],
+   "tint": 1.0,
+   "order": 3
+  },
+  {
+   "name": "frontLegLower",
+   "image": "legLoF",
+   "parent": "frontLegUpper",
+   "pivot": [
+    1286.0,
+    782.0
+   ],
+   "tint": 1.0,
+   "order": 5,
+   "sole": [
+    [
+     1240,
+     976
+    ],
+    [
+     1388,
+     976
+    ]
+   ]
+  },
+  {
+   "name": "body",
+   "image": "body",
+   "parent": "root",
+   "pivot": [
+    1283.0,
+    665.0
+   ],
+   "tint": 1.0,
+   "order": 6
+  },
+  {
+   "name": "frontLegUpper",
+   "image": "legUpF",
+   "parent": "body",
+   "pivot": [
+    1283.0,
+    665.0
+   ],
+   "tint": 1.0,
+   "order": 7
+  },
+  {
+   "name": "head",
+   "image": "head",
+   "parent": "body",
+   "pivot": [
+    1296.5,
+    359.0
+   ],
+   "tint": 1.0,
+   "order": 8
+  },
+  {
+   "name": "frontArmLower",
+   "image": "armLoF",
+   "parent": "frontArmUpper",
+   "pivot": [
+    1275.9,
+    553.2
+   ],
+   "tint": 1.0,
+   "order": 10
+  },
+  {
+   "name": "frontArmUpper",
+   "image": "armUpF",
+   "parent": "body",
+   "pivot": [
+    1272.0,
+    420.0
+   ],
+   "tint": 1.0,
+   "order": 11
+  },
+  {
+   "name": "grabber",
+   "image": "grabber",
+   "parent": "frontArmLower",
+   "pivot": [
+    1290.5,
+    675.0
+   ],
+   "tint": 1.0,
+   "order": 9
+  }
+ ]
+}

@@ -4,7 +4,7 @@
   "floorDoc": "floor { y, x:[min,max] } = chão 2D lateral (uma linha, sem profundidade). floor { nearY, farY, farScale, nearX, farX } = chão com perspectiva (modelo antigo).",
   "coordinates": "Todas as posições em % de um palco 16:9 (referência 1920x1080). Hotspots: x,y = canto superior esquerdo medido do topo; w,h = largura/altura. Chão e personagens: x = centro horizontal, y = distância da base do palco (bottom %).",
   "characters": {
-    "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front-sem-garra.png", "frontHolding": "assets/characters/antonio-front-garra.png", "side": "assets/characters/antonio-side.png" }, "rigSide": "assets/characters/antonio-rig/rig.json", "holdingItem": "braco", "holdingRigPart": "grabber", "frames": "assets/characters/antonio-frames/frames.json" },
+    "antonio": { "name": "Antônio", "sprites": { "front": "assets/characters/antonio-front-sem-garra.png", "frontHolding": "assets/characters/antonio-front-garra.png", "side": "assets/characters/antonio-side.png" }, "rigSide": "assets/characters/antonio-rig4/rig.json", "holdingItem": "braco", "holdingRigPart": "grabber", "frames": "assets/characters/antonio-frames/frames.json" },
     "caio": { "name": "Caio", "sprite": "assets/characters/npc-caio.png" },
     "bia": { "name": "Bia", "sprite": "assets/characters/npc-bia.png" },
     "lucia": { "name": "Prof. Lúcia", "sprite": "assets/characters/npc-lucia.png" },

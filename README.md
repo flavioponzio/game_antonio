@@ -142,13 +142,19 @@ braço mecânico.
 
 ## Rig do Antônio (boneco recortado de perfil)
 
-Quando anda de lado, o Antônio usa um boneco recortado em partes (cabeça, tronco, braços, pernas e braço
-mecânico) com um ciclo de caminhada feito por código (`World/CutoutRig.cs`). As partes saíram do perfil da
-folha de turnaround (`Design/personagens/antonio-turnaround.jpg`) com o script
-`Design/tools/cortar_rig_antonio.py`, que também grava os pivôs das juntas em
-`Assets/Resources/EP01/assets/characters/antonio-rig/rig.json`. A perna e o braço de trás são cópias mais
-escuras dos da frente. Parado, ele usa a imagem de frente, também tirada do turnaround. O braço mecânico (de frente e no rig) só aparece depois que ele pega o item `braco` na mochila: veja `holdingItem` no JSON. A versão de frente sem a garra foi feita por `Design/tools/antonio_frente_sem_garra.py`, que espelha a mão aberta do outro lado. Prévia das poses:
-`Design/personagens/antonio-rig-poses.png`.
+O Antônio **anda** com um boneco recortado em partes (cabeça, tronco com o short, braço de cima e antebraço, coxa e
+canela com o pé, de frente e de trás) e um ciclo de caminhada feito por código (`World/CutoutRig.cs`, `ApplyWalk`).
+Parado, falando, pulando, sentado e nas interações ele continua usando as poses desenhadas (folha de poses).
+
+- Partes: `Assets/Resources/EP01/assets/characters/antonio-rig4/` + `rig.json` (pivôs das juntas, ordem de desenho,
+  `stride` = passo em fração da altura e `sole` = calcanhar e ponta de cada pé).
+- Montagem: `Design/tools/monta_rig_v4.py`, a partir das imagens do ChatGPT em `Design/personagens/v4/` (folha de peças,
+  tronco e short de perfil e o braço montado usado como gabarito). `Design/tools/desenha_rig.py` e `caminhada_rig.py`
+  desenham a prévia (`Design/personagens/v4/antonio-caminhada-rig-previa.gif`).
+- A cada quadro, `GroundFeet` sobe ou desce o boneco para o pé mais baixo encostar no chão: o sobe-e-desce do corpo sai
+  das próprias pernas.
+- O braço mecânico do rig é provisório (recortado do elenco) até chegar o desenho dele (passo 4 de
+  `Design/prompts-chatgpt-personagens.md`).
 
 ## Estado atual e limitações
 

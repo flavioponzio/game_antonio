@@ -127,6 +127,8 @@ namespace RecreioEspacial.World
         SortingGroup sortingGroup;
         /// <summary>Boneco recortado de perfil (opcional). Quando existe, substitui o sprite de perfil ao andar.</summary>
         CutoutRig sideRig;
+        /// <summary>A caminhada é feita pelo boneco recortado (que tem os pés marcados), mesmo com a folha de poses.</summary>
+        bool RigWalks => sideRig != null && sideRig.CanWalk && sideRig.Stride > 0f;
 
         public static AntonioController Create(Transform parent, Sprite front, Sprite side, string sideRigJson = null,
             Sprite frontHolding = null, string holdingRigPart = null, string framesJson = null)
@@ -347,10 +349,9 @@ namespace RecreioEspacial.World
 
             if (moved > 0f)
             {
-                // com quadros desenhados, um passo = a passada do desenho (fração da altura do Antônio), para o pé não deslizar
-                float stepLen = frames != null && frames.Stride > 0f
-                    ? frames.Stride * antonioHeight * Stage.Height / Stage.ScreenWidth
-                    : StepLength;
+                // um passo = a passada do boneco (ou do desenho), em fração da altura do Antônio, para o pé não deslizar
+                float stride = RigWalks ? sideRig.Stride : frames != null ? frames.Stride : 0f;
+                float stepLen = stride > 0f ? stride * antonioHeight * Stage.Height / Stage.ScreenWidth : StepLength;
                 phase += moved / (stepLen * wf * ScaleAt(Y)) * Mathf.PI;
                 if (Mathf.Abs(dxMoved) > 0.2f || keyboard && Mathf.Abs(dxMoved) > 0.0001f) Dir = dxMoved < 0 ? -1 : 1;
                 side = Mathf.Abs(dxMoved) > Mathf.Abs(dyMetricMoved) * 0.6f;
@@ -470,6 +471,7 @@ namespace RecreioEspacial.World
             float walkAmt = Mathf.Min(1f, v / 14f);
             float sn = Mathf.Abs(Mathf.Sin(phase));
             bool moving = hasTarget || walkAmt > 0.05f;
+            if (moving && RigWalks && jumpPhase == JumpPhase.None) { UpdateRigWalkVisual(s, walkAmt); return; }
             string name = PickFrame(moving, dt);
             var f = frames.Get(name) ?? frames.Get("front");
             sr.enabled = true;
@@ -516,6 +518,38 @@ namespace RecreioEspacial.World
                 shadow.transform.localScale = new Vector3(widthUnits * 0.78f * sc, heightUnits * 0.05f * sc, 1f);
                 var c = shadow.color;
                 c.a = curLift > 3f ? 0f : (1f - bob * 0.12f) * (1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.5f);
+                shadow.color = c;
+                shadow.sortingOrder = order - 1;
+            }
+        }
+
+        /// <summary>Andando com o boneco recortado: as poses desenhadas ficam para parado, falando, pulando e sentado.</summary>
+        void UpdateRigWalkVisual(float s, float walkAmt)
+        {
+            sr.enabled = false;
+            if (heldSr != null) heldSr.enabled = false;
+            sideRig.SetPartHidden(holdingRigPart, !Holding);
+            sideRig.SetVisible(true);
+            sideRig.ApplyWalk(phase, walkAmt);
+            sideRig.GroundFeet();
+
+            float heightUnits = Stage.H(antonioHeight * s);
+            float k = heightUnits / (sideRig.HeightPx / 100f);
+            transform.localPosition = Stage.Point(X, Y + curLift + jumpY);
+            body.localPosition = Vector3.zero;
+            body.localRotation = Quaternion.identity;
+            body.localScale = new Vector3(k * Dir, k, 1f);
+
+            int order = Stage.SortingOrderForBottom(Y) + 1;
+            sortingGroup.sortingOrder = order;
+            if (shadow != null)
+            {
+                shadow.enabled = true;
+                float widthUnits = heightUnits * 0.53f;
+                shadow.transform.localPosition = new Vector3(0f, -curLift / 100f * Stage.Height + heightUnits * 0.013f, 0f);
+                shadow.transform.localScale = new Vector3(widthUnits * 0.78f, heightUnits * 0.05f, 1f);
+                var c = shadow.color;
+                c.a = curLift > 3f ? 0f : 1f;
                 shadow.color = c;
                 shadow.sortingOrder = order - 1;
             }
