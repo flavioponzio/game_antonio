@@ -2,7 +2,7 @@
 A folha tem: cabeça, tronco (de frente, não usado), short (de frente, não usado), braço de cima/baixo (frente e trás),
 coxa e canela+pé (frente e trás) e, à direita, o Antônio de perfil inteiro.
 O tronco e o quadril saem do perfil inteiro, apagando o braço; o resto são as peças soltas.
-Uso: python3 -I build_rig4.py <folha.png> <tronco_e_short.png> <bracos.png> <pasta_saida>
+Uso: python3 -I build_rig4.py <folha.png> <tronco_e_short.png> <bracos.png> <pasta_saida> [garra.png]
 O tronco e o short de perfil vêm de uma segunda imagem (a folha trouxe os dois de frente) e o braço de cima
 (manga com o ombro arredondado) de uma terceira, já sem o quadriculado (unchecker.py).
 Grava as imagens das partes e rig.json (formato do CutoutRig: coordenadas no espaço do perfil montado, y para baixo)."""
@@ -10,6 +10,7 @@ import sys, os, json
 import numpy as np, cv2
 from PIL import Image
 src, src2, src3, out = sys.argv[1:5]
+grabber_src = sys.argv[5] if len(sys.argv) > 5 else None   # braço mecânico (provisório: o do rig antigo)
 os.makedirs(out, exist_ok=True)
 A = np.array(Image.open(src).convert('RGBA'))
 n, lab, st, _ = cv2.connectedComponentsWithStats((A[..., 3] > 40).astype(np.uint8), 8)
@@ -228,8 +229,20 @@ part('frontLegLower', 'legLoF', 'frontLegUpper', knee['F'], 5)
 part('body', 'body', 'root', HIP, 6)
 part('frontLegUpper', 'legUpF', 'body', HIP, 7)
 part('head', 'head', 'body', NECK, 8)
-part('frontArmUpper', 'armUpF', 'body', SHOULDER, 10)
-part('frontArmLower', 'armLoF', 'frontArmUpper', elbow['F'], 9)
+part('frontArmLower', 'armLoF', 'frontArmUpper', elbow['F'], 10)
+part('frontArmUpper', 'armUpF', 'body', SHOULDER, 11)
+if grabber_src:
+    # garra provisória (recortada do elenco: Antônio com 613 px de altura), espelhada para a garra ir para a frente;
+    # a ponta de cima do cabo fica na palma da mão da frente (a 72% do antebraço), por trás da mão
+    b = images['armLoF']['box']; al = np.array(Image.open(f'{out}/armLoF.png'))[..., 3] > 100
+    gy = int(al.shape[0] * 0.72); xs = np.where(al[gy])[0]
+    grip = (b[0] + float(xs.mean()), b[1] + gy)
+    g = Image.open(grabber_src).convert('RGBA').transpose(Image.FLIP_LEFT_RIGHT)
+    gs = (FLOOR - min(images[k]['box'][1] for k in images)) / 613
+    ga = np.array(g)[..., 3] > 100; gx0 = float(np.where(ga[3])[0].mean())
+    g = g.resize((round(g.width * gs), round(g.height * gs)), Image.LANCZOS)
+    add_image('grabber', g, (round(grip[0] - gx0 * gs), round(grip[1] - 3 * gs)))
+    part('grabber', 'grabber', 'frontArmLower', grip, 9)
 # sola (calcanhar e ponta do pé) de cada canela+pé, no espaço do rig: o jogo usa para manter o pé no chão
 for pt in parts:
     if pt['name'] in ('frontLegLower', 'backLegLower'):
