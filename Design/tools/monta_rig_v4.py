@@ -42,7 +42,7 @@ SEEDS = {'head': (160, 150), 'profile': (1290, 600), 'armUpF': (690, 200), 'armU
 C = {k: comp_at(*v) for k, v in SEEDS.items()}
 
 # espaço do rig = coordenadas do perfil na folha
-SHOULDER = (1262, 402)         # ombro no perfil
+SHOULDER = (1272, 420)         # ombro (centro da cúpula da manga) no perfil
 NECK = (1290, 340)             # base da cabeça
 HIP = (1283, 665)              # quadril (pivô do tronco)
 FLOOR = 989
@@ -68,34 +68,86 @@ px0, py0 = st[C['profile'], :2]
 head, (hx, hy) = piece(C['head'])
 add_image('head', head, (px0 + 17, py0 + 5))
 
-# braço de cima novo: manga com a cúpula do ombro (pivô no centro da cúpula) e ponta redonda no cotovelo
-ARM_UP = (0.33, 0.32)          # (largura, altura): manga e cotovelo na altura do perfil (cotovelo perto da barra da camiseta)
+# braços: imagem com o braço MONTADO (gabarito) e as 2 peças, em 2 linhas (frente em cima, trás embaixo).
+# O cotovelo fica logo abaixo da barra da manga (ombro→punho dividido ao meio no braço montado); a peça de cima vem com
+# pele demais, então é cortada ali com a ponta arredondada. A escala vem da barra da camiseta do braço montado.
 Cimg = np.array(Image.open(src3).convert('RGBA'))
 n3, lab3, st3, _ = cv2.connectedComponentsWithStats((Cimg[..., 3] > 40).astype(np.uint8), 8)
-arms3 = sorted([i for i in range(1, n3) if st3[i, 4] > 3000], key=lambda i: st3[i, 0])   # esquerda = frente, direita = trás
-def upper_arm(side):
-    i = arms3[0 if side == 'F' else 1]; x, y, w, h = st3[i, :4]
+big3 = [i for i in range(1, n3) if st3[i, 4] > 3000]
+rows3 = [sorted([i for i in big3 if (st3[i, 1] < Cimg.shape[0] / 2) == top], key=lambda i: st3[i, 0]) for top in (True, False)]
+hsv3 = cv2.cvtColor(np.ascontiguousarray(Cimg[..., :3]), cv2.COLOR_RGB2HSV).astype(int)
+blue3 = (hsv3[..., 0] >= 95) & (hsv3[..., 0] <= 125) & (hsv3[..., 1] > 80) & (Cimg[..., 3] > 40)
+skin3 = (hsv3[..., 0] <= 22) & (hsv3[..., 1] > 40) & (hsv3[..., 2] > 120) & (Cimg[..., 3] > 40)
+INK = None
+def crop3(i):
+    x, y, w, h = st3[i, :4]
     m = cv2.dilate((lab3[y:y + h, x:x + w] == i).astype(np.uint8), np.ones((3, 3), np.uint8)) > 0
-    c = Cimg[y:y + h, x:x + w].copy(); c[~m, 3] = 0
-    al = c[..., 3] > 40
-    top_row = np.where(al.any(1))[0].min(); sleeve_w = np.ptp(np.where(al[top_row + int(w * 0.6)])[0])
-    xs_top = np.where(al[top_row + int(w * 0.6)])[0]
-    top_j = (xs_top.mean(), top_row + sleeve_w / 2)
-    bot = np.where(al.any(1))[0].max(); xs_b = np.where(al[bot - 60])[0]; r = np.ptp(xs_b) / 2
-    bot_j = (xs_b.mean(), bot - r)
-    return Image.fromarray(c), top_j, bot_j
+    c = Cimg[y:y + h, x:x + w].copy(); c[~m, 3] = 0; return c, x, y
+def cuff_bottom(c, x, y, zone=(0.0, 1.0)):
+    """última linha da barra azul da manga (mais da metade da linha azul), dentro da faixa de altura zone"""
+    b = blue3[y:y + c.shape[0], x:x + c.shape[1]]; w = (c[..., 3] > 40).sum(1)
+    rows = np.where(b.sum(1) > 0.5 * np.maximum(w, 1))[0]
+    h = c.shape[0]; rows = rows[(rows >= zone[0] * h) & (rows <= zone[1] * h)]
+    return int(rows.max())
+def arm_from_sheet(row):
+    asm, up, fo = rows3[row]
+    A, ax, ay = crop3(asm); U, ux, uy = crop3(up); F, fx, fy = crop3(fo)
+    # gabarito: barra da camiseta (canto da frente) e o braço
+    aal = A[..., 3] > 40
+    sk = skin3[ay:ay + A.shape[0], ax:ax + A.shape[1]]
+    cuffA = cuff_bottom(A[:, :int(A.shape[1] * 0.75)], ax, ay, (0.2, 0.6))   # sem a gola e o short
+    hand_rows = np.where(sk[cuffA:].any(1))[0] + cuffA
+    # pontas dos dedos: última linha de pele antes do vão da perna (a pele do joelho aparece de novo embaixo)
+    gaps = np.where(np.diff(hand_rows) > 3)[0]
+    tips = int(hand_rows[gaps[0]] if len(gaps) else hand_rows.max())
+    # peça de cima: cúpula = topo; pivô do ombro no centro da cúpula
+    ual = U[..., 3] > 40; uw = ual.shape[1]
+    utop = int(np.where(ual.any(1))[0].min()); ucuff = cuff_bottom(U, ux, uy)
+    xs = np.where(ual[utop + uw // 2])[0]; shoulder_u = (float(xs.mean()), utop + np.ptp(xs) / 2)
+    # no gabarito a peça de cima está com a cúpula no mesmo lugar (a manga casa): distância cúpula→barra igual
+    dome_to_cuff = ucuff - utop
+    domeA = cuffA - dome_to_cuff
+    shoulderA_y = domeA + (shoulder_u[1] - utop)
+    elbowA_y = shoulderA_y + (tips - shoulderA_y) * 0.43     # ombro→cotovelo ≈ cotovelo→punho (mão ≈ 0,14 do braço)
+    elbow_u_y = shoulder_u[1] + (elbowA_y - shoulderA_y)
+    # corta a peça de cima no cotovelo com ponta redonda + contorno novo
+    sk_u = skin3[uy:uy + U.shape[0], ux:ux + U.shape[1]]
+    xs_e = np.where(sk_u[int(elbow_u_y)])[0]; cx = float(xs_e.mean()); R = np.ptp(xs_e) / 2 + 2
+    yy, xx = np.mgrid[0:U.shape[0], 0:U.shape[1]]
+    keep = (yy <= elbow_u_y) | ((xx - cx) ** 2 + (yy - elbow_u_y) ** 2 <= R ** 2)
+    U[~keep, 3] = 0
+    # a ponta fica sempre por cima do antebraço: sem contorno, só pele (o contorno lateral do braço continua)
+    # (só o arco de baixo; os lados da ponta mantêm o contorno do braço)
+    low = yy > elbow_u_y + 0.45 * R
+    solid = (U[..., 3] > 40).astype(np.uint8)
+    edge = (solid > 0) & ~(cv2.erode(solid, np.ones((7, 7), np.uint8)) > 0) & low
+    skin_col = np.median(U[sk_u & (yy < elbow_u_y) & (yy > elbow_u_y - 25)][:, :3], axis=0)
+    U[edge, :3] = skin_col.astype(np.uint8)
+    dark = (U[..., :3].astype(int).sum(2) < 330) & (U[..., 3] > 0) & low
+    U[dark, :3] = skin_col.astype(np.uint8)
+    elbow_u = (cx, float(elbow_u_y))
+    # antebraço: pivô no centro da ponta de cima; escala para a ponta dos dedos cair onde está no gabarito
+    fal = F[..., 3] > 40; ftop = int(np.where(fal.any(1))[0].min()); fbot = int(np.where(fal.any(1))[0].max())
+    xs_f = np.where(fal[ftop + 30])[0]; elbow_f = (float(xs_f.mean()), ftop + np.ptp(xs_f) / 2)
+    f_scale = (tips - elbowA_y) / (fbot - elbow_f[1])
+    # escala do gabarito para o rig: largura da barra da camiseta
+    hem_rows = np.where(aal.any(1))[0]
+    return dict(U=Image.fromarray(U), shoulder_u=shoulder_u, elbow_u=elbow_u, F=Image.fromarray(F), elbow_f=elbow_f, f_scale=f_scale)
+ARM_S = 0.87                   # gabarito -> rig (largura da barra da camiseta: 146 px no rig, 170 no gabarito)
 
 # braços e pernas
 elbow = {}
 for side, dx in (('F', 0), ('B', BACK_DX['arm'])):
     sh = (SHOULDER[0] + dx, SHOULDER[1])
-    im, top_j, bot_j = upper_arm(side)
-    sx, sy = ARM_UP
-    bx, by = sh[0] - top_j[0] * sx, sh[1] - top_j[1] * sy
-    im = im.resize((round(im.width * sx), round(im.height * sy)), Image.LANCZOS)
-    add_image('armUp' + side, im, (round(bx), round(by)))
-    elbow[side] = (float(sh[0] + (bot_j[0] - top_j[0]) * sx), float(sh[1] + (bot_j[1] - top_j[1]) * sy))
-    place('armLo' + side, ARM, J['armLo' + side][0], elbow[side])
+    d = arm_from_sheet(0 if side == 'F' else 1)
+    s = ARM_S
+    im = d['U'].resize((round(d['U'].width * s), round(d['U'].height * s)), Image.LANCZOS)
+    add_image('armUp' + side, im, (round(sh[0] - d['shoulder_u'][0] * s), round(sh[1] - d['shoulder_u'][1] * s)))
+    elbow[side] = (float(sh[0] + (d['elbow_u'][0] - d['shoulder_u'][0]) * s), float(sh[1] + (d['elbow_u'][1] - d['shoulder_u'][1]) * s))
+    fs = s * d['f_scale']
+    im = d['F'].resize((round(d['F'].width * fs), round(d['F'].height * fs)), Image.LANCZOS)
+    add_image('armLo' + side, im, (round(elbow[side][0] - d['elbow_f'][0] * fs), round(elbow[side][1] - d['elbow_f'][1] * fs)))
+    print('braço', side, 'escala antebraço', round(d['f_scale'], 3))
 knee = {}
 for side, dx in (('F', 0), ('B', BACK_DX['leg'])):
     hp = (HIP[0] + dx, HIP[1])
@@ -151,7 +203,6 @@ def soften_end(key, joint_rig, radius, below=True):
     c[fix, :3] = col.astype(np.uint8)
     Image.fromarray(c).save(path)
 for side in 'FB':
-    soften_end('armUp' + side, elbow[side], 50 * ARM_UP[0])
     soften_end('legUp' + side, knee[side], 30)
 # topo da coxa (perna do short) sem contorno, para emendar no short do quadril
 for side in 'FB':
