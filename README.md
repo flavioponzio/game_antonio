@@ -142,9 +142,10 @@ braço mecânico.
 
 ## Rig do Antônio (boneco recortado de perfil)
 
-O Antônio **anda** com um boneco recortado em partes (cabeça, tronco com o short, braço de cima e antebraço, coxa e
+O Antônio **anda e pula** com um boneco recortado em partes (cabeça, tronco com o short, braço de cima e antebraço, coxa e
 canela com o pé, de frente e de trás) e um ciclo de caminhada feito por código (`World/CutoutRig.cs`, `ApplyWalk`).
-Parado, falando, pulando, sentado e nas interações ele continua usando as poses desenhadas (folha de poses).
+Parado ele usa a frente do modelo v4 (`Design/tools/quadros_modelo_v4.py`, com a garra desenhada na mão pelo jogo);
+falando, sentado e nas interações ainda usa as poses desenhadas antigas (folha de poses v3) até chegar a folha nova.
 
 - Partes: `Assets/Resources/EP01/assets/characters/antonio-rig4/` + `rig.json` (pivôs das juntas, ordem de desenho,
   `stride` = passo em fração da altura e `sole` = calcanhar e ponta de cada pé).

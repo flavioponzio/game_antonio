@@ -13,7 +13,7 @@ namespace RecreioEspacial.World
     public class AntonioController : MonoBehaviour
     {
         const float Accel = 140f;          // %/s²
-        const float MaxSpeed = 22f;        // %/s (multiplicado pela escala de profundidade)
+        const float MaxSpeed = 30f;        // %/s (multiplicado pela escala de profundidade)
         // distância vertical vale altura/largura da cena (9/16 numa cena do tamanho da tela)
         static float YMetric => Stage.Height / Stage.Width;
         const float StepLength = 4.2f;     // distância de um passo (× escala); os quadros desenhados usam a do frames.json
@@ -471,7 +471,7 @@ namespace RecreioEspacial.World
             float walkAmt = Mathf.Min(1f, v / 14f);
             float sn = Mathf.Abs(Mathf.Sin(phase));
             bool moving = hasTarget || walkAmt > 0.05f;
-            if (moving && RigWalks && jumpPhase == JumpPhase.None) { UpdateRigWalkVisual(s, walkAmt); return; }
+            if (RigWalks && (moving || jumpPhase != JumpPhase.None)) { UpdateRigVisual(s, walkAmt); return; }
             string name = PickFrame(moving, dt);
             var f = frames.Get(name) ?? frames.Get("front");
             sr.enabled = true;
@@ -523,22 +523,29 @@ namespace RecreioEspacial.World
             }
         }
 
-        /// <summary>Andando com o boneco recortado: as poses desenhadas ficam para parado, falando, pulando e sentado.</summary>
-        void UpdateRigWalkVisual(float s, float walkAmt)
+        /// <summary>Andando e pulando com o boneco recortado: as poses desenhadas ficam para parado, falando, sentado e interações.</summary>
+        void UpdateRigVisual(float s, float walkAmt)
         {
             sr.enabled = false;
             if (heldSr != null) heldSr.enabled = false;
             sideRig.SetPartHidden(holdingRigPart, !Holding);
             sideRig.SetVisible(true);
-            sideRig.ApplyWalk(phase, walkAmt);
-            sideRig.GroundFeet();
+            switch (jumpPhase)
+            {
+                case JumpPhase.Crouch: sideRig.ApplyCrouch(Mathf.Clamp01(jumpTimer / CrouchTime)); break;
+                case JumpPhase.Air: sideRig.ApplyJump(Mathf.Clamp(jumpV / JumpSpeed, -1f, 1f)); break;
+                case JumpPhase.Land: sideRig.ApplyCrouch(1f - Mathf.Clamp01(jumpTimer / LandTime)); break;
+                default: sideRig.ApplyWalk(phase, walkAmt); break;
+            }
+            sideRig.GroundFeet();   // o pé mais baixo no chão (no ar, na altura do pulo)
 
+            var squash = Vector2.Lerp(Vector2.one, JumpSquash(), 0.3f);
             float heightUnits = Stage.H(antonioHeight * s);
             float k = heightUnits / (sideRig.HeightPx / 100f);
             transform.localPosition = Stage.Point(X, Y + curLift + jumpY);
             body.localPosition = Vector3.zero;
             body.localRotation = Quaternion.identity;
-            body.localScale = new Vector3(k * Dir, k, 1f);
+            body.localScale = new Vector3(k * Dir * squash.x, k * squash.y, 1f);
 
             int order = Stage.SortingOrderForBottom(Y) + 1;
             sortingGroup.sortingOrder = order;
@@ -546,10 +553,11 @@ namespace RecreioEspacial.World
             {
                 shadow.enabled = true;
                 float widthUnits = heightUnits * 0.53f;
-                shadow.transform.localPosition = new Vector3(0f, -curLift / 100f * Stage.Height + heightUnits * 0.013f, 0f);
-                shadow.transform.localScale = new Vector3(widthUnits * 0.78f, heightUnits * 0.05f, 1f);
+                float sc = 1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.35f;
+                shadow.transform.localPosition = new Vector3(0f, -(curLift + jumpY) / 100f * Stage.Height + heightUnits * 0.013f, 0f);
+                shadow.transform.localScale = new Vector3(widthUnits * 0.78f * sc, heightUnits * 0.05f * sc, 1f);
                 var c = shadow.color;
-                c.a = curLift > 3f ? 0f : 1f;
+                c.a = curLift > 3f ? 0f : 1f - Mathf.Clamp01(jumpY / JumpHeight) * 0.5f;
                 shadow.color = c;
                 shadow.sortingOrder = order - 1;
             }

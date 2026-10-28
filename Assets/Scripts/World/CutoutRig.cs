@@ -154,6 +154,22 @@ namespace RecreioEspacial.World
             SetAngle("backArmLower", 42f);
         }
 
+        /// <summary>Agachado (preparando o pulo ou amortecendo a queda). amount 0 = em pé … 1 = agachado.</summary>
+        public void ApplyCrouch(float amount)
+        {
+            transform.localPosition = Vector3.zero;
+            SetAngle("body", -12f * amount);
+            SetAngle("head", 8f * amount);
+            SetAngle("frontLegUpper", 45f * amount);
+            SetAngle("frontLegLower", -85f * amount);
+            SetAngle("backLegUpper", 38f * amount);
+            SetAngle("backLegLower", -80f * amount);
+            SetAngle("frontArmUpper", -30f * amount);
+            SetAngle("frontArmLower", 20f * amount);
+            SetAngle("backArmUpper", -26f * amount);
+            SetAngle("backArmLower", 20f * amount);
+        }
+
         /// <summary>Pose no ar: joelhos dobrados e braços para cima. rise = +1 subindo … -1 caindo.</summary>
         public void ApplyJump(float rise)
         {
