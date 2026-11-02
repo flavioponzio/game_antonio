@@ -154,8 +154,9 @@ falando, sentado e nas interações ainda usa as poses desenhadas antigas (folha
   desenham a prévia (`Design/personagens/v4/antonio-caminhada-rig-previa.gif`).
 - A cada quadro, `GroundFeet` sobe ou desce o boneco para o pé mais baixo encostar no chão: o sobe-e-desce do corpo sai
   das próprias pernas.
-- O braço mecânico do rig é provisório (recortado do elenco) até chegar o desenho dele (passo 4 de
-  `Design/prompts-chatgpt-personagens.md`).
+- O braço mecânico (`Design/personagens/v4/braco-mecanico-aberto.png`) fica pendurado na mão da frente: a mão cobre a
+  pegada azul e o jogo desfaz a maior parte do giro do braço para ele ficar quase na vertical. Nas poses paradas ele é
+  desenhado na mão pelo jogo (`held` + `hold` no `frames.json`).
 
 ## Estado atual e limitações
 

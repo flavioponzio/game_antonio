@@ -100,10 +100,10 @@
   "grabber": {
    "file": "assets/characters/antonio-rig4/grabber.png",
    "box": [
-    1277,
-    671,
-    83,
-    136
+    1248,
+    665,
+    86,
+    257
    ]
   }
  },

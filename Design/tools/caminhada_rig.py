@@ -17,4 +17,5 @@ def walk_angles(phase, amount=1.0, thigh=27, arm=20):
         a[side + 'ArmLower'] = (8 + 16 * max(0.0, s)) * amount
     a['body'] = -3 * amount
     a['head'] = (2 + 1.5 * math.cos(2 * phase)) * amount
+    a['grabber'] = -0.75 * (a['body'] + a['frontArmUpper'] + a['frontArmLower'])   # garra quase pendurada
     return a

@@ -168,6 +168,7 @@ namespace RecreioEspacial.World
             SetAngle("frontArmLower", 20f * amount);
             SetAngle("backArmUpper", -26f * amount);
             SetAngle("backArmLower", 20f * amount);
+            Hang((-12f - 30f + 20f) * amount);
         }
 
         /// <summary>Pose no ar: joelhos dobrados e braços para cima. rise = +1 subindo … -1 caindo.</summary>
@@ -185,6 +186,7 @@ namespace RecreioEspacial.World
             SetAngle("frontArmLower", 25f);
             SetAngle("backArmUpper", -18f - 10f * rise);
             SetAngle("backArmLower", 20f);
+            Hang(35f + 20f * rise + 25f);
         }
 
         // joelho em 8 pontos de um ciclo (phase 0 = passagem com a perna no ar, π/2 = calcanhar no chão,
@@ -221,7 +223,12 @@ namespace RecreioEspacial.World
             SetAngle("backArmLower", (8f + 16f * Mathf.Max(0f, sb)) * amount);
             SetAngle("body", -3f * amount);
             SetAngle("head", (2f + 1.5f * Mathf.Cos(2f * phase)) * amount);
+            Hang(-3f * amount + arm * sf * amount + (8f + 16f * Mathf.Max(0f, sf)) * amount);
         }
+
+        /// <summary>O braço mecânico fica quase pendurado (o peso puxa para baixo): desfaz a maior parte do giro do braço.
+        /// armTotal = soma dos ângulos do tronco, braço e antebraço da frente.</summary>
+        void Hang(float armTotal) => SetAngle("grabber", -0.75f * armTotal);
 
         /// <summary>Sobe ou desce o boneco para a sola mais baixa encostar no chão (y = 0 do rig).</summary>
         public void GroundFeet()

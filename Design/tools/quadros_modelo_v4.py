@@ -29,13 +29,15 @@ for name, i in zip(['front', 'front34', 'side', 'back'], figs):
                     'hold': {'hand': [round(hand[0] * s, 1), round(hand[1] * s, 1)], 'flip': False, 'angle': 0}}
 # costas olhando o quadro: mesma imagem das costas
 frames['back34'] = dict(frames['back'])
-# piscar e falar ainda são do desenho antigo: saem até chegar a folha de poses nova (sem eles, fica a frente)
-for k in ('blink', 'talk'): frames.pop(k, None)
-# braço mecânico na mão (provisório, recortado do elenco: Antônio com 613 px)
-g = Image.open(garra).convert('RGBA'); gs = REF / 613
+# (piscar e falar: Design/tools/rostos_frente.py, a partir desta frente)
+# braço mecânico na mão: pegada = centro do cabo azul; da pegada até a ponta = 27% da altura do Antônio
+g = Image.open(garra).convert('RGBA'); G = np.array(g)
+hsvg = cv2.cvtColor(np.ascontiguousarray(G[..., :3]), cv2.COLOR_RGB2HSV).astype(int)
+bys, bxs = np.where((hsvg[..., 0] >= 95) & (hsvg[..., 0] <= 130) & (hsvg[..., 1] > 100) & (G[..., 3] > 100))
+gx, gy = float(bxs.mean()), float(bys.mean())
+gs = 0.27 * REF / (G.shape[0] - gy)
 g = g.resize((round(g.width * gs), round(g.height * gs)), Image.LANCZOS); g.save(f'{D}/garra.png')
-ga = np.array(g)[..., 3] > 100; gx = float(np.where(ga[2])[0].mean())
-meta['held'] = {'file': 'assets/characters/antonio-frames/garra.png', 'grip': [round(gx / g.width, 4), round(1 - 2 / g.height, 4)]}
+meta['held'] = {'file': 'assets/characters/antonio-frames/garra.png', 'grip': [round(gx / G.shape[1], 4), round(1 - gy / G.shape[0], 4)]}
 meta['note'] = ('Quadros do Antônio. front/front34/side/back = modelo v4 (Design/personagens/v4/antonio-modelo.png), com a garra '
                 'desenhada pelo jogo na mão (hold + held); os outros ainda são da folha de poses v3 (file = sem garra, '
                 'fileHolding = com o braço mecânico). pivot = (x do tronco, base) 0..1. Os quadros olham para a direita.')
