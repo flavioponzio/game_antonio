@@ -10,7 +10,7 @@ import sys, os, json
 import numpy as np, cv2
 from PIL import Image
 src, src2, src3, out = sys.argv[1:5]
-grabber_src = sys.argv[5] if len(sys.argv) > 5 else None   # braço mecânico (garra aberta, com a pegada azul)
+grabber_src = sys.argv[5] if len(sys.argv) > 5 else None   # braço mecânico (braco-mecanico-ilustracao.png)
 os.makedirs(out, exist_ok=True)
 A = np.array(Image.open(src).convert('RGBA'))
 n, lab, st, _ = cv2.connectedComponentsWithStats((A[..., 3] > 40).astype(np.uint8), 8)
@@ -231,21 +231,22 @@ part('frontLegUpper', 'legUpF', 'body', HIP, 7)
 part('head', 'head', 'body', NECK, 8)
 part('frontArmLower', 'armLoF', 'frontArmUpper', elbow['F'], 10)
 part('frontArmUpper', 'armUpF', 'body', SHOULDER, 11)
-GARRA_LEN = 0.27               # da pegada (cabo azul) até a ponta da garra, em fração da altura do Antônio
+GARRA_LEN = 0.305              # da pegada (topo do cabo azul) até a ponta da garra, em fração da altura (como na ilustração)
 if grabber_src:
     # braço mecânico pendurado na palma da mão da frente (a 72% do antebraço), por trás da mão:
-    # a mão cobre a pegada azul do cabo
+    # a mão fica logo acima do cabo azul, como na ilustração com a garra
     b = images['armLoF']['box']; al = np.array(Image.open(f'{out}/armLoF.png'))[..., 3] > 100
     gy = int(al.shape[0] * 0.72); xs = np.where(al[gy])[0]
     grip = (b[0] + float(xs.mean()), b[1] + gy)
+    knob = b[1] + al.shape[0] * 0.86     # topo do cabo azul fica na ponta dos dedos (o azul aparece embaixo da mão)
     g = Image.open(grabber_src).convert('RGBA'); G = np.array(g)
     hsvg = cv2.cvtColor(np.ascontiguousarray(G[..., :3]), cv2.COLOR_RGB2HSV).astype(int)
     blue = (hsvg[..., 0] >= 95) & (hsvg[..., 0] <= 130) & (hsvg[..., 1] > 100) & (G[..., 3] > 100)
-    bys, bxs = np.where(blue); gx0, gy0 = float(bxs.mean()), float(bys.mean())
+    bys, bxs = np.where(blue); gx0, gy0 = float(bxs.mean()), float(bys.min()) + 4
     height = FLOOR - min(images[k]['box'][1] for k in images)
-    gs = GARRA_LEN * height / (G.shape[0] - gy0)
+    gs = GARRA_LEN * height / (G.shape[0] - gy0)   # (giro em volta da palma: grip)
     g = g.resize((round(g.width * gs), round(g.height * gs)), Image.LANCZOS)
-    add_image('grabber', g, (round(grip[0] - gx0 * gs), round(grip[1] - gy0 * gs)))
+    add_image('grabber', g, (round(grip[0] - gx0 * gs), round(knob - gy0 * gs)))
     part('grabber', 'grabber', 'frontArmLower', grip, 9)
 # sola (calcanhar e ponta do pé) de cada canela+pé, no espaço do rig: o jogo usa para manter o pé no chão
 for pt in parts:
