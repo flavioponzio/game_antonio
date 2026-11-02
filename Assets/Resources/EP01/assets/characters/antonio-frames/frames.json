@@ -30,7 +30,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/front-garra.png",
+   "pivotHolding": [
+    0.5022,
+    0.0
+   ]
   },
   "front34": {
    "file": "assets/characters/antonio-frames/front34.png",
@@ -49,7 +54,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/front34-garra.png",
+   "pivotHolding": [
+    0.4687,
+    0.0
+   ]
   },
   "side": {
    "file": "assets/characters/antonio-frames/side.png",
@@ -68,7 +78,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/side-garra.png",
+   "pivotHolding": [
+    0.5153,
+    0.0
+   ]
   },
   "back34": {
    "file": "assets/characters/antonio-frames/back.png",
@@ -87,7 +102,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/back34-garra.png",
+   "pivotHolding": [
+    0.5212,
+    0.0
+   ]
   },
   "back": {
    "file": "assets/characters/antonio-frames/back.png",
@@ -106,7 +126,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/back-garra.png",
+   "pivotHolding": [
+    0.5212,
+    0.0
+   ]
   },
   "walk1": {
    "file": "assets/characters/antonio-frames/walk1.png",
@@ -417,7 +442,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/blink-garra.png",
+   "pivotHolding": [
+    0.5022,
+    0.0
+   ]
   },
   "talk": {
    "file": "assets/characters/antonio-frames/talk.png",
@@ -436,7 +466,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/talk-garra.png",
+   "pivotHolding": [
+    0.5022,
+    0.0
+   ]
   },
   "talkHalf": {
    "file": "assets/characters/antonio-frames/talkHalf.png",
@@ -455,7 +490,12 @@
     ],
     "flip": false,
     "angle": 0
-   }
+   },
+   "fileHolding": "assets/characters/antonio-frames/talkHalf-garra.png",
+   "pivotHolding": [
+    0.5022,
+    0.0
+   ]
   },
   "kneel": {
    "file": "assets/characters/antonio-frames/kneel.png",
