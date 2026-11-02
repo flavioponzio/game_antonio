@@ -12,6 +12,7 @@ namespace RecreioEspacial.World
     ///   parts:  [ { name, image, parent, pivot:[x,y], tint, order } ] — pivot = junta onde a parte gira
     ///   root:   [x,y] — ponto do chão (entre os pés); height: altura do personagem em pixels
     ///   stride: passo em fração da altura; parts[].sole: [[x,y],[x,y]] calcanhar e ponta do pé (nas canelas)
+    ///   parts[].when: "holding" (só com o item na mão) ou "empty" (só sem ele)
     /// A escala vem de fora (1 pixel = 0,01 unidade antes de escalar).
     /// </summary>
     public class CutoutRig : MonoBehaviour
@@ -33,6 +34,17 @@ namespace RecreioEspacial.World
         readonly List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         readonly Dictionary<string, SpriteRenderer> byPart = new Dictionary<string, SpriteRenderer>();
         readonly HashSet<string> hidden = new HashSet<string>();
+        // partes que só aparecem com o item na mão ("when": "holding") ou só sem ele ("when": "empty"), ex.: mão fechada
+        readonly List<string> whenHolding = new List<string>(), whenEmpty = new List<string>();
+        bool holding;
+
+        /// <summary>Com o braço desenhado segurando o item ("when": "holding"), o braço da frente fica parado.</summary>
+        void FreezeHeldArm()
+        {
+            if (!holding || whenHolding.Count == 0) return;
+            SetAngle("frontArmUpper", 0f);
+            SetAngle("frontArmLower", 0f);
+        }
         bool visible = true;
 
         public static CutoutRig Load(Transform parent, string jsonPath)
@@ -114,6 +126,9 @@ namespace RecreioEspacial.World
                 art.sortingOrder = (int)Num(d, "order", 0);
                 rig.renderers.Add(art);
                 rig.byPart[name] = art;
+                string when = Str(d, "when");
+                if (when == "holding") rig.whenHolding.Add(name);
+                else if (when == "empty") rig.whenEmpty.Add(name);
             }
             return rig;
         }
@@ -128,6 +143,14 @@ namespace RecreioEspacial.World
         {
             visible = value;
             foreach (var kv in byPart) kv.Value.enabled = visible && !hidden.Contains(kv.Key);
+        }
+
+        /// <summary>Com ou sem o item na mão: troca as partes marcadas com "when" (ex.: mão aberta ↔ mão fechada).</summary>
+        public void SetHolding(bool holding)
+        {
+            this.holding = holding;
+            foreach (var p in whenHolding) SetPartHidden(p, !holding);
+            foreach (var p in whenEmpty) SetPartHidden(p, holding);
         }
 
         /// <summary>Esconde/mostra uma parte (ex.: o braço mecânico quando ele não está com o item).</summary>
@@ -152,6 +175,7 @@ namespace RecreioEspacial.World
             SetAngle("frontArmLower", 45f);
             SetAngle("backArmUpper", 62f + breathe);
             SetAngle("backArmLower", 42f);
+            FreezeHeldArm();
         }
 
         /// <summary>Agachado (preparando o pulo ou amortecendo a queda). amount 0 = em pé … 1 = agachado.</summary>
@@ -169,6 +193,7 @@ namespace RecreioEspacial.World
             SetAngle("backArmUpper", -26f * amount);
             SetAngle("backArmLower", 20f * amount);
             Hang((-12f - 30f + 20f) * amount);
+            FreezeHeldArm();
         }
 
         /// <summary>Pose no ar: joelhos dobrados e braços para cima. rise = +1 subindo … -1 caindo.</summary>
@@ -187,6 +212,7 @@ namespace RecreioEspacial.World
             SetAngle("backArmUpper", -18f - 10f * rise);
             SetAngle("backArmLower", 20f);
             Hang(35f + 20f * rise + 25f);
+            FreezeHeldArm();
         }
 
         // joelho em 8 pontos de um ciclo (phase 0 = passagem com a perna no ar, π/2 = calcanhar no chão,
@@ -224,6 +250,7 @@ namespace RecreioEspacial.World
             SetAngle("body", -3f * amount);
             SetAngle("head", (2f + 1.5f * Mathf.Cos(2f * phase)) * amount);
             Hang(-3f * amount + arm * sf * amount + (8f + 16f * Mathf.Max(0f, sf)) * amount);
+            FreezeHeldArm();
         }
 
         /// <summary>O braço mecânico fica quase pendurado (o peso puxa para baixo): desfaz a maior parte do giro do braço.

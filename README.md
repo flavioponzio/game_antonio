@@ -159,10 +159,10 @@ por dentro do punho (`<nome>-garra.png`). Sentado na cadeira ele usa o boneco (`
   desenham a prévia (`Design/personagens/v4/antonio-caminhada-rig-previa.gif`).
 - A cada quadro, `GroundFeet` sobe ou desce o boneco para o pé mais baixo encostar no chão: o sobe-e-desce do corpo sai
   das próprias pernas.
-- O braço mecânico do boneco é o da ilustração com a garra (`braco-mecanico-ilustracao.png`, recortado por
-  `Design/tools/garra_da_ilustracao.py`) e fica pendurado na mão da frente: a mão fica logo acima da
-  pegada azul e o jogo desfaz a maior parte do giro do braço para ele ficar quase na vertical. Nas poses paradas ele é
-  desenhado na mão pelo jogo (`held` + `hold` no `frames.json`).
+- Com o braço mecânico, o braço da frente do boneco fica PARADO: o antebraço com a mão fechada e a garra é recortado do
+  desenho de perfil da ilustração com a garra (2ª figura de `antonio-poses-com-garra.png`) e entra no lugar do
+  antebraço aberto (`"when": "holding"` / `"empty"` no `rig.json`; `CutoutRig.SetHolding` troca as peças e trava o braço).
+  Só as pernas e o braço de trás se mexem.
 
 ## Estado atual e limitações
 

@@ -384,6 +384,7 @@ namespace RecreioEspacial.World
             if (sideRig != null)
             {
                 sideRig.SetPartHidden(holdingRigPart, !Holding);
+                sideRig.SetHolding(Holding);
                 sideRig.SetVisible(useRig);
                 if (useRig) sideRig.ApplyWalk(phase, walkAmt);
                 if (useRig && jumpPhase == JumpPhase.Air) sideRig.ApplyJump(Mathf.Clamp(jumpV / JumpSpeed, -1f, 1f));
@@ -530,6 +531,7 @@ namespace RecreioEspacial.World
             sr.enabled = false;
             if (heldSr != null) heldSr.enabled = false;
             sideRig.SetPartHidden(holdingRigPart, !Holding);
+            sideRig.SetHolding(Holding);
             sideRig.SetVisible(true);
             switch (jumpPhase)
             {
@@ -590,6 +592,7 @@ namespace RecreioEspacial.World
             float k = heightUnits / (sideRig.HeightPx / 100f);
             sr.enabled = false;
             sideRig.SetPartHidden(holdingRigPart, !Holding);
+            sideRig.SetHolding(Holding);
             sideRig.SetVisible(true);
             sideRig.ApplySit(Mathf.Sin(t * 2.3f));
             if (heldSr != null) heldSr.enabled = false;

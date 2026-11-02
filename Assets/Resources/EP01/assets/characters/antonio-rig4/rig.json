@@ -97,13 +97,13 @@
     352
    ]
   },
-  "grabber": {
-   "file": "assets/characters/antonio-rig4/grabber.png",
+  "armHold": {
+   "file": "assets/characters/antonio-rig4/armHold.png",
    "box": [
-    1223,
-    699,
-    95,
-    283
+    1226,
+    475,
+    168,
+    413
    ]
   }
  },
@@ -225,7 +225,8 @@
     553.2
    ],
    "tint": 1.0,
-   "order": 10
+   "order": 10,
+   "when": "empty"
   },
   {
    "name": "frontArmUpper",
@@ -239,15 +240,16 @@
    "order": 11
   },
   {
-   "name": "grabber",
-   "image": "grabber",
-   "parent": "frontArmLower",
+   "name": "frontArmHold",
+   "image": "armHold",
+   "parent": "frontArmUpper",
    "pivot": [
-    1290.5,
-    675.0
+    1275.9,
+    553.2
    ],
    "tint": 1.0,
-   "order": 9
+   "order": 10,
+   "when": "holding"
   }
  ]
 }

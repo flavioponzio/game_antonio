@@ -2,7 +2,7 @@
 A folha tem: cabeça, tronco (de frente, não usado), short (de frente, não usado), braço de cima/baixo (frente e trás),
 coxa e canela+pé (frente e trás) e, à direita, o Antônio de perfil inteiro.
 O tronco e o quadril saem do perfil inteiro, apagando o braço; o resto são as peças soltas.
-Uso: python3 -I build_rig4.py <folha.png> <tronco_e_short.png> <bracos.png> <pasta_saida> [garra.png]
+Uso: python3 -I build_rig4.py <folha.png> <tronco_e_short.png> <bracos.png> <pasta_saida> [garra.png] [antonio-poses-com-garra.png]
 O tronco e o short de perfil vêm de uma segunda imagem (a folha trouxe os dois de frente) e o braço de cima
 (manga com o ombro arredondado) de uma terceira, já sem o quadriculado (unchecker.py).
 Grava as imagens das partes e rig.json (formato do CutoutRig: coordenadas no espaço do perfil montado, y para baixo)."""
@@ -11,6 +11,7 @@ import numpy as np, cv2
 from PIL import Image
 src, src2, src3, out = sys.argv[1:5]
 grabber_src = sys.argv[5] if len(sys.argv) > 5 else None   # braço mecânico (braco-mecanico-ilustracao.png)
+fist_src = sys.argv[6] if len(sys.argv) > 6 else None      # ilustração com a garra (antonio-poses-com-garra.png)
 os.makedirs(out, exist_ok=True)
 A = np.array(Image.open(src).convert('RGBA'))
 n, lab, st, _ = cv2.connectedComponentsWithStats((A[..., 3] > 40).astype(np.uint8), 8)
@@ -232,7 +233,61 @@ part('head', 'head', 'body', NECK, 8)
 part('frontArmLower', 'armLoF', 'frontArmUpper', elbow['F'], 10)
 part('frontArmUpper', 'armUpF', 'body', SHOULDER, 11)
 GARRA_LEN = 0.305              # da pegada (topo do cabo azul) até a ponta da garra, em fração da altura (como na ilustração)
-if grabber_src:
+held_arm = False
+if fist_src:
+    # COM O ITEM NA MÃO: o antebraço da frente com a mão fechada e o braço mecânico vem pronto do desenho de perfil
+    # segurando a garra (2ª figura de antonio-poses-com-garra.png) e fica parado ("when": "holding"); a mão aberta
+    # some ("when": "empty"). A escala e a posição saem de casar a cabeça do desenho com a cabeça do boneco.
+    Fi = np.array(Image.open(fist_src).convert('RGBA'))
+    n4, lab4, st4, _ = cv2.connectedComponentsWithStats((Fi[..., 3] > 40).astype(np.uint8), 8)
+    side_i = sorted([i for i in range(1, n4) if st4[i, 4] > 3000], key=lambda i: st4[i, 0])[1]
+    x, y, w, h = st4[side_i, :4]
+    fig = Fi[y:y + h, x:x + w].copy(); fig[lab4[y:y + h, x:x + w] != side_i, 3] = 0
+    hsv4 = cv2.cvtColor(np.ascontiguousarray(fig[..., :3]), cv2.COLOR_RGB2HSV).astype(int)
+    a4 = fig[..., 3] > 40
+    yel = (hsv4[..., 0] >= 15) & (hsv4[..., 0] <= 35) & (hsv4[..., 1] > 100) & a4
+    blue = (hsv4[..., 0] >= 95) & (hsv4[..., 0] <= 130) & (hsv4[..., 1] > 120) & (hsv4[..., 2] > 150) & a4
+    gray = (hsv4[..., 1] < 60) & (hsv4[..., 2] > 50) & (hsv4[..., 2] < 140) & a4
+    skin = (hsv4[..., 0] <= 20) & (hsv4[..., 1] > 40) & (hsv4[..., 2] > 130) & a4
+    yy4, xx4 = np.mgrid[0:h, 0:w]
+    # antebraço: pele entre a barra da manga e o fim do short (abaixo é a perna)
+    cuff = int(np.where(((hsv4[..., 0] >= 95) & (hsv4[..., 0] <= 130) & (hsv4[..., 1] > 120) & a4)[: h // 2].sum(1) > 20)[0].max())
+    shorts_bottom = int(h * 0.71)
+    arm = skin & (yy4 > cuff - 4) & (yy4 < shorts_bottom - 30)
+    n5, l5, s5, _ = cv2.connectedComponentsWithStats(arm.astype(np.uint8), 8); arm = l5 == 1 + int(np.argmax(s5[1:, 4]))
+    garra = (yel | blue) & (yy4 > cuff + 40)            # só a garra (a gola e a manga também são azuis)
+    n6, l6, s6, _ = cv2.connectedComponentsWithStats(garra.astype(np.uint8), 8)
+    garra = np.isin(l6, [i for i in range(1, n6) if s6[i, 4] > 80])
+    garra = cv2.morphologyEx(garra.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8)) > 0
+    garra |= gray & (cv2.dilate(garra.astype(np.uint8), np.ones((15, 15), np.uint8)) > 0)
+    core = arm | garra
+    ink = (fig[..., :3].astype(int).sum(2) < 230) & a4
+    m = core | (ink & (cv2.dilate(core.astype(np.uint8), np.ones((7, 7), np.uint8)) > 0))
+    m = cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8)) > 0
+    piece4 = fig.copy(); piece4[~m, 3] = 0
+    # casa a cabeça do desenho com a cabeça do boneco (escala e deslocamento)
+    head_im = np.array(Image.open(f'{out}/head.png').convert('RGBA')).astype(np.float32)
+    hb = images['head']['box']; best = None
+    for s in np.linspace(0.95, 1.25, 31):
+        fs = cv2.resize(fig, (round(w * s), round(h * s)), interpolation=cv2.INTER_AREA).astype(np.float32)
+        Pd = np.zeros((fs.shape[0] + 80, fs.shape[1] + 80, 4), np.float32); Pd[40:-40, 40:-40] = fs
+        mk = (head_im[..., 3] > 200).astype(np.uint8) * 255
+        if head_im.shape[0] > Pd.shape[0] or head_im.shape[1] > Pd.shape[1]: continue
+        r = cv2.matchTemplate(Pd[..., :3], np.ascontiguousarray(head_im[..., :3]), cv2.TM_SQDIFF, mask=np.dstack([mk] * 3))
+        mn, _, loc, _ = cv2.minMaxLoc(r); mn /= max(1, (mk > 0).sum())
+        if best is None or mn < best[0]: best = (mn, s, loc[0] - 40, loc[1] - 40)
+    _, s4, lx, ly = best
+    # pixel do desenho (u,v) -> rig: (u*s4 - lx + hb[0], v*s4 - ly + hb[1])
+    im4 = Image.fromarray(piece4).resize((round(w * s4), round(h * s4)), Image.LANCZOS)
+    bb = im4.getbbox(); im4 = im4.crop(bb)
+    add_image('armHold', im4, (round(bb[0] - lx + hb[0]), round(bb[1] - ly + hb[1])))
+    part('frontArmHold', 'armHold', 'frontArmUpper', elbow['F'], 10)
+    parts[-1]['when'] = 'holding'
+    for pt in parts:
+        if pt['name'] == 'frontArmLower': pt['when'] = 'empty'
+    held_arm = True
+    print('braço com a garra: escala', round(s4, 3), 'erro', round(best[0]), im4.size)
+if grabber_src and not held_arm:
     # braço mecânico pendurado na palma da mão da frente (a 72% do antebraço), por trás da mão:
     # a mão fica logo acima do cabo azul, como na ilustração com a garra
     b = images['armLoF']['box']; al = np.array(Image.open(f'{out}/armLoF.png'))[..., 3] > 100
