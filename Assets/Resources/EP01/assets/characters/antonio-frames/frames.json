@@ -194,38 +194,34 @@
   },
   "lookUp": {
    "file": "assets/characters/antonio-frames/lookUp.png",
-   "fileHolding": "assets/characters/antonio-frames/lookUp-garra.png",
    "size": [
-    245,
-    482
+    187,
+    491
    ],
    "pivot": [
-    0.5587,
+    0.4767,
+    0.0
+   ],
+   "fileHolding": "assets/characters/antonio-frames/lookUp-garra.png",
+   "pivotHolding": [
+    0.4767,
     0.0
    ]
   },
   "lookDown": {
    "file": "assets/characters/antonio-frames/lookDown.png",
-   "fileHolding": "assets/characters/antonio-frames/lookDown-garra.png",
    "size": [
-    324,
-    452
+    152,
+    468
    ],
    "pivot": [
-    0.6303,
+    0.4181,
     0.0
-   ]
-  },
-  "sit": {
-   "file": "assets/characters/antonio-frames/sit.png",
-   "fileHolding": "assets/characters/antonio-frames/sit-garra.png",
-   "size": [
-    298,
-    444
    ],
-   "pivot": [
-    0.2685,
-    0.2095
+   "fileHolding": "assets/characters/antonio-frames/lookDown-garra.png",
+   "pivotHolding": [
+    0.4181,
+    0.0
    ]
   },
   "walk3": {
@@ -254,13 +250,17 @@
   },
   "pickUp": {
    "file": "assets/characters/antonio-frames/pickUp.png",
-   "fileHolding": "assets/characters/antonio-frames/pickUp-garra.png",
    "size": [
-    356,
-    442
+    212,
+    311
    ],
    "pivot": [
-    0.5923,
+    0.5826,
+    0.0
+   ],
+   "fileHolding": "assets/characters/antonio-frames/pickUp-garra.png",
+   "pivotHolding": [
+    0.3824,
     0.0
    ]
   },
@@ -452,6 +452,25 @@
     "hand": [
      19.6,
      295.6
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "kneel": {
+   "file": "assets/characters/antonio-frames/kneel.png",
+   "size": [
+    176,
+    313
+   ],
+   "pivot": [
+    0.358,
+    0.0192
+   ],
+   "hold": {
+    "hand": [
+     154.8,
+     245.4
     ],
     "flip": false,
     "angle": 0
