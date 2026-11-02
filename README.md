@@ -147,7 +147,8 @@ canela com o pé, de frente e de trás) e um ciclo de caminhada feito por códig
 Parado ele usa a frente do modelo v4 (`Design/tools/quadros_modelo_v4.py`, com a garra desenhada na mão pelo jogo);
 pisca e fala com os rostos novos (`Design/tools/rostos_frente.py`); olhar para cima/baixo e pegar do chão vêm de
 `Design/personagens/v4/antonio-poses-perfil.png` (`Design/tools/poses_perfil_v4.py`, que também gera a versão com a garra
-na frente da perna). Com o braço mecânico, as vistas do modelo (e piscar/falar) usam a mão fechada de
+na frente da perna). Com o braço mecânico, frente, perfil e pegar do chão usam a ilustração `Design/personagens/v4/antonio-poses-com-garra.png`
+(`Design/tools/poses_com_garra.py`; piscar/falar com a garra = rostos aplicados sobre ela); as outras vistas do modelo (e piscar/falar) usam a mão fechada de
 `Design/personagens/v4/antonio-modelo-mao-fechada.png`, colada por `Design/tools/mao_fechada.py` com a garra passando
 por dentro do punho (`<nome>-garra.png`). Sentado na cadeira ele usa o boneco (`ApplySit`); o desenho ajoelhado da folha ficou como `kneel`.
 

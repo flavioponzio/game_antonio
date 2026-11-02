@@ -1,22 +1,26 @@
 """Troca só o rosto da vista de frente do modelo pelos rostos de outra imagem (piscando, falando...).
 O resto do corpo continua o do modelo, então os quadros ficam alinhados pixel a pixel com a frente.
-Uso: python3 -I faces.py <modelo_frente.png> <imagem_com_variacoes.png> <pasta_saida> nome1 nome2 ..."""
+Uso: python3 -I rostos_frente.py <modelo_frente.png> <imagem_com_variacoes.png> <pasta_saida> nome1 nome2 ... [--shift dx dy]
+--shift: onde fica o rosto quando a imagem base não é a frente do modelo (ex.: a frente segurando a garra)."""
 import sys
 import numpy as np, cv2
 from PIL import Image
-model_p, var_p, out = sys.argv[1:4]; names = sys.argv[4:]
+args = sys.argv[1:]; SHIFT = (0, 0)
+if '--shift' in args:
+    k = args.index('--shift'); SHIFT = (int(args[k + 1]), int(args[k + 2])); args = args[:k] + args[k + 3:]
+model_p, var_p, out = args[:3]; names = args[3:]
 M = np.array(Image.open(model_p).convert('RGBA')); H, W = M.shape[:2]
 V = np.array(Image.open(var_p).convert('RGBA'))
 n, lab, st, _ = cv2.connectedComponentsWithStats((V[..., 3] > 40).astype(np.uint8), 8)
 figs = sorted([i for i in range(1, n) if st[i, 4] > 3000], key=lambda i: st[i, 0])
-FACE = (72, 92, 238, 228)                 # x0, y0, x1, y1 do rosto (sobrancelhas até o queixo) na frente do modelo
-HEAD_Y = 250
+FACE = (72 + SHIFT[0], 92 + SHIFT[1], 238 + SHIFT[0], 228 + SHIFT[1])   # rosto (sobrancelhas até o queixo) na frente do modelo
+HEAD_Y = 250 + SHIFT[1]
 yy, xx = np.mgrid[0:H, 0:W]
 cx, cy = (FACE[0] + FACE[2]) / 2, (FACE[1] + FACE[3]) / 2; rx, ry = (FACE[2] - FACE[0]) / 2, (FACE[3] - FACE[1]) / 2
 ell = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2
 face_mask = np.clip((1.15 - ell) / 0.3, 0, 1)          # 1 no meio do rosto, some suave na borda
 # piscar troca só os olhos (com as sobrancelhas); falar troca só a boca — o resto do rosto fica o da frente
-REGIONS = {'eyes': (155, 146, 92, 56), 'mouth': (154, 206, 44, 24)}      # cx, cy, rx, ry
+REGIONS = {'eyes': (155 + SHIFT[0], 146 + SHIFT[1], 92, 56), 'mouth': (154 + SHIFT[0], 206 + SHIFT[1], 44, 24)}   # cx, cy, rx, ry
 def region_mask(name):
     cxr, cyr, rxr, ryr = REGIONS['eyes' if name == 'blink' else 'mouth']
     e = ((xx - cxr) / rxr) ** 2 + ((yy - cyr) / ryr) ** 2

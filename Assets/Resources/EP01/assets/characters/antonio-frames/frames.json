@@ -33,7 +33,7 @@
    },
    "fileHolding": "assets/characters/antonio-frames/front-garra.png",
    "pivotHolding": [
-    0.5022,
+    0.4554,
     0.0
    ]
   },
@@ -81,7 +81,7 @@
    },
    "fileHolding": "assets/characters/antonio-frames/side-garra.png",
    "pivotHolding": [
-    0.5153,
+    0.4864,
     0.0
    ]
   },
@@ -285,7 +285,7 @@
    ],
    "fileHolding": "assets/characters/antonio-frames/pickUp-garra.png",
    "pivotHolding": [
-    0.3824,
+    0.4856,
     0.0
    ]
   },
@@ -445,7 +445,7 @@
    },
    "fileHolding": "assets/characters/antonio-frames/blink-garra.png",
    "pivotHolding": [
-    0.5022,
+    0.4554,
     0.0
    ]
   },
@@ -469,7 +469,7 @@
    },
    "fileHolding": "assets/characters/antonio-frames/talk-garra.png",
    "pivotHolding": [
-    0.5022,
+    0.4554,
     0.0
    ]
   },
@@ -493,7 +493,7 @@
    },
    "fileHolding": "assets/characters/antonio-frames/talkHalf-garra.png",
    "pivotHolding": [
-    0.5022,
+    0.4554,
     0.0
    ]
   },
