@@ -9,6 +9,7 @@ namespace RecreioEspacial.World
     /// Quadros de animação de um personagem (folha de poses), lidos de um frames.json:
     ///   refHeight: altura em px do quadro "front" (define a escala de todos)
     ///   walkCycle: quadros da caminhada em ordem (2 passos); stride: passada como fração da altura
+    ///   talkCycle: quadros da boca falando, em ordem
     ///   frames: { nome: { file, fileHolding?, size:[w,h], pivot:[x 0..1, y 0..1], pivotHolding?, hold?:{ hand:[px,py], flip, angle } } }
     ///   held: { file, grip:[x 0..1, y 0..1] } — item desenhado na mão (ex.: braço mecânico)
     /// Os quadros olham para a direita; para a esquerda, espelha.
@@ -29,6 +30,8 @@ namespace RecreioEspacial.World
         public float RefHeightPx = 490f;
         /// <summary>Quadros do ciclo de caminhada, em ordem (um ciclo = 2 passos). Vazio = walk1..walk4 / walk1..walk2.</summary>
         public readonly List<string> WalkCycle = new List<string>();
+        /// <summary>Quadros da boca falando, em ordem (repete). Vazio = alterna "talk" e "front".</summary>
+        public readonly List<string> TalkCycle = new List<string>();
         /// <summary>Passada do desenho (distância entre os pés na passada) como fração da altura do personagem. 0 = padrão do código.</summary>
         public float Stride;
         public readonly Dictionary<string, Frame> Frames = new Dictionary<string, Frame>();
@@ -49,6 +52,8 @@ namespace RecreioEspacial.World
             var set = new FrameSet { RefHeightPx = Num(root, "refHeight", 490f), Stride = Num(root, "stride", 0f) };
             if (root.TryGetValue("walkCycle", out var wc) && wc is List<object> wl)
                 foreach (var o in wl) if (o is string ws) set.WalkCycle.Add(ws);
+            if (root.TryGetValue("talkCycle", out var tc) && tc is List<object> tl)
+                foreach (var o in tl) if (o is string ts) set.TalkCycle.Add(ts);
             if (root.TryGetValue("frames", out var fo) && fo is Dictionary<string, object> frames)
             {
                 foreach (var kv in frames)

@@ -399,6 +399,63 @@
     0.5186,
     0.0
    ]
+  },
+  "blink": {
+   "file": "assets/characters/antonio-frames/blink.png",
+   "size": [
+    166,
+    484
+   ],
+   "pivot": [
+    0.4872,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     19.6,
+     295.6
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "talk": {
+   "file": "assets/characters/antonio-frames/talk.png",
+   "size": [
+    166,
+    484
+   ],
+   "pivot": [
+    0.4872,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     19.6,
+     295.6
+    ],
+    "flip": false,
+    "angle": 0
+   }
+  },
+  "talkHalf": {
+   "file": "assets/characters/antonio-frames/talkHalf.png",
+   "size": [
+    166,
+    484
+   ],
+   "pivot": [
+    0.4872,
+    0.0
+   ],
+   "hold": {
+    "hand": [
+     19.6,
+     295.6
+    ],
+    "flip": false,
+    "angle": 0
+   }
   }
  },
  "held": {
@@ -407,5 +464,11 @@
    0.8052,
    0.9722
   ]
- }
+ },
+ "talkCycle": [
+  "talkHalf",
+  "talk",
+  "talkHalf",
+  "front"
+ ]
 }

@@ -455,6 +455,7 @@ namespace RecreioEspacial.World
                 return ((int)(phase / Mathf.PI) & 1) == 0 ? "walk1" : "walk2";
             }
             if (!string.IsNullOrEmpty(Pose) && frames.Get(Pose) != null) return Pose;
+            if (Talking && frames.TalkCycle.Count > 0) return frames.TalkCycle[(int)(t / 0.09f) % frames.TalkCycle.Count];
             if (Talking && frames.Get("talk") != null) return ((int)(t / 0.16f) & 1) == 0 ? "talk" : "front";
             // piscada de vez em quando
             if (blinkLeft > 0f) { blinkLeft -= dt; return "blink"; }
@@ -463,7 +464,7 @@ namespace RecreioEspacial.World
             return "front";
         }
 
-        static bool Symmetric(string frame) => frame == "front" || frame == "back" || frame == "blink";
+        static bool Symmetric(string frame) => frame == "front" || frame == "back" || frame == "blink" || frame == "talk" || frame == "talkHalf";
 
         void UpdateFrameVisual(float dt)
         {
